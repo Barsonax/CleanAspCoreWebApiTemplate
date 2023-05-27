@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Support",
+    "city": "Kertapura"
+  },
+  {
+    "id": 2,
+    "name": "Product Management",
+    "city": "Karanganyar"
+  },
+  {
+    "id": 3,
+    "name": "Services",
+    "city": "El Paso"
+  },
+  {
+    "id": 4,
+    "name": "Research and Development",
+    "city": "Stradbally"
+  }
+]
