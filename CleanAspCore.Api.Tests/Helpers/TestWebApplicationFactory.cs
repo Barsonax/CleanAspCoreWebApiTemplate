@@ -8,6 +8,13 @@ namespace CleanAspCore.Api.Tests.Helpers;
 
 public class TestWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
 {
+    private readonly string _connectionString;
+
+    public TestWebApplicationFactory(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
     protected override IHost CreateHost(IHostBuilder builder)
     {
         builder.ConfigureServices(services =>
@@ -19,11 +26,7 @@ public class TestWebApplicationFactory<TProgram> : WebApplicationFactory<TProgra
                 services.Remove(descriptor);
             }
 
-            services.AddDbContext<HrContext>(options =>
-            {
-                var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                SqliteDbContextOptionsBuilderExtensions.UseSqlite(options, $"Data Source={Path.Join(path, "WebMinRouteGroup_tests.db")}");
-            });
+            services.AddDbContext<HrContext>(options => options.UseNpgsql(_connectionString));
         });
 
         return base.CreateHost(builder);

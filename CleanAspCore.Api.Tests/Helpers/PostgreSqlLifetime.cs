@@ -4,7 +4,8 @@ namespace CleanAspCore.Api.Tests.Helpers;
 
 public class PostgreSqlLifetime : IAsyncLifetime
 {
-    public readonly PostgreSqlContainer _postgreSqlContainer = new PostgreSqlBuilder().Build();
+    private readonly PostgreSqlContainer _postgreSqlContainer = new PostgreSqlBuilder().Build();
+    public string ConnectionString => _postgreSqlContainer.GetConnectionString();
     
     public Task InitializeAsync()
     {

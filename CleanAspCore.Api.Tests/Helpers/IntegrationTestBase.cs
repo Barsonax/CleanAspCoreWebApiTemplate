@@ -11,7 +11,7 @@ public abstract class IntegrationTestBase
     
     public IntegrationTestBase(PostgreSqlLifetime fixture)
     {
-        var factory = new TestWebApplicationFactory<Program>();
+        var factory = new TestWebApplicationFactory<Program>(fixture.ConnectionString);
         Client = factory.CreateClient();
         Context = factory.Services.CreateScope().ServiceProvider.GetRequiredService<HrContext>();
     }
