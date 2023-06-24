@@ -8,6 +8,9 @@ public class HrContext : DbContext
     public DbSet<Department> Departments { get; set; }
     public DbSet<Job> Jobs { get; set; }
     
+    public HrContext() { }
+    public HrContext(DbContextOptionsBuilder<HrContext> context) : base(context) { }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
