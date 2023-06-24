@@ -9,7 +9,7 @@ public class HrContext : DbContext
     public DbSet<Job> Jobs { get; set; }
     
     public HrContext() { }
-    public HrContext(DbContextOptionsBuilder<HrContext> context) : base(context) { }
+    public HrContext(DbContextOptions<HrContext> context) : base(context) { }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
