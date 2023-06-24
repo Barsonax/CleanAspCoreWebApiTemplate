@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFolder1", "SolutionFolder1", "{3CFBE58F-AACF-4201-A0B8-7A2BD7B36D7B}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yaml = docker-compose.yaml
+		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.Tests", "CleanAspCore.Api.Tests\CleanAspCore.Api.Tests.csproj", "{4B45D679-E787-4236-BD9A-383364CD0E6F}"

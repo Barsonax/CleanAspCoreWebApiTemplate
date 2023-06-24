@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanAspCore.Persistance;
 
 public static class Registrations
 {
-    public static void AddInfrastructure(this IServiceCollection services)
+    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<HrContext>(options => options.UseNpgsql());
+        services.AddDbContext<HrContext>(options => options.UseNpgsql(configuration.GetConnectionString("Default")));
     }
 }
