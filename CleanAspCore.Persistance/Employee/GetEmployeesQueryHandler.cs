@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Persistance;
 
-public record GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, List<Domain.Employee>>
+public record GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, List<Employee>>
 {
     private readonly HrContext _context;
 

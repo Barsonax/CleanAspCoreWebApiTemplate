@@ -36,8 +36,8 @@ public class EmployeeController : Controller
         var validationResult = validator.Validate(employee);
         if (!validationResult.IsValid)
         {
-            validationResult.AddToModelState(this.ModelState);
-            return BadRequest(this.ModelState);
+            validationResult.AddToModelState(ModelState);
+            return BadRequest(ModelState);
         }
 
         var result = await _sender.Send(new UpdateEmployeeByIdCommand(employee));
@@ -56,8 +56,8 @@ public class EmployeeController : Controller
         var validationResult = validator.Validate(employee);
         if (!validationResult.IsValid)
         {
-            validationResult.AddToModelState(this.ModelState);
-            return BadRequest(this.ModelState);
+            validationResult.AddToModelState(ModelState);
+            return BadRequest(ModelState);
         }
         
         await _sender.Send(new AddEmployeesCommand(new List<Employee> {employee}));

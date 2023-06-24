@@ -21,7 +21,9 @@ public class IntegrationTest2 : IntegrationTestBase
         
         //Act
         var result = await Client.GetAsync("Job");
-        var song = result.Content.ReadFromJsonAsync<JobDto>();
+
+        result.EnsureSuccessStatusCode();
+        var job = result.Content.ReadFromJsonAsync<JobDto>();
 
         //Assert
 
