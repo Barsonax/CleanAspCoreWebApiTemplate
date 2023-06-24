@@ -5,7 +5,7 @@ using FluentAssertions;
 
 namespace CleanAspCore.Api.Tests;
 
-public class IntegrationTest2 : IntegrationTestBase
+public class JobControllerTests : IntegrationTestBase
 {
     [Fact]
     public async Task SearchJobs_ReturnsExpectedJobs()
@@ -16,18 +16,14 @@ public class IntegrationTest2 : IntegrationTestBase
             Id = 0,
             Name = "Foo",
         });
-        
 
         await Context.SaveChangesAsync();
         
         //Act
-        var result = await Client.GetAsync("Job");
-
-        result.EnsureSuccessStatusCode();
-        var jobs = await result.Content.ReadFromJsonAsync<JobDto[]>();
+        var result = await Client.GetFromJsonAsync<JobDto[]>("Job");
 
         //Assert
-        jobs.Should().BeEquivalentTo(new[]
+        result.Should().BeEquivalentTo(new[]
         {
             new JobDto()
             {
@@ -37,7 +33,7 @@ public class IntegrationTest2 : IntegrationTestBase
         });
     }
     
-    public IntegrationTest2(PostgreSqlLifetime fixture) : base(fixture)
+    public JobControllerTests(PostgreSqlLifetime fixture) : base(fixture)
     {
     }
 }
