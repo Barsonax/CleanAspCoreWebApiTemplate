@@ -5,8 +5,8 @@
     "lastname": "Collopy",
     "email": "ncollopy0@slate.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 2
+    "DepartmentId": 1,
+    "JobId": 2
   },
   {
     "id": 2,
@@ -14,8 +14,8 @@
     "lastname": "Grisedale",
     "email": "bgrisedale1@google.pl",
     "gender": "Male",
-    "Department": 3,
-    "Job": 2
+    "DepartmentId": 3,
+    "JobId": 2
   },
   {
     "id": 3,
@@ -23,8 +23,8 @@
     "lastname": "Rosenthal",
     "email": "lrosenthal2@nyu.edu",
     "gender": "Female",
-    "Department": 2,
-    "Job": 9
+    "DepartmentId": 2,
+    "JobId": 9
   },
   {
     "id": 4,
@@ -32,8 +32,8 @@
     "lastname": "Popple",
     "email": "dpopple3@elpais.com",
     "gender": "Male",
-    "Department": 3,
-    "Job": 7
+    "DepartmentId": 3,
+    "JobId": 7
   },
   {
     "id": 5,
@@ -41,8 +41,8 @@
     "lastname": "Grieves",
     "email": "agrieves4@bandcamp.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 1
+    "DepartmentId": 2,
+    "JobId": 1
   },
   {
     "id": 6,
@@ -50,8 +50,8 @@
     "lastname": "Piser",
     "email": "mpiser5@nydailynews.com",
     "gender": "Female",
-    "Department": 1,
-    "Job": 10
+    "DepartmentId": 1,
+    "JobId": 10
   },
   {
     "id": 7,
@@ -59,8 +59,8 @@
     "lastname": "Inkles",
     "email": "minkles6@yelp.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 8
+    "DepartmentId": 3,
+    "JobId": 8
   },
   {
     "id": 8,
@@ -68,8 +68,8 @@
     "lastname": "Joddens",
     "email": "rjoddens7@github.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 4
+    "DepartmentId": 3,
+    "JobId": 4
   },
   {
     "id": 9,
@@ -77,8 +77,8 @@
     "lastname": "Gunton",
     "email": "kgunton8@yahoo.co.jp",
     "gender": "Female",
-    "Department": 2,
-    "Job": 2
+    "DepartmentId": 2,
+    "JobId": 2
   },
   {
     "id": 10,
@@ -86,8 +86,8 @@
     "lastname": "Cropp",
     "email": "ccropp9@zimbio.com",
     "gender": "Female",
-    "Department": 4,
-    "Job": 7
+    "DepartmentId": 4,
+    "JobId": 7
   },
   {
     "id": 11,
@@ -95,8 +95,8 @@
     "lastname": "Wolsey",
     "email": "hwolseya@sourceforge.net",
     "gender": "Genderqueer",
-    "Department": 2,
-    "Job": 7
+    "DepartmentId": 2,
+    "JobId": 7
   },
   {
     "id": 12,
@@ -104,8 +104,8 @@
     "lastname": "Drain",
     "email": "adrainb@cbc.ca",
     "gender": "Male",
-    "Department": 2,
-    "Job": 1
+    "DepartmentId": 2,
+    "JobId": 1
   },
   {
     "id": 13,
@@ -113,8 +113,8 @@
     "lastname": "Tomaino",
     "email": "htomainoc@washingtonpost.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 4
+    "DepartmentId": 2,
+    "JobId": 4
   },
   {
     "id": 14,
@@ -122,8 +122,8 @@
     "lastname": "Phin",
     "email": "tphind@hibu.com",
     "gender": "Female",
-    "Department": 4,
-    "Job": 3
+    "DepartmentId": 4,
+    "JobId": 3
   },
   {
     "id": 15,
@@ -131,8 +131,8 @@
     "lastname": "Spenley",
     "email": "lspenleye@patch.com",
     "gender": "Male",
-    "Department": 2,
-    "Job": 8
+    "DepartmentId": 2,
+    "JobId": 8
   },
   {
     "id": 16,
@@ -140,8 +140,8 @@
     "lastname": "Petricek",
     "email": "spetricekf@behance.net",
     "gender": "Male",
-    "Department": 1,
-    "Job": 1
+    "DepartmentId": 1,
+    "JobId": 1
   },
   {
     "id": 17,
@@ -149,8 +149,8 @@
     "lastname": "Beecham",
     "email": "gbeechamg@hexun.com",
     "gender": "Male",
-    "Department": 4,
-    "Job": 5
+    "DepartmentId": 4,
+    "JobId": 5
   },
   {
     "id": 18,
@@ -158,8 +158,8 @@
     "lastname": "Treffrey",
     "email": "ntreffreyh@cpanel.net",
     "gender": "Male",
-    "Department": 2,
-    "Job": 4
+    "DepartmentId": 2,
+    "JobId": 4
   },
   {
     "id": 19,
@@ -167,8 +167,8 @@
     "lastname": "Petley",
     "email": "ppetleyi@constantcontact.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 10
+    "DepartmentId": 2,
+    "JobId": 10
   },
   {
     "id": 20,
@@ -176,8 +176,8 @@
     "lastname": "Collins",
     "email": "ccollinsj@hao123.com",
     "gender": "Agender",
-    "Department": 4,
-    "Job": 4
+    "DepartmentId": 4,
+    "JobId": 4
   },
   {
     "id": 21,
@@ -185,8 +185,8 @@
     "lastname": "Izakson",
     "email": "gizaksonk@wikia.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 4
+    "DepartmentId": 1,
+    "JobId": 4
   },
   {
     "id": 22,
@@ -194,8 +194,8 @@
     "lastname": "Sign",
     "email": "ysignl@jiathis.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 7
+    "DepartmentId": 3,
+    "JobId": 7
   },
   {
     "id": 23,
@@ -203,8 +203,8 @@
     "lastname": "Swynley",
     "email": "wswynleym@usgs.gov",
     "gender": "Male",
-    "Department": 4,
-    "Job": 6
+    "DepartmentId": 4,
+    "JobId": 6
   },
   {
     "id": 24,
@@ -212,8 +212,8 @@
     "lastname": "Draycott",
     "email": "ddraycottn@webeden.co.uk",
     "gender": "Male",
-    "Department": 4,
-    "Job": 10
+    "DepartmentId": 4,
+    "JobId": 10
   },
   {
     "id": 25,
@@ -221,8 +221,8 @@
     "lastname": "Vairow",
     "email": "evairowo@indiegogo.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 6
+    "DepartmentId": 2,
+    "JobId": 6
   },
   {
     "id": 26,
@@ -230,8 +230,8 @@
     "lastname": "Peasey",
     "email": "cpeaseyp@multiply.com",
     "gender": "Male",
-    "Department": 3,
-    "Job": 6
+    "DepartmentId": 3,
+    "JobId": 6
   },
   {
     "id": 27,
@@ -239,8 +239,8 @@
     "lastname": "Limmer",
     "email": "plimmerq@sohu.com",
     "gender": "Male",
-    "Department": 4,
-    "Job": 2
+    "DepartmentId": 4,
+    "JobId": 2
   },
   {
     "id": 28,
@@ -248,8 +248,8 @@
     "lastname": "Osichev",
     "email": "tosichevr@ftc.gov",
     "gender": "Female",
-    "Department": 3,
-    "Job": 5
+    "DepartmentId": 3,
+    "JobId": 5
   },
   {
     "id": 29,
@@ -257,8 +257,8 @@
     "lastname": "Loche",
     "email": "mloches@answers.com",
     "gender": "Male",
-    "Department": 4,
-    "Job": 9
+    "DepartmentId": 4,
+    "JobId": 9
   },
   {
     "id": 30,
@@ -266,8 +266,8 @@
     "lastname": "Banbrook",
     "email": "cbanbrookt@livejournal.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 6
+    "DepartmentId": 2,
+    "JobId": 6
   },
   {
     "id": 31,
@@ -275,8 +275,8 @@
     "lastname": "Burchett",
     "email": "rburchettu@parallels.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 7
+    "DepartmentId": 1,
+    "JobId": 7
   },
   {
     "id": 32,
@@ -284,8 +284,8 @@
     "lastname": "Samwayes",
     "email": "csamwayesv@archive.org",
     "gender": "Female",
-    "Department": 2,
-    "Job": 6
+    "DepartmentId": 2,
+    "JobId": 6
   },
   {
     "id": 33,
@@ -293,8 +293,8 @@
     "lastname": "Atyeo",
     "email": "latyeow@blogspot.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 8
+    "DepartmentId": 2,
+    "JobId": 8
   },
   {
     "id": 34,
@@ -302,8 +302,8 @@
     "lastname": "Paddingdon",
     "email": "kpaddingdonx@microsoft.com",
     "gender": "Female",
-    "Department": 4,
-    "Job": 10
+    "DepartmentId": 4,
+    "JobId": 10
   },
   {
     "id": 35,
@@ -311,8 +311,8 @@
     "lastname": "Sarle",
     "email": "gsarley@photobucket.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 5
+    "DepartmentId": 1,
+    "JobId": 5
   },
   {
     "id": 36,
@@ -320,8 +320,8 @@
     "lastname": "Antonelli",
     "email": "santonelliz@va.gov",
     "gender": "Genderfluid",
-    "Department": 1,
-    "Job": 5
+    "DepartmentId": 1,
+    "JobId": 5
   },
   {
     "id": 37,
@@ -329,8 +329,8 @@
     "lastname": "Brecknock",
     "email": "jbrecknock10@auda.org.au",
     "gender": "Female",
-    "Department": 3,
-    "Job": 4
+    "DepartmentId": 3,
+    "JobId": 4
   },
   {
     "id": 38,
@@ -338,8 +338,8 @@
     "lastname": "Bunn",
     "email": "abunn11@eventbrite.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 8
+    "DepartmentId": 3,
+    "JobId": 8
   },
   {
     "id": 39,
@@ -347,8 +347,8 @@
     "lastname": "Eronie",
     "email": "aeronie12@nbcnews.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 10
+    "DepartmentId": 3,
+    "JobId": 10
   },
   {
     "id": 40,
@@ -356,8 +356,8 @@
     "lastname": "Dennert",
     "email": "ydennert13@bloomberg.com",
     "gender": "Male",
-    "Department": 3,
-    "Job": 2
+    "DepartmentId": 3,
+    "JobId": 2
   },
   {
     "id": 41,
@@ -365,8 +365,8 @@
     "lastname": "Kiendl",
     "email": "ykiendl14@cargocollective.com",
     "gender": "Male",
-    "Department": 2,
-    "Job": 8
+    "DepartmentId": 2,
+    "JobId": 8
   },
   {
     "id": 42,
@@ -374,8 +374,8 @@
     "lastname": "Simenel",
     "email": "gsimenel15@usa.gov",
     "gender": "Male",
-    "Department": 2,
-    "Job": 5
+    "DepartmentId": 2,
+    "JobId": 5
   },
   {
     "id": 43,
@@ -383,8 +383,8 @@
     "lastname": "Petracci",
     "email": "kpetracci16@wsj.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 9
+    "DepartmentId": 3,
+    "JobId": 9
   },
   {
     "id": 44,
@@ -392,8 +392,8 @@
     "lastname": "MacNamee",
     "email": "lmacnamee17@vkontakte.ru",
     "gender": "Female",
-    "Department": 1,
-    "Job": 7
+    "DepartmentId": 1,
+    "JobId": 7
   },
   {
     "id": 45,
@@ -401,8 +401,8 @@
     "lastname": "Petkens",
     "email": "gpetkens18@facebook.com",
     "gender": "Non-binary",
-    "Department": 3,
-    "Job": 2
+    "DepartmentId": 3,
+    "JobId": 2
   },
   {
     "id": 46,
@@ -410,8 +410,8 @@
     "lastname": "Hartlebury",
     "email": "ehartlebury19@dropbox.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 6
+    "DepartmentId": 3,
+    "JobId": 6
   },
   {
     "id": 47,
@@ -419,8 +419,8 @@
     "lastname": "Wainscoat",
     "email": "swainscoat1a@wsj.com",
     "gender": "Female",
-    "Department": 1,
-    "Job": 1
+    "DepartmentId": 1,
+    "JobId": 1
   },
   {
     "id": 48,
@@ -428,8 +428,8 @@
     "lastname": "Wellwood",
     "email": "rwellwood1b@php.net",
     "gender": "Male",
-    "Department": 3,
-    "Job": 10
+    "DepartmentId": 3,
+    "JobId": 10
   },
   {
     "id": 49,
@@ -437,8 +437,8 @@
     "lastname": "Rounsefell",
     "email": "prounsefell1c@exblog.jp",
     "gender": "Male",
-    "Department": 4,
-    "Job": 10
+    "DepartmentId": 4,
+    "JobId": 10
   },
   {
     "id": 50,
@@ -446,8 +446,8 @@
     "lastname": "Marusik",
     "email": "cmarusik1d@yandex.ru",
     "gender": "Female",
-    "Department": 4,
-    "Job": 4
+    "DepartmentId": 4,
+    "JobId": 4
   },
   {
     "id": 51,
@@ -455,8 +455,8 @@
     "lastname": "Aleswell",
     "email": "saleswell1e@google.fr",
     "gender": "Male",
-    "Department": 4,
-    "Job": 9
+    "DepartmentId": 4,
+    "JobId": 9
   },
   {
     "id": 52,
@@ -464,8 +464,8 @@
     "lastname": "Ducker",
     "email": "fducker1f@huffingtonpost.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 1
+    "DepartmentId": 2,
+    "JobId": 1
   },
   {
     "id": 53,
@@ -473,8 +473,8 @@
     "lastname": "Romeril",
     "email": "gromeril1g@jiathis.com",
     "gender": "Female",
-    "Department": 1,
-    "Job": 4
+    "DepartmentId": 1,
+    "JobId": 4
   },
   {
     "id": 54,
@@ -482,8 +482,8 @@
     "lastname": "Abbott",
     "email": "tabbott1h@storify.com",
     "gender": "Female",
-    "Department": 4,
-    "Job": 6
+    "DepartmentId": 4,
+    "JobId": 6
   },
   {
     "id": 55,
@@ -491,8 +491,8 @@
     "lastname": "Lillo",
     "email": "nlillo1i@thetimes.co.uk",
     "gender": "Female",
-    "Department": 4,
-    "Job": 10
+    "DepartmentId": 4,
+    "JobId": 10
   },
   {
     "id": 56,
@@ -500,8 +500,8 @@
     "lastname": "McFater",
     "email": "fmcfater1j@amazon.co.jp",
     "gender": "Non-binary",
-    "Department": 4,
-    "Job": 9
+    "DepartmentId": 4,
+    "JobId": 9
   },
   {
     "id": 57,
@@ -509,8 +509,8 @@
     "lastname": "McCuaig",
     "email": "pmccuaig1k@behance.net",
     "gender": "Male",
-    "Department": 1,
-    "Job": 8
+    "DepartmentId": 1,
+    "JobId": 8
   },
   {
     "id": 58,
@@ -518,8 +518,8 @@
     "lastname": "Gravy",
     "email": "cgravy1l@marriott.com",
     "gender": "Female",
-    "Department": 4,
-    "Job": 6
+    "DepartmentId": 4,
+    "JobId": 6
   },
   {
     "id": 59,
@@ -527,8 +527,8 @@
     "lastname": "Dancey",
     "email": "adancey1m@typepad.com",
     "gender": "Male",
-    "Department": 2,
-    "Job": 8
+    "DepartmentId": 2,
+    "JobId": 8
   },
   {
     "id": 60,
@@ -536,8 +536,8 @@
     "lastname": "Hassur",
     "email": "hhassur1n@mail.ru",
     "gender": "Male",
-    "Department": 4,
-    "Job": 7
+    "DepartmentId": 4,
+    "JobId": 7
   },
   {
     "id": 61,
@@ -545,8 +545,8 @@
     "lastname": "Rodenborch",
     "email": "drodenborch1o@tamu.edu",
     "gender": "Female",
-    "Department": 2,
-    "Job": 5
+    "DepartmentId": 2,
+    "JobId": 5
   },
   {
     "id": 62,
@@ -554,8 +554,8 @@
     "lastname": "Shrubshall",
     "email": "eshrubshall1p@mtv.com",
     "gender": "Female",
-    "Department": 1,
-    "Job": 2
+    "DepartmentId": 1,
+    "JobId": 2
   },
   {
     "id": 63,
@@ -563,8 +563,8 @@
     "lastname": "Giabucci",
     "email": "kgiabucci1q@foxnews.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 10
+    "DepartmentId": 1,
+    "JobId": 10
   },
   {
     "id": 64,
@@ -572,8 +572,8 @@
     "lastname": "Nunson",
     "email": "fnunson1r@drupal.org",
     "gender": "Bigender",
-    "Department": 2,
-    "Job": 1
+    "DepartmentId": 2,
+    "JobId": 1
   },
   {
     "id": 65,
@@ -581,8 +581,8 @@
     "lastname": "Youles",
     "email": "lyoules1s@bigcartel.com",
     "gender": "Female",
-    "Department": 4,
-    "Job": 8
+    "DepartmentId": 4,
+    "JobId": 8
   },
   {
     "id": 66,
@@ -590,8 +590,8 @@
     "lastname": "Manis",
     "email": "tmanis1t@booking.com",
     "gender": "Male",
-    "Department": 4,
-    "Job": 9
+    "DepartmentId": 4,
+    "JobId": 9
   },
   {
     "id": 67,
@@ -599,8 +599,8 @@
     "lastname": "Sketchley",
     "email": "bsketchley1u@nationalgeographic.com",
     "gender": "Male",
-    "Department": 3,
-    "Job": 4
+    "DepartmentId": 3,
+    "JobId": 4
   },
   {
     "id": 68,
@@ -608,8 +608,8 @@
     "lastname": "Bawcock",
     "email": "gbawcock1v@dropbox.com",
     "gender": "Male",
-    "Department": 2,
-    "Job": 4
+    "DepartmentId": 2,
+    "JobId": 4
   },
   {
     "id": 69,
@@ -617,8 +617,8 @@
     "lastname": "McGannon",
     "email": "cmcgannon1w@prweb.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 1
+    "DepartmentId": 3,
+    "JobId": 1
   },
   {
     "id": 70,
@@ -626,8 +626,8 @@
     "lastname": "Wallentin",
     "email": "jwallentin1x@blogs.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 7
+    "DepartmentId": 3,
+    "JobId": 7
   },
   {
     "id": 71,
@@ -635,8 +635,8 @@
     "lastname": "Gledhill",
     "email": "agledhill1y@usatoday.com",
     "gender": "Male",
-    "Department": 4,
-    "Job": 7
+    "DepartmentId": 4,
+    "JobId": 7
   },
   {
     "id": 72,
@@ -644,8 +644,8 @@
     "lastname": "Makeswell",
     "email": "amakeswell1z@ox.ac.uk",
     "gender": "Male",
-    "Department": 4,
-    "Job": 5
+    "DepartmentId": 4,
+    "JobId": 5
   },
   {
     "id": 73,
@@ -653,8 +653,8 @@
     "lastname": "Starton",
     "email": "mstarton20@bravesites.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 5
+    "DepartmentId": 3,
+    "JobId": 5
   },
   {
     "id": 74,
@@ -662,8 +662,8 @@
     "lastname": "Boddy",
     "email": "dboddy21@webmd.com",
     "gender": "Female",
-    "Department": 2,
-    "Job": 9
+    "DepartmentId": 2,
+    "JobId": 9
   },
   {
     "id": 75,
@@ -671,8 +671,8 @@
     "lastname": "Dymott",
     "email": "ldymott22@businessinsider.com",
     "gender": "Male",
-    "Department": 2,
-    "Job": 2
+    "DepartmentId": 2,
+    "JobId": 2
   },
   {
     "id": 76,
@@ -680,8 +680,8 @@
     "lastname": "Meller",
     "email": "gmeller23@booking.com",
     "gender": "Female",
-    "Department": 1,
-    "Job": 5
+    "DepartmentId": 1,
+    "JobId": 5
   },
   {
     "id": 77,
@@ -689,8 +689,8 @@
     "lastname": "Bolmann",
     "email": "ibolmann24@so-net.ne.jp",
     "gender": "Male",
-    "Department": 1,
-    "Job": 9
+    "DepartmentId": 1,
+    "JobId": 9
   },
   {
     "id": 78,
@@ -698,8 +698,8 @@
     "lastname": "Putnam",
     "email": "uputnam25@weibo.com",
     "gender": "Male",
-    "Department": 3,
-    "Job": 3
+    "DepartmentId": 3,
+    "JobId": 3
   },
   {
     "id": 79,
@@ -707,8 +707,8 @@
     "lastname": "Train",
     "email": "ftrain26@slideshare.net",
     "gender": "Male",
-    "Department": 1,
-    "Job": 7
+    "DepartmentId": 1,
+    "JobId": 7
   },
   {
     "id": 80,
@@ -716,8 +716,8 @@
     "lastname": "Lintin",
     "email": "ylintin27@behance.net",
     "gender": "Male",
-    "Department": 1,
-    "Job": 1
+    "DepartmentId": 1,
+    "JobId": 1
   },
   {
     "id": 81,
@@ -725,8 +725,8 @@
     "lastname": "Loveland",
     "email": "wloveland28@4shared.com",
     "gender": "Male",
-    "Department": 2,
-    "Job": 7
+    "DepartmentId": 2,
+    "JobId": 7
   },
   {
     "id": 82,
@@ -734,8 +734,8 @@
     "lastname": "Fearne",
     "email": "lfearne29@netlog.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 9
+    "DepartmentId": 1,
+    "JobId": 9
   },
   {
     "id": 83,
@@ -743,8 +743,8 @@
     "lastname": "Caldaro",
     "email": "scaldaro2a@nhs.uk",
     "gender": "Agender",
-    "Department": 1,
-    "Job": 10
+    "DepartmentId": 1,
+    "JobId": 10
   },
   {
     "id": 84,
@@ -752,8 +752,8 @@
     "lastname": "Glenfield",
     "email": "cglenfield2b@gizmodo.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 9
+    "DepartmentId": 1,
+    "JobId": 9
   },
   {
     "id": 85,
@@ -761,8 +761,8 @@
     "lastname": "Gavey",
     "email": "dgavey2c@yahoo.com",
     "gender": "Female",
-    "Department": 1,
-    "Job": 2
+    "DepartmentId": 1,
+    "JobId": 2
   },
   {
     "id": 86,
@@ -770,8 +770,8 @@
     "lastname": "Danko",
     "email": "kdanko2d@topsy.com",
     "gender": "Male",
-    "Department": 2,
-    "Job": 4
+    "DepartmentId": 2,
+    "JobId": 4
   },
   {
     "id": 87,
@@ -779,8 +779,8 @@
     "lastname": "Petyt",
     "email": "hpetyt2e@princeton.edu",
     "gender": "Female",
-    "Department": 1,
-    "Job": 2
+    "DepartmentId": 1,
+    "JobId": 2
   },
   {
     "id": 88,
@@ -788,8 +788,8 @@
     "lastname": "Kimmins",
     "email": "hkimmins2f@pen.io",
     "gender": "Male",
-    "Department": 4,
-    "Job": 2
+    "DepartmentId": 4,
+    "JobId": 2
   },
   {
     "id": 89,
@@ -797,8 +797,8 @@
     "lastname": "Antonoczyk",
     "email": "gantonoczyk2g@youku.com",
     "gender": "Male",
-    "Department": 1,
-    "Job": 10
+    "DepartmentId": 1,
+    "JobId": 10
   },
   {
     "id": 90,
@@ -806,8 +806,8 @@
     "lastname": "Landre",
     "email": "hlandre2h@ycombinator.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 9
+    "DepartmentId": 3,
+    "JobId": 9
   },
   {
     "id": 91,
@@ -815,8 +815,8 @@
     "lastname": "Stillgoe",
     "email": "zstillgoe2i@ustream.tv",
     "gender": "Male",
-    "Department": 1,
-    "Job": 1
+    "DepartmentId": 1,
+    "JobId": 1
   },
   {
     "id": 92,
@@ -824,8 +824,8 @@
     "lastname": "Buse",
     "email": "cbuse2j@shinystat.com",
     "gender": "Male",
-    "Department": 3,
-    "Job": 3
+    "DepartmentId": 3,
+    "JobId": 3
   },
   {
     "id": 93,
@@ -833,8 +833,8 @@
     "lastname": "Struys",
     "email": "fstruys2k@123-reg.co.uk",
     "gender": "Female",
-    "Department": 3,
-    "Job": 3
+    "DepartmentId": 3,
+    "JobId": 3
   },
   {
     "id": 94,
@@ -842,8 +842,8 @@
     "lastname": "Mohamed",
     "email": "emohamed2l@uol.com.br",
     "gender": "Bigender",
-    "Department": 2,
-    "Job": 7
+    "DepartmentId": 2,
+    "JobId": 7
   },
   {
     "id": 95,
@@ -851,8 +851,8 @@
     "lastname": "Corbishley",
     "email": "dcorbishley2m@gizmodo.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 10
+    "DepartmentId": 3,
+    "JobId": 10
   },
   {
     "id": 96,
@@ -860,8 +860,8 @@
     "lastname": "Anthiftle",
     "email": "danthiftle2n@eepurl.com",
     "gender": "Polygender",
-    "Department": 2,
-    "Job": 4
+    "DepartmentId": 2,
+    "JobId": 4
   },
   {
     "id": 97,
@@ -869,8 +869,8 @@
     "lastname": "Lazarus",
     "email": "alazarus2o@github.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 10
+    "DepartmentId": 3,
+    "JobId": 10
   },
   {
     "id": 98,
@@ -878,8 +878,8 @@
     "lastname": "Drover",
     "email": "cdrover2p@bigcartel.com",
     "gender": "Female",
-    "Department": 1,
-    "Job": 2
+    "DepartmentId": 1,
+    "JobId": 2
   },
   {
     "id": 99,
@@ -887,8 +887,8 @@
     "lastname": "Moncur",
     "email": "mmoncur2q@biblegateway.com",
     "gender": "Female",
-    "Department": 3,
-    "Job": 1
+    "DepartmentId": 3,
+    "JobId": 1
   },
   {
     "id": 100,
@@ -896,7 +896,7 @@
     "lastname": "Keelan",
     "email": "ikeelan2r@canalblog.com",
     "gender": "Male",
-    "Department": 4,
-    "Job": 8
+    "DepartmentId": 4,
+    "JobId": 8
   }
 ]
