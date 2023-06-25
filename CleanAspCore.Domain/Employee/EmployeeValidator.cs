@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace CleanAspCore.Domain;
+﻿namespace CleanAspCore.Domain;
 
 public class EmployeeValidator : AbstractValidator<Employee>
 {

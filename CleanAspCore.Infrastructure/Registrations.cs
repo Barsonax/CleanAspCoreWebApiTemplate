@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanAspCore.Persistance;
+namespace CleanAspCore.Infrastructure;
 
 public static class Registrations
 {

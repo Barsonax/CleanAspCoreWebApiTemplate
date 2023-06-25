@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore", "CleanAspCor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Tests", "CleanAspCore.Tests\CleanAspCore.Tests.csproj", "{2EDC8DC4-8469-40F2-A293-57BAAD67C5C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Persistance", "CleanAspCore.Persistance\CleanAspCore.Persistance.csproj", "{1264CC2A-66B0-4FFB-B40F-2B84332A207E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Infrastructure", "CleanAspCore.Infrastructure\CleanAspCore.Infrastructure.csproj", "{1264CC2A-66B0-4FFB-B40F-2B84332A207E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Domain", "CleanAspCore.Domain\CleanAspCore.Domain.csproj", "{6D23A06C-CE6F-4ADF-8D86-185AF5866CD1}"
 EndProject

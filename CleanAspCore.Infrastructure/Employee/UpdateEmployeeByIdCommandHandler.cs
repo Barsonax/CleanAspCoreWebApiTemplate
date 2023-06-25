@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Persistance;
+﻿namespace CleanAspCore.Infrastructure;
 
 public class UpdateEmployeeByIdCommandHandler : IRequestHandler<UpdateEmployeeByIdCommand, OneOf<Success, NotFound>>
 {

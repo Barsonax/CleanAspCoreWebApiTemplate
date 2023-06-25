@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Persistance;
+namespace CleanAspCore.Infrastructure;
 
 public record GetJobsQueryHandler : IRequestHandler<GetJobsQuery, List<Job>>
 {

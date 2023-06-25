@@ -21,7 +21,7 @@
     <ItemGroup>
       <ProjectReference Include="..\CleanAspCore.Application\CleanAspCore.Application.csproj" />
       <ProjectReference Include="..\CleanAspCore.Domain\CleanAspCore.Domain.csproj" />
-      <ProjectReference Include="..\CleanAspCore.Persistance\CleanAspCore.Persistance.csproj" />
+      <ProjectReference Include="..\CleanAspCore.Infrastructure\CleanAspCore.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

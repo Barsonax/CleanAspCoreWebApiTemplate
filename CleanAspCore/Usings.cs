@@ -6,4 +6,4 @@ global using FluentValidation;
 global using FluentValidation.AspNetCore;
 global using CleanAspCore.Domain;
 global using CleanAspCore.Application;
-global using CleanAspCore.Persistance;
+global using CleanAspCore.Infrastructure;

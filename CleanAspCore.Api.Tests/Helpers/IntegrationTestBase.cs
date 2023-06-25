@@ -1,4 +1,4 @@
-using CleanAspCore.Persistance;
+using CleanAspCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanAspCore.Api.Tests.Helpers;

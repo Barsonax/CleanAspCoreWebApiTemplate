@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Persistance;
+﻿namespace CleanAspCore.Infrastructure;
 
 public class DeleteEmployeeByIdCommandHandler : IRequestHandler<DeleteEmployeeByIdCommand, OneOf<Success, NotFound>>
 {
