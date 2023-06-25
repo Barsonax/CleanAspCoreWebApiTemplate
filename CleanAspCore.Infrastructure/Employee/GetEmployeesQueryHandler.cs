@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace CleanAspCore.Infrastructure;
+﻿namespace CleanAspCore.Infrastructure;
 
 public record GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, List<Employee>>
 {
