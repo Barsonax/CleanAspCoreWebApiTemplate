@@ -13,7 +13,7 @@ public class JobController : Controller
     }
     
     [HttpGet]
-    [ProducesResponseType(typeof(EmployeeDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(JobDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> Search()
     {
         var result = (await _sender.Send(new GetJobsQuery()))
