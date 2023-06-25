@@ -1,6 +1,4 @@
-using CleanAspCore.Application;
-using CleanAspCore.Domain;
-using CleanAspCore.Persistance;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

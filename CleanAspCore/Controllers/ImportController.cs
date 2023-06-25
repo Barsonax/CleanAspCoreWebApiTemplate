@@ -1,7 +1,4 @@
-﻿using CleanAspCore.Application;
-using CleanAspCore.Domain;
-
-namespace CleanAspCore.Controllers;
+﻿namespace CleanAspCore.Controllers;
 
 [ApiController]
 [Route("[controller]")]

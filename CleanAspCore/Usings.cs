@@ -2,3 +2,8 @@
 global using OneOf.Types;
 global using Mediator;
 global using Microsoft.AspNetCore.Mvc;
+global using FluentValidation;
+global using FluentValidation.AspNetCore;
+global using CleanAspCore.Domain;
+global using CleanAspCore.Application;
+global using CleanAspCore.Persistance;

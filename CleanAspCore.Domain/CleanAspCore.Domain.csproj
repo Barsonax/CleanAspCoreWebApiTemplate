@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="11.5.2" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
       <PackageReference Include="Mediator.Abstractions" Version="2.1.1" />
       <PackageReference Include="OneOf" Version="3.0.243" />
       <PackageReference Include="Riok.Mapperly" Version="2.8.0" />

@@ -1,7 +1,4 @@
-﻿using CleanAspCore.Domain;
-using FluentValidation.AspNetCore;
-
-namespace CleanAspCore.Controllers;
+﻿namespace CleanAspCore.Controllers;
 
 [ApiController]
 [Route("[controller]")]

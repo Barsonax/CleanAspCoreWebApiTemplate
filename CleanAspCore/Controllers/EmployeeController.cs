@@ -1,7 +1,4 @@
-﻿using CleanAspCore.Domain;
-using FluentValidation.AspNetCore;
-
-namespace CleanAspCore.Controllers;
+﻿namespace CleanAspCore.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -9,10 +6,12 @@ namespace CleanAspCore.Controllers;
 public class EmployeeController : Controller
 {
     private readonly ISender _sender;
+    private readonly IValidator<Employee> _validator;
 
-    public EmployeeController(ISender sender)
+    public EmployeeController(ISender sender, IValidator<Employee> validator)
     {
         _sender = sender;
+        _validator = validator;
     }
     
     [HttpGet]
@@ -32,8 +31,7 @@ public class EmployeeController : Controller
     public async Task<IActionResult> Update([FromBody] EmployeeDto employeeDto)
     {
         var employee = employeeDto.ToDomain();
-        var validator = new EmployeeValidator();
-        var validationResult = validator.Validate(employee);
+        var validationResult = _validator.Validate(employee);
         if (!validationResult.IsValid)
         {
             validationResult.AddToModelState(ModelState);
@@ -52,8 +50,7 @@ public class EmployeeController : Controller
     public async Task<IActionResult> Add([FromBody] EmployeeDto employeeDto)
     {
         var employee = employeeDto.ToDomain();
-        var validator = new EmployeeValidator();
-        var validationResult = validator.Validate(employee);
+        var validationResult = _validator.Validate(employee);
         if (!validationResult.IsValid)
         {
             validationResult.AddToModelState(ModelState);
