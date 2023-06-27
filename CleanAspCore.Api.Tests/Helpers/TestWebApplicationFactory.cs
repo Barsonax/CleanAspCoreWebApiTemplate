@@ -1,4 +1,4 @@
-﻿using CleanAspCore.Infrastructure;
+﻿using CleanAspCore.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

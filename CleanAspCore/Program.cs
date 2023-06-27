@@ -1,3 +1,9 @@
+using System.Reflection;
+using CleanAspCore.Data;
+using CleanAspCore.Features.Departments;
+using CleanAspCore.Features.Employees;
+using CleanAspCore.Features.Import;
+using CleanAspCore.Features.Jobs;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +15,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDomain();
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+builder.Services.AddImport();
+builder.Services.AddDbContext<HrContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddMediator(options =>
 {
@@ -35,8 +41,16 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapGetDepartments();
+app.MapGetJobs();
+app.MapGetEmployees();
+app.MapAddEmployee();
+app.MapUpdateEmployeeById();
+app.MapDeleteEmployeeById();
 
 app.Run();
 
-public partial class Program { }
+namespace CleanAspCore
+{
+    public partial class Program { }
+}
