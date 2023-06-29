@@ -5,6 +5,7 @@ using CleanAspCore.Features.Employees;
 using CleanAspCore.Features.Import;
 using CleanAspCore.Features.Jobs;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-builder.Services.AddImport();
 builder.Services.AddDbContext<HrContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddMediator(options =>
@@ -24,11 +24,17 @@ builder.Services.AddMediator(options =>
     options.ServiceLifetime = ServiceLifetime.Transient;
 });
 
+IFileProvider physicalProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
+builder.Services.AddSingleton<IFileProvider>(physicalProvider);  
+
 var app = builder.Build();
 
-using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
-var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
-context.Database.Migrate();
+if (app.Environment.IsDevelopment())
+{
+    using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+    var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
+    context.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -47,6 +53,7 @@ app.MapGetEmployees();
 app.MapAddEmployee();
 app.MapUpdateEmployeeById();
 app.MapDeleteEmployeeById();
+app.MapPutImport();
 
 app.Run();
 

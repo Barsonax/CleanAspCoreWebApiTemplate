@@ -1,7 +1,4 @@
-using System.Net.Http.Json;
-using CleanAspCore.Api.Tests.Helpers;
 using CleanAspCore.Domain.Job;
-using FluentAssertions;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 
@@ -11,16 +8,18 @@ public class JobControllerTests : IntegrationTestBase
     public async Task SearchJobs_ReturnsExpectedJobs()
     {
         //Arrange
-        Context.Jobs.Add(new Job()
+        await using var api = CreateApi();
+        api.SeedData(context =>
         {
-            Id = 0,
-            Name = "Foo",
+            context.Jobs.Add(new Job()
+            {
+                Id = 0,
+                Name = "Foo",
+            });
         });
 
-        await Context.SaveChangesAsync();
-        
         //Act
-        var result = await Client.GetFromJsonAsync<JobDto[]>("Job");
+        var result = await api.CreateClient().GetFromJsonAsync<JobDto[]>("Job");
 
         //Assert
         result.Should().BeEquivalentTo(new[]

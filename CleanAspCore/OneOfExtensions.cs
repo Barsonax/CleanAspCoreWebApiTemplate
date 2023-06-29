@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using System.Runtime.InteropServices.JavaScript;
+using Microsoft.AspNetCore.Http.HttpResults;
 using NotFound = OneOf.Types.NotFound;
 
 namespace CleanAspCore;
@@ -12,7 +13,7 @@ public static class OneOfExtensions
 
     public static async ValueTask<Results<Ok, Microsoft.AspNetCore.Http.HttpResults.NotFound>> ToHttpResultAsync(this ValueTask<OneOf<Success, NotFound>> oneOf) =>
         (await oneOf).ToHttpResult();
-    
+
     public static Results<Ok, ValidationProblem> ToHttpResult(this OneOf<Success, ValidationError> oneOf) =>
         oneOf.Match<Results<Ok, ValidationProblem>>(
             success => TypedResults.Ok(),

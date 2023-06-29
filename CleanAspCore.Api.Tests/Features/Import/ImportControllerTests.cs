@@ -1,26 +1,79 @@
-﻿using System.Text.Json;
+﻿using CleanAspCore.Domain.Department;
 using CleanAspCore.Domain.Employee;
+using CleanAspCore.Domain.Job;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.FileProviders;
 
 namespace CleanAspCore.Api.Tests.Features.Import;
 
-public class ImportControllerTests
+public class ImportControllerTests : IntegrationTestBase
 {
     [Fact]
-    public async Task foo()
+    public async Task Import_SingleNewEmployee_IsImported()
     {
-        var foo = 
-            """
-[
+        await using var api = CreateApi().ConfigureServices(services =>
         {
-            "id": 1,
-            "firstname": "Neal",
-            "lastname": "Collopy",
-            "email": "ncollopy0@slate.com",
-            "gender": "Male",
-            "Department": 1,
-            "Job": 2
-        }]
-""";
-        var result = JsonSerializer.Deserialize<EmployeeDto[]>(foo);
+            var fileProviderMock = new Mock<IFileProvider>()
+                .SetupJsonFileMock("TestData/Employee.json", new[]
+                {
+                    new Employee
+                    {
+                        Id = 1,
+                        FirstName = "Foo",
+                        LastName = "Bar",
+                        Email = "email",
+                        Gender = "Weird",
+                        JobId = 2,
+                        DepartmentId = 3
+                    }
+                })
+                .SetupJsonFileMock("TestData/Job.json", Array.Empty<JobDto>())
+                .SetupJsonFileMock("TestData/Department.json", Array.Empty<DepartmentDto>());
+
+            services.Replace(new ServiceDescriptor(typeof(IFileProvider), fileProviderMock.Object));
+        });
+
+        api.SeedData(context =>
+        {
+            context.Jobs.Add(new Job
+            {
+                Id = 2,
+                Name = "Foo",
+            });
+
+            context.Departments.Add(new Department
+            {
+                Id = 3,
+                Name = "Bar",
+                City = "Foo"
+            });
+        });
+
+        //Act
+        var result = await api.CreateClient().PutAsync("Import", null);
+        result.EnsureSuccessStatusCode();
+
+        //Assert
+        api.AssertDatabase(context =>
+        {
+            context.Employees.Should().BeEquivalentTo(new []
+            {
+                new Employee
+                {
+                    Id = 1,
+                    FirstName = "Foo",
+                    LastName = "Bar",
+                    Email = "email",
+                    Gender = "Weird",
+                    JobId = 2,
+                    DepartmentId = 3
+                }
+            });
+        });
+    }
+
+    public ImportControllerTests(PostgreSqlLifetime fixture) : base(fixture)
+    {
     }
 }

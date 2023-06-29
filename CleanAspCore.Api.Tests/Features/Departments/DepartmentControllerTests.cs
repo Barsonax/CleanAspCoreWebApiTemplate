@@ -1,7 +1,4 @@
-﻿using System.Net.Http.Json;
-using CleanAspCore.Api.Tests.Helpers;
-using CleanAspCore.Domain.Department;
-using FluentAssertions;
+﻿using CleanAspCore.Domain.Department;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
 
@@ -11,17 +8,19 @@ public class DepartmentControllerTests : IntegrationTestBase
     public async Task SearchDepartments_ReturnsExpectedDepartments()
     {
         //Arrange
-        Context.Departments.Add(new Department()
+        await using var api = CreateApi();
+        api.SeedData(context =>
         {
-            Id = 0,
-            Name = "Foo",
-            City = "bar",
+            context.Departments.Add(new Department()
+            {
+                Id = 0,
+                Name = "Foo",
+                City = "bar",
+            });
         });
-
-        await Context.SaveChangesAsync();
         
         //Act
-        var result = await Client.GetFromJsonAsync<DepartmentDto[]>("Department");
+        var result = await api.CreateClient().GetFromJsonAsync<DepartmentDto[]>("Department");
 
         //Assert
         result.Should().BeEquivalentTo(new[]

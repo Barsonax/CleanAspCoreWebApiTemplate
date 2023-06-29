@@ -6,17 +6,19 @@ using Microsoft.Extensions.Hosting;
 
 namespace CleanAspCore.Api.Tests.Helpers;
 
-public class TestWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
+public class TestWebApplicationFactory : WebApplicationFactory<Program>
 {
     private readonly string _connectionString;
+    private Action<IServiceCollection>? _configure;
 
     public TestWebApplicationFactory(string connectionString)
     {
         _connectionString = connectionString;
     }
-
+    
     protected override IHost CreateHost(IHostBuilder builder)
     {
+        builder.UseEnvironment(Environments.Production);
         builder.ConfigureServices(services =>
         {
             var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<HrContext>));
@@ -27,8 +29,24 @@ public class TestWebApplicationFactory<TProgram> : WebApplicationFactory<TProgra
             }
 
             services.AddDbContext<HrContext>(options => options.UseNpgsql(_connectionString));
+            
+            _configure?.Invoke(services);
         });
 
-        return base.CreateHost(builder);
+        var app = base.CreateHost(builder);
+        
+        using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+        var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
+        context.Database.Migrate();
+
+        return app;
+    }
+    
+    
+
+    public TestWebApplicationFactory ConfigureServices(Action<IServiceCollection> configure)
+    {
+        _configure = configure;
+        return this;
     }
 }
