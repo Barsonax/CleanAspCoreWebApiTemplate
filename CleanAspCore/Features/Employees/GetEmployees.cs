@@ -25,6 +25,7 @@ public static class GetEmployees
         public async ValueTask<List<EmployeeDto>> Handle(Request request, CancellationToken cancellationToken) => new(await
             _context.Employees
                 .Select(x => x.ToDto())
+                .AsNoTracking()
                 .ToListAsync(cancellationToken));
     }
 }

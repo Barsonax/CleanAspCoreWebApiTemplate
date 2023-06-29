@@ -1,21 +1,25 @@
 ﻿using CleanAspCore.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.ObjectPool;
+using Npgsql;
+using Respawn;
 
 namespace CleanAspCore.Api.Tests.Helpers;
 
 public class TestWebApplicationFactory : WebApplicationFactory<Program>
 {
-    private readonly string _connectionString;
+    private readonly ObjectPool<IntegrationDatabase> _databasePool;
+    private readonly IntegrationDatabase _integrationDatabase;
     private Action<IServiceCollection>? _configure;
 
-    public TestWebApplicationFactory(string connectionString)
+    public TestWebApplicationFactory(ObjectPool<IntegrationDatabase> databasePool)
     {
-        _connectionString = connectionString;
+        _databasePool = databasePool;
+        _integrationDatabase = databasePool.Get();
     }
-    
+
     protected override IHost CreateHost(IHostBuilder builder)
     {
         builder.UseEnvironment(Environments.Production);
@@ -28,21 +32,42 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
                 services.Remove(descriptor);
             }
 
-            services.AddDbContext<HrContext>(options => options.UseNpgsql(_connectionString));
+            services.AddDbContext<HrContext>(options => options.UseNpgsql(_integrationDatabase.ConnectionString));
             
             _configure?.Invoke(services);
         });
 
         var app = base.CreateHost(builder);
-        
-        using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
-        var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
-        context.Database.Migrate();
 
+        if (_integrationDatabase.Respawner == null)
+        {
+            using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
+            context.Database.Migrate();
+            _integrationDatabase.InitializeRespawner().Wait();
+        }
+        
         return app;
     }
-    
-    
+
+    public override async ValueTask DisposeAsync()
+    {
+        await base.DisposeAsync();
+        
+        using (var conn = new NpgsqlConnection(_integrationDatabase.ConnectionString))
+        {
+            await conn.OpenAsync();
+            
+            var respawner = await Respawner.CreateAsync(conn, new RespawnerOptions
+            {
+                DbAdapter = DbAdapter.Postgres
+            });
+
+            await respawner.ResetAsync(conn);
+        }
+            
+        _databasePool.Return(_integrationDatabase);
+    }
 
     public TestWebApplicationFactory ConfigureServices(Action<IServiceCollection> configure)
     {

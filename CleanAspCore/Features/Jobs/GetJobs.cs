@@ -22,6 +22,9 @@ public static class GetJobs
         }
 
         public async ValueTask<List<JobDto>> Handle(Request request, CancellationToken cancellationToken) => new(await
-            _context.Jobs.Select(x => x.ToDto()).ToListAsync(cancellationToken));
+            _context.Jobs
+                .Select(x => x.ToDto())
+                .AsNoTracking()
+                .ToListAsync(cancellationToken));
     }
 }

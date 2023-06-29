@@ -23,6 +23,9 @@ public static class GetDepartments
         }
 
         public async ValueTask<List<DepartmentDto>> Handle(Request request, CancellationToken cancellationToken) => new(await
-            _context.Departments.Select(x => x.ToDto()).ToListAsync(cancellationToken));
+            _context.Departments
+                .Select(x => x.ToDto())
+                .AsNoTracking()
+                .ToListAsync(cancellationToken));
     }
 }
