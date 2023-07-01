@@ -53,17 +53,14 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
     public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
-        
-        using (var conn = new NpgsqlConnection(_integrationDatabase.ConnectionString))
-        {
-            await conn.OpenAsync();
-            
-            var respawner = await Respawner.CreateAsync(conn, new RespawnerOptions
-            {
-                DbAdapter = DbAdapter.Postgres
-            });
 
-            await respawner.ResetAsync(conn);
+        if (_integrationDatabase.Respawner != null)
+        {
+            using (var conn = new NpgsqlConnection(_integrationDatabase.ConnectionString))
+            {
+                await conn.OpenAsync();
+                await _integrationDatabase.Respawner.ResetAsync(conn);
+            }
         }
             
         _databasePool.Return(_integrationDatabase);

@@ -8,21 +8,20 @@ public class Employee
     public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string Email { get; set; }
-    public string Gender {get; set; }
-    public virtual Department Department { get; set; } 
+    public EmailAddress Email { get; set; }
+    public string Gender { get; set; }
+    public virtual Department Department { get; set; }
     public int DepartmentId { get; set; }
     public virtual Job Job { get; set; }
     public int JobId { get; set; }
 }
 
-public class EmployeeDto
+public class EmployeeValidator : AbstractValidator<Employee>
 {
-    public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string Gender {get; set; }
-    public int DepartmentId { get; set; }
-    public int JobId { get; set; }
+    public EmployeeValidator()
+    {
+        RuleFor(x => x.FirstName).NotEmpty();
+        RuleFor(x => x.LastName).NotEmpty();
+        RuleFor(x => x.Email).NotNull();
+    }
 }

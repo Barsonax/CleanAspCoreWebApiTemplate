@@ -18,7 +18,7 @@ public class EmployeeControllerTests : IntegrationTestBase
                 Id = 0,
                 FirstName = "Foo",
                 LastName = "Bar",
-                Email = "email",
+                Email = "email@foobar.com",
                 Gender = "Weird",
                 DepartmentId = 1,
                 JobId = 2
@@ -49,7 +49,7 @@ public class EmployeeControllerTests : IntegrationTestBase
                 Id = 0,
                 FirstName = "Foo",
                 LastName = "Bar",
-                Email = "email",
+                Email = "email@foobar.com",
                 Gender = "Weird",
                 DepartmentId = 1,
                 JobId = 2
@@ -83,7 +83,7 @@ public class EmployeeControllerTests : IntegrationTestBase
             Id = 0,
             FirstName = "Foo",
             LastName = "Bar",
-            Email = "email",
+            Email = "email@foobar.com",
             Gender = "Weird",
             DepartmentId = 1,
             JobId = 2
@@ -106,7 +106,7 @@ public class EmployeeControllerTests : IntegrationTestBase
                     Id = 0,
                     FirstName = "Foo",
                     LastName = "Bar",
-                    Email = "email",
+                    Email = "email@foobar.com",
                     Gender = "Weird",
                     DepartmentId = 1,
                     Department = new Department()

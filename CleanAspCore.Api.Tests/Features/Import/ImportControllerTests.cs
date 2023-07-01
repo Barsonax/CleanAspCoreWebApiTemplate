@@ -17,12 +17,12 @@ public class ImportControllerTests : IntegrationTestBase
             var fileProviderMock = new Mock<IFileProvider>()
                 .SetupJsonFileMock("TestData/Employee.json", new[]
                 {
-                    new Employee
+                    new EmployeeDto()
                     {
                         Id = 1,
                         FirstName = "Foo",
                         LastName = "Bar",
-                        Email = "email",
+                        Email = "email@foobar.com",
                         Gender = "Weird",
                         JobId = 2,
                         DepartmentId = 3
@@ -64,7 +64,7 @@ public class ImportControllerTests : IntegrationTestBase
                     Id = 1,
                     FirstName = "Foo",
                     LastName = "Bar",
-                    Email = "email",
+                    Email = "email@foobar.com",
                     Gender = "Weird",
                     JobId = 2,
                     DepartmentId = 3
