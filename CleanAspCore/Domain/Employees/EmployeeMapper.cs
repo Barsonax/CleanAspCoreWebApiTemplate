@@ -1,6 +1,6 @@
 ﻿using Riok.Mapperly.Abstractions;
 
-namespace CleanAspCore.Domain.Employee;
+namespace CleanAspCore.Domain.Employees;
 
 [Mapper]
 public static partial class EmployeeMapper

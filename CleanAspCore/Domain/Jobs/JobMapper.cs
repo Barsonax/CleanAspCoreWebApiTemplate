@@ -1,6 +1,6 @@
 ﻿using Riok.Mapperly.Abstractions;
 
-namespace CleanAspCore.Domain.Job;
+namespace CleanAspCore.Domain.Jobs;
 
 [Mapper]
 public static partial class JobMapper

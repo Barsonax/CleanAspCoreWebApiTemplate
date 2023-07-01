@@ -1,6 +1,6 @@
 ﻿using Riok.Mapperly.Abstractions;
 
-namespace CleanAspCore.Domain.Department;
+namespace CleanAspCore.Domain.Departments;
 
 [Mapper]
 public static partial class DepartmentMapper

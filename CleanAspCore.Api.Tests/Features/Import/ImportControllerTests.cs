@@ -1,6 +1,6 @@
-﻿using CleanAspCore.Domain.Department;
-using CleanAspCore.Domain.Employee;
-using CleanAspCore.Domain.Job;
+﻿using CleanAspCore.Domain.Departments;
+using CleanAspCore.Domain.Employees;
+using CleanAspCore.Domain.Jobs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;

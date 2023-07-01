@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using CleanAspCore.Data;
-using CleanAspCore.Domain.Department;
-using CleanAspCore.Domain.Employee;
-using CleanAspCore.Domain.Job;
+using CleanAspCore.Domain.Departments;
+using CleanAspCore.Domain.Employees;
+using CleanAspCore.Domain.Jobs;
 using Microsoft.Extensions.FileProviders;
 
 namespace CleanAspCore.Features.Import;

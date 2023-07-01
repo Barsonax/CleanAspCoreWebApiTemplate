@@ -1,6 +1,6 @@
-﻿using CleanAspCore.Domain.Department;
-using CleanAspCore.Domain.Employee;
-using CleanAspCore.Domain.Job;
+﻿using CleanAspCore.Domain.Departments;
+using CleanAspCore.Domain.Employees;
+using CleanAspCore.Domain.Jobs;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
 

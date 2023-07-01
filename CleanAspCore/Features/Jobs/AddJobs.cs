@@ -1,5 +1,5 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Domain.Job;
+using CleanAspCore.Domain.Jobs;
 
 namespace CleanAspCore.Features.Jobs;
 

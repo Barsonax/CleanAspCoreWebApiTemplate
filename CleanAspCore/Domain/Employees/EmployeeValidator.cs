@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Domain.Employee;
+﻿namespace CleanAspCore.Domain.Employees;
 
 public class EmployeeValidator : AbstractValidator<Employee>
 {

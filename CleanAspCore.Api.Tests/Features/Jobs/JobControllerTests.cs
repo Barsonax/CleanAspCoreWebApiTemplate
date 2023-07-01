@@ -1,4 +1,4 @@
-using CleanAspCore.Domain.Job;
+using CleanAspCore.Domain.Jobs;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 

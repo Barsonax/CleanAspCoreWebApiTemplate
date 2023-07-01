@@ -1,4 +1,4 @@
-﻿using CleanAspCore.Domain.Department;
+﻿using CleanAspCore.Domain.Departments;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
 

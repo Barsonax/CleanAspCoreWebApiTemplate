@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Domain.Department;
+﻿namespace CleanAspCore.Domain.Departments;
 
 public class Department
 {

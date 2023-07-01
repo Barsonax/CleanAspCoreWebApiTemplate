@@ -1,5 +1,5 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Domain.Employee;
+using CleanAspCore.Domain.Employees;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Employees;

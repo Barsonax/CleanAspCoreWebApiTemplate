@@ -1,5 +1,5 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Domain.Department;
+using CleanAspCore.Domain.Departments;
 
 namespace CleanAspCore.Features.Departments;
 

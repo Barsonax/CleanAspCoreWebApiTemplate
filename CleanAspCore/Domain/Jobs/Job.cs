@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Domain.Job;
+﻿namespace CleanAspCore.Domain.Jobs;
 
 public class Job
 {
