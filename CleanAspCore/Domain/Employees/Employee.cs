@@ -3,9 +3,8 @@ using CleanAspCore.Domain.Jobs;
 
 namespace CleanAspCore.Domain.Employees;
 
-public class Employee
+public class Employee : Entity
 {
-    public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public EmailAddress Email { get; set; }
