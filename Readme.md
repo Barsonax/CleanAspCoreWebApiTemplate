@@ -1,4 +1,14 @@
-## Setting up https
+## Running tests
+
+Only docker is required to run the tests. First run can take a bit longer as the docker image is downloaded.
+Run the following command to run the tests:
+
+```cmd
+dotnet test
+```
+
+
+## Setting up https for when running in a docker container
 
 Run these commands to generate a https certificate for development:
 
