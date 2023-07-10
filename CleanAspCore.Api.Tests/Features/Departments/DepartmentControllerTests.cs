@@ -34,12 +34,6 @@ public class DepartmentControllerTests : IntegrationTestBase
         });
     }
 
-    [Fact]
-    public async Task FailOnPurpose()
-    {
-        Assert.Fail("As intended");
-    }
-
     public DepartmentControllerTests(PostgreSqlLifetime fixture) : base(fixture)
     {
     }
