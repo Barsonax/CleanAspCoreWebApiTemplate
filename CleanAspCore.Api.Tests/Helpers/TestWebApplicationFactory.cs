@@ -41,9 +41,7 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
 
         if (_integrationDatabase.Respawner == null)
         {
-            using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
-            var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
-            context.Database.Migrate();
+            app.MigrateHrContext();
             _integrationDatabase.InitializeRespawner().Wait();
         }
         

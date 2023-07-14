@@ -33,3 +33,13 @@ public class HrContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 }
+
+public static class HrContextExtensions
+{
+    public static void MigrateHrContext(this IHost host)
+    {
+        using var serviceScope = host.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+        var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
+        context.Database.Migrate();
+    }
+}

@@ -2,13 +2,14 @@
 
 namespace CleanAspCore.Features.Employees;
 
-public static class DeleteEmployeeById
+public class DeleteEmployeeById : IRouteModule
 {
-    public static void MapDeleteEmployeeById(this IEndpointRouteBuilder endpoints) => endpoints.MapDelete("Employee/{id}", 
-        async (int id, ISender sender) => 
-            await sender.Send(new Request(id)).ToHttpResultAsync())
-        .WithTags("Employee");
-    
+    public void AddRoutes(IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapDelete("Employee/{id}", async (int id, ISender sender) => await sender.Send(new Request(id)).ToHttpResultAsync())
+            .WithTags("Employee");
+    }
+
     public record Request(int Id) : IRequest<OneOf<Success, NotFound>>;
     
     public class Handler : IRequestHandler<Request, OneOf<Success, NotFound>>

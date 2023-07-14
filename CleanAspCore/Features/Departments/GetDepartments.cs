@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Departments;
 
-public static class GetDepartments
+public class GetDepartments : IRouteModule
 {
-    public static void MapGetDepartments(this IEndpointRouteBuilder endpoints) => endpoints.MapGet("Department",
-        async (ISender sender) => 
-            TypedResults.Json(await sender.Send(new Request())))
-        .WithTags("Department");
+    public void AddRoutes(IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapGet("Department", async (ISender sender) => TypedResults.Json(await sender.Send(new Request())))
+            .WithTags("Department");
+    }
 
     public record Request : IRequest<List<DepartmentDto>>;
 

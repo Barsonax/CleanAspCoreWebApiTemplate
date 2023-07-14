@@ -7,13 +7,14 @@ using Microsoft.Extensions.FileProviders;
 
 namespace CleanAspCore.Features.Import;
 
-public static class ImportTestData
+public class ImportTestData : IRouteModule
 {
-    public static void MapPutImport(this IEndpointRouteBuilder endpoints) => endpoints.MapPut("Import",
-            async (ISender sender) => 
-                TypedResults.Json(await sender.Send(new Request()).ToHttpResultAsync()))
-        .WithTags("Import");
-
+    public void AddRoutes(IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapPut("Import", async (ISender sender) => TypedResults.Json(await sender.Send(new Request()).ToHttpResultAsync()))
+            .WithTags("Import");
+    }
+    
     public record Request : IRequest<OneOf<Success, ValidationError>>;
 
     public record Handler : IRequestHandler<Request, OneOf<Success, ValidationError>>

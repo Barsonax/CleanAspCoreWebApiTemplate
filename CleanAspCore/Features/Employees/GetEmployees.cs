@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Employees;
 
-public static class GetEmployees
+public class GetEmployees : IRouteModule
 {
-    public static void MapGetEmployees(this IEndpointRouteBuilder endpoints) => endpoints.MapGet("Employee",
-        async (ISender sender) => 
-            TypedResults.Json(await sender.Send(new Request())))
-        .WithTags("Employee");
-
+    public void AddRoutes(IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapGet("Employee", async (ISender sender) => TypedResults.Json(await sender.Send(new Request())))
+            .WithTags("Employee");
+    }
+    
     public record Request : IRequest<List<EmployeeDto>>;
 
     public record Handler : IRequestHandler<Request, List<EmployeeDto>>

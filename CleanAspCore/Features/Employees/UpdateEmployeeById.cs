@@ -3,13 +3,14 @@ using CleanAspCore.Domain.Employees;
 
 namespace CleanAspCore.Features.Employees;
 
-public static class UpdateEmployeeById
+public class UpdateEmployeeById : IRouteModule
 {
-    public static void MapUpdateEmployeeById(this IEndpointRouteBuilder endpoints) => endpoints.MapPut("Employee/{id}", 
-        async ([FromBody] EmployeeDto employeeDto, ISender sender) => 
-            await sender.Send(new Request(employeeDto)).ToHttpResultAsync())
-        .WithTags("Employee");
-    
+    public void AddRoutes(IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapPut("Employee/{id}", async ([FromBody] EmployeeDto employeeDto, ISender sender) => await sender.Send(new Request(employeeDto)).ToHttpResultAsync())
+            .WithTags("Employee");
+    }
+
     public record Request(EmployeeDto EmployeeDto) : IRequest<OneOf<Success, NotFound, ValidationError>>;
     
     public class Handler : IRequestHandler<Request, OneOf<Success, NotFound, ValidationError>>

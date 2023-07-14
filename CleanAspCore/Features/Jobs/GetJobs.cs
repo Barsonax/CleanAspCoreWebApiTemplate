@@ -4,11 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Jobs;
 
-public static class GetJobs
+public class GetJobs : IRouteModule
 {
-    public static void MapGetJobs(this IEndpointRouteBuilder endpoints) => endpoints.MapGet("Job", async (ISender sender) => 
-        TypedResults.Json(await sender.Send(new Request())))
-        .WithTags("Job");
+    public void AddRoutes(IEndpointRouteBuilder endpoints)
+    {
+        endpoints.MapGet("Job", async (ISender sender) => TypedResults.Json(await sender.Send(new Request())))
+            .WithTags("Job");
+    }
 
     public record Request : IRequest<List<JobDto>>;
 
