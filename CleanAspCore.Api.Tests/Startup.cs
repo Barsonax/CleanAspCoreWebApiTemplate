@@ -8,7 +8,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddTransient<TestWebApplicationFactory>();
+        services.AddTransient<TestWebApi>();
         services.AddLogging(x => x.AddXunitOutput());
         
         var container = new PostgreSqlBuilder().Build();

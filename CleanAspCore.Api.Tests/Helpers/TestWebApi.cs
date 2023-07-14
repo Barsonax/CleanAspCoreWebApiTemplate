@@ -6,13 +6,13 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanAspCore.Api.Tests.Helpers;
 
-public class TestWebApplicationFactory : WebApplicationFactory<Program>
+public class TestWebApi : WebApplicationFactory<Program>
 {
     private readonly ILoggerProvider _loggerProvider;
     private readonly RentedDatabase _integrationDatabase;
     private Action<IServiceCollection>? _configure;
 
-    public TestWebApplicationFactory(DatabasePool databasePool, ILoggerProvider loggerProvider)
+    public TestWebApi(DatabasePool databasePool, ILoggerProvider loggerProvider)
     {
         _loggerProvider = loggerProvider;
         _integrationDatabase = databasePool.Get();

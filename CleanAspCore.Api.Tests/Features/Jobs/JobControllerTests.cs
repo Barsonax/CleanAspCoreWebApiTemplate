@@ -4,9 +4,9 @@ namespace CleanAspCore.Api.Tests.Features.Jobs;
 
 public class JobControllerTests
 {
-    private readonly TestWebApplicationFactory _api;
+    private readonly TestWebApi _api;
 
-    public JobControllerTests(TestWebApplicationFactory api)
+    public JobControllerTests(TestWebApi api)
     {
         _api = api;
     }

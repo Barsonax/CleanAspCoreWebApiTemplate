@@ -6,9 +6,9 @@ namespace CleanAspCore.Api.Tests.Features.Employees;
 
 public class EmployeeControllerTests
 {
-    private readonly TestWebApplicationFactory _api;
+    private readonly TestWebApi _api;
 
-    public EmployeeControllerTests(TestWebApplicationFactory api)
+    public EmployeeControllerTests(TestWebApi api)
     {
         _api = api;
     }

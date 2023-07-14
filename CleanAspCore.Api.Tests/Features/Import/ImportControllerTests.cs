@@ -9,9 +9,9 @@ namespace CleanAspCore.Api.Tests.Features.Import;
 
 public class ImportControllerTests
 {
-    private readonly TestWebApplicationFactory _api;
+    private readonly TestWebApi _api;
 
-    public ImportControllerTests(TestWebApplicationFactory api)
+    public ImportControllerTests(TestWebApi api)
     {
         _api = api;
     }

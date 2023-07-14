@@ -4,9 +4,9 @@ namespace CleanAspCore.Api.Tests.Features.Departments;
 
 public class DepartmentControllerTests
 {
-    private readonly TestWebApplicationFactory _api;
+    private readonly TestWebApi _api;
 
-    public DepartmentControllerTests(TestWebApplicationFactory api)
+    public DepartmentControllerTests(TestWebApi api)
     {
         _api = api;
     }
