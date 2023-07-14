@@ -1,16 +1,22 @@
 using CleanAspCore.Domain.Jobs;
-using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 
-public class JobControllerTests : IntegrationTestBase
+public class JobControllerTests
 {
+    private readonly TestWebApplicationFactory _api;
+
+    public JobControllerTests(TestWebApplicationFactory api)
+    {
+        _api = api;
+    }
+
+    
     [Fact]
     public async Task SearchJobs_ReturnsExpectedJobs()
     {
         //Arrange
-        await using var api = CreateApi();
-        api.SeedData(context =>
+        _api.SeedData(context =>
         {
             context.Jobs.Add(new Job()
             {
@@ -20,7 +26,7 @@ public class JobControllerTests : IntegrationTestBase
         });
 
         //Act
-        var result = await api.CreateClient().GetFromJsonAsync<JobDto[]>("Job");
+        var result = await _api.CreateClient().GetFromJsonAsync<JobDto[]>("Job");
 
         //Assert
         result.Should().BeEquivalentTo(new[]
@@ -31,9 +37,5 @@ public class JobControllerTests : IntegrationTestBase
                 Name = "Foo",
             }
         });
-    }
-    
-    public JobControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
-    {
     }
 }

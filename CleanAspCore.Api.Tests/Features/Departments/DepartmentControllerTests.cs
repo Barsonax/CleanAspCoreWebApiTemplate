@@ -1,16 +1,21 @@
 ﻿using CleanAspCore.Domain.Departments;
-using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
 
-public class DepartmentControllerTests : IntegrationTestBase
+public class DepartmentControllerTests
 {
+    private readonly TestWebApplicationFactory _api;
+
+    public DepartmentControllerTests(TestWebApplicationFactory api)
+    {
+        _api = api;
+    }
+    
     [Fact]
     public async Task SearchDepartments_ReturnsExpectedDepartments()
     {
         //Arrange
-        await using var api = CreateApi();
-        api.SeedData(context =>
+        _api.SeedData(context =>
         {
             context.Departments.Add(new Department()
             {
@@ -21,7 +26,7 @@ public class DepartmentControllerTests : IntegrationTestBase
         });
         
         //Act
-        var result = await api.CreateClient().GetFromJsonAsync<DepartmentDto[]>("Department");
+        var result = await _api.CreateClient().GetFromJsonAsync<DepartmentDto[]>("Department");
 
         //Assert
         result.Should().BeEquivalentTo(new[]
@@ -33,9 +38,5 @@ public class DepartmentControllerTests : IntegrationTestBase
                 City = "bar",
             }
         });
-    }
-
-    public DepartmentControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
-    {
     }
 }

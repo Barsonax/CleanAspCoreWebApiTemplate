@@ -3,21 +3,17 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.ObjectPool;
-using Npgsql;
 
 namespace CleanAspCore.Api.Tests.Helpers;
 
 public class TestWebApplicationFactory : WebApplicationFactory<Program>
 {
-    private readonly ObjectPool<IntegrationDatabase> _databasePool;
     private readonly ILoggerProvider _loggerProvider;
-    private readonly IntegrationDatabase _integrationDatabase;
+    private readonly RentedDatabase _integrationDatabase;
     private Action<IServiceCollection>? _configure;
 
-    public TestWebApplicationFactory(ObjectPool<IntegrationDatabase> databasePool, ILoggerProvider loggerProvider)
+    public TestWebApplicationFactory(DatabasePool databasePool, ILoggerProvider loggerProvider)
     {
-        _databasePool = databasePool;
         _loggerProvider = loggerProvider;
         _integrationDatabase = databasePool.Get();
     }
@@ -50,10 +46,10 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
 
         var app = base.CreateHost(builder);
 
-        if (_integrationDatabase.Respawner == null)
+        if (!_integrationDatabase.MigrationsApplied)
         {
             app.MigrateHrContext();
-            _integrationDatabase.InitializeRespawner().Wait();
+            _integrationDatabase.MigrationsApplied = true;
         }
         
         return app;
@@ -62,22 +58,11 @@ public class TestWebApplicationFactory : WebApplicationFactory<Program>
     public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
-
-        if (_integrationDatabase.Respawner != null)
-        {
-            using (var conn = new NpgsqlConnection(_integrationDatabase.ConnectionString))
-            {
-                await conn.OpenAsync();
-                await _integrationDatabase.Respawner.ResetAsync(conn);
-            }
-        }
-            
-        _databasePool.Return(_integrationDatabase);
+        await _integrationDatabase.DisposeAsync();
     }
 
-    public TestWebApplicationFactory ConfigureServices(Action<IServiceCollection> configure)
+    public void ConfigureServices(Action<IServiceCollection> configure)
     {
         _configure = configure;
-        return this;
     }
 }

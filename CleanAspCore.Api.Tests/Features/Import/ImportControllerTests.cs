@@ -4,16 +4,22 @@ using CleanAspCore.Domain.Jobs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
-using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Import;
 
-public class ImportControllerTests : IntegrationTestBase
+public class ImportControllerTests
 {
+    private readonly TestWebApplicationFactory _api;
+
+    public ImportControllerTests(TestWebApplicationFactory api)
+    {
+        _api = api;
+    }
+    
     [Fact]
     public async Task Import_SingleNewEmployee_IsImported()
     {
-        await using var api = CreateApi().ConfigureServices(services =>
+        _api.ConfigureServices(services =>
         {
             var fileProviderMock = new Mock<IFileProvider>()
                 .SetupJsonFileMock("TestData/Employee.json", new[]
@@ -35,7 +41,7 @@ public class ImportControllerTests : IntegrationTestBase
             services.Replace(new ServiceDescriptor(typeof(IFileProvider), fileProviderMock.Object));
         });
 
-        api.SeedData(context =>
+        _api.SeedData(context =>
         {
             context.Jobs.Add(new Job
             {
@@ -52,11 +58,11 @@ public class ImportControllerTests : IntegrationTestBase
         });
 
         //Act
-        var result = await api.CreateClient().PutAsync("Import", null);
+        var result = await _api.CreateClient().PutAsync("Import", null);
         result.EnsureSuccessStatusCode();
 
         //Assert
-        api.AssertDatabase(context =>
+        _api.AssertDatabase(context =>
         {
             context.Employees.Should().BeEquivalentTo(new []
             {
@@ -72,9 +78,5 @@ public class ImportControllerTests : IntegrationTestBase
                 }
             });
         });
-    }
-
-    public ImportControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
-    {
     }
 }

@@ -5,19 +5,21 @@ namespace CleanAspCore.Api.Tests.Helpers;
 
 public class IntegrationDatabase
 {
+    public bool MigrationsApplied { get; set; }
     public required string ConnectionString { get; init; }
-    public Respawner? Respawner { get; private set; }
-
-    public async Task InitializeRespawner()
+    
+    private Respawner? _respawner;
+    
+    public async ValueTask CleanupDatabase()
     {
         await using var conn = new NpgsqlConnection(ConnectionString);
         await conn.OpenAsync();
-            
-        var respawner = await Respawner.CreateAsync(conn, new RespawnerOptions
+        
+        _respawner ??= await Respawner.CreateAsync(conn, new RespawnerOptions
         {
             DbAdapter = DbAdapter.Postgres
         });
-
-        Respawner = respawner;
+        
+        await _respawner.ResetAsync(conn);
     }
 }

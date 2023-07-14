@@ -1,18 +1,23 @@
 ﻿using CleanAspCore.Domain.Departments;
 using CleanAspCore.Domain.Employees;
 using CleanAspCore.Domain.Jobs;
-using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
 
-public class EmployeeControllerTests : IntegrationTestBase
+public class EmployeeControllerTests
 {
+    private readonly TestWebApplicationFactory _api;
+
+    public EmployeeControllerTests(TestWebApplicationFactory api)
+    {
+        _api = api;
+    }
+    
     [Fact]
     public async Task SearchEmployee_ReturnsExpectedJobs()
     {
         //Arrange
-        await using var api = CreateApi();
-        api.SeedData(context =>
+        _api.SeedData(context =>
         {
             context.Employees.Add(new Employee()
             {
@@ -40,7 +45,7 @@ public class EmployeeControllerTests : IntegrationTestBase
         });
         
         //Act
-        var result = await api.CreateClient().GetFromJsonAsync<EmployeeDto[]>("Employee");
+        var result = await _api.CreateClient().GetFromJsonAsync<EmployeeDto[]>("Employee");
 
         //Assert
         result.Should().BeEquivalentTo(new[]
@@ -62,8 +67,7 @@ public class EmployeeControllerTests : IntegrationTestBase
     public async Task AddEmployee_IsAdded()
     {
         //Arrange
-        await using var api = CreateApi();
-        api.SeedData(context =>
+        _api.SeedData(context =>
         {
             context.Departments.Add(new Department()
             {
@@ -91,11 +95,11 @@ public class EmployeeControllerTests : IntegrationTestBase
         };
         
         //Act
-        var result = await api.CreateClient().PostAsJsonAsync("Employee", newEmployee);
+        var result = await _api.CreateClient().PostAsJsonAsync("Employee", newEmployee);
         result.EnsureSuccessStatusCode();
 
         //Assert
-        api.AssertDatabase(context =>
+        _api.AssertDatabase(context =>
         {
             context.Employees
                 .Include(x => x.Department)
@@ -125,9 +129,5 @@ public class EmployeeControllerTests : IntegrationTestBase
                 }
             });
         });
-    }
-    
-    public EmployeeControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
-    {
     }
 }
