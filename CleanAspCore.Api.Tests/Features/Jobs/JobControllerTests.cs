@@ -1,4 +1,5 @@
 using CleanAspCore.Domain.Jobs;
+using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 
@@ -32,7 +33,7 @@ public class JobControllerTests : IntegrationTestBase
         });
     }
     
-    public JobControllerTests(PostgreSqlLifetime fixture) : base(fixture)
+    public JobControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CleanAspCore.Domain.Departments;
+using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
 
@@ -34,7 +35,7 @@ public class DepartmentControllerTests : IntegrationTestBase
         });
     }
 
-    public DepartmentControllerTests(PostgreSqlLifetime fixture) : base(fixture)
+    public DepartmentControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
     {
     }
 }

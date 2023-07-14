@@ -4,6 +4,7 @@ using CleanAspCore.Domain.Jobs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
+using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Import;
 
@@ -73,7 +74,7 @@ public class ImportControllerTests : IntegrationTestBase
         });
     }
 
-    public ImportControllerTests(PostgreSqlLifetime fixture) : base(fixture)
+    public ImportControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
     {
     }
 }

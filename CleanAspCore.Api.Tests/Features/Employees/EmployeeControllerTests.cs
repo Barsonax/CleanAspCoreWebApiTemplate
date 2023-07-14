@@ -1,6 +1,7 @@
 ﻿using CleanAspCore.Domain.Departments;
 using CleanAspCore.Domain.Employees;
 using CleanAspCore.Domain.Jobs;
+using Xunit.Abstractions;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
 
@@ -126,7 +127,7 @@ public class EmployeeControllerTests : IntegrationTestBase
         });
     }
     
-    public EmployeeControllerTests(PostgreSqlLifetime fixture) : base(fixture)
+    public EmployeeControllerTests(PostgreSqlLifetime fixture, ITestOutputHelper output) : base(fixture, output)
     {
     }
 }

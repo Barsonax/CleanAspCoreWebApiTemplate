@@ -14,7 +14,7 @@ public class IntegrationDatabasePoolPolicy : IPooledObjectPolicy<IntegrationData
     public IntegrationDatabase Create() =>
         new()
         {
-            ConnectionString = $"Host=127.0.0.1;Port={_databaseContainerPort};Database={Guid.NewGuid()};Username=postgres;Password=postgres"
+            ConnectionString = $"Host=127.0.0.1;Port={_databaseContainerPort};Database={Guid.NewGuid()};Username=postgres;Password=postgres;Include Error Detail=true"
         };
 
     public bool Return(IntegrationDatabase obj)
