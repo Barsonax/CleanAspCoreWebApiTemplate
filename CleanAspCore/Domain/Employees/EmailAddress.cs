@@ -10,10 +10,18 @@ public record EmailAddress
         Validator.Instance.ValidateAndThrow(this);
     }
 
+    public static bool operator ==(EmailAddress emailAddress, string email) => emailAddress.Equals(email);
+
+    public static bool operator !=(EmailAddress emailAddress, string email) => !emailAddress.Equals(email);
+    
+    public bool Equals(string email) => Email == email;
+
     public static implicit operator string(EmailAddress emailAddress) => emailAddress.Email;
 
     public static implicit operator EmailAddress(string emailAddress) => new(emailAddress);
-    
+
+    public override string ToString() => Email;
+
     private class Validator : AbstractValidator<EmailAddress>
     {
         public static readonly Validator Instance = new();

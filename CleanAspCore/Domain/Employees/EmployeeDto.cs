@@ -1,6 +1,6 @@
 ﻿namespace CleanAspCore.Domain.Employees;
 
-public class EmployeeDto
+public record class EmployeeDto
 {
     public int Id { get; set; }
     public string FirstName { get; set; }

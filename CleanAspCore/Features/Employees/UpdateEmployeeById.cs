@@ -7,7 +7,7 @@ public class UpdateEmployeeById : IRouteModule
 {
     public void AddRoutes(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPut("Employee/{id}", async ([FromBody] EmployeeDto employeeDto, ISender sender) => await sender.Send(new Request(employeeDto)).ToHttpResultAsync())
+        endpoints.MapPut("Employee", async ([FromBody] EmployeeDto employeeDto, ISender sender) => await sender.Send(new Request(employeeDto)).ToHttpResultAsync())
             .WithTags("Employee");
     }
 
