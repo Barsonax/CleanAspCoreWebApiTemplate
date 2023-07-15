@@ -60,11 +60,8 @@ public class EmployeeControllerTests
     {
         //Arrange
         var employee = Fakers.CreateEmployeeFaker().Generate();
-        _api.SeedData(context =>
-        {
-            context.Employees.Add(employee);
-        });
-        
+        _api.SeedData(context => { context.Employees.Add(employee); });
+
         var updatedEmployee = employee.ToDto() with
         {
             FirstName = "Updated",
@@ -90,10 +87,7 @@ public class EmployeeControllerTests
     {
         //Arrange
         var employee = Fakers.CreateEmployeeFaker().Generate();
-        _api.SeedData(context =>
-        {
-            context.Employees.Add(employee);
-        });
+        _api.SeedData(context => { context.Employees.Add(employee); });
 
         //Act
         var result = await _api.CreateClient().DeleteAsync($"Employee/{employee.Id}");

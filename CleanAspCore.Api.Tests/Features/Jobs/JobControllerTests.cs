@@ -11,19 +11,13 @@ public class JobControllerTests
         _api = api;
     }
 
-    
+
     [Fact]
     public async Task SearchJobs_ReturnsExpectedJobs()
     {
         //Arrange
-        _api.SeedData(context =>
-        {
-            context.Jobs.Add(new Job()
-            {
-                Id = 0,
-                Name = "Foo",
-            });
-        });
+        var job = Fakers.CreateJobFaker().Generate();
+        _api.SeedData(context => { context.Jobs.Add(job); });
 
         //Act
         var result = await _api.CreateClient().GetFromJsonAsync<JobDto[]>("Job");
@@ -31,11 +25,7 @@ public class JobControllerTests
         //Assert
         result.Should().BeEquivalentTo(new[]
         {
-            new JobDto()
-            {
-                Id = 0,
-                Name = "Foo",
-            }
+            job.ToDto()
         });
     }
 }

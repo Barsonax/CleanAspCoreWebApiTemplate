@@ -10,33 +10,21 @@ public class DepartmentControllerTests
     {
         _api = api;
     }
-    
+
     [Fact]
     public async Task SearchDepartments_ReturnsExpectedDepartments()
     {
         //Arrange
-        _api.SeedData(context =>
-        {
-            context.Departments.Add(new Department()
-            {
-                Id = 0,
-                Name = "Foo",
-                City = "bar",
-            });
-        });
-        
+        var department = Fakers.CreateDepartmentFaker().Generate();
+        _api.SeedData(context => { context.Departments.Add(department); });
+
         //Act
         var result = await _api.CreateClient().GetFromJsonAsync<DepartmentDto[]>("Department");
 
         //Assert
         result.Should().BeEquivalentTo(new[]
         {
-            new DepartmentDto()
-            {
-                Id = 0,
-                Name = "Foo",
-                City = "bar",
-            }
+            department.ToDto()
         });
     }
 }

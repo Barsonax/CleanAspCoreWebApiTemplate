@@ -19,21 +19,13 @@ public class ImportControllerTests
     [Fact]
     public async Task Import_SingleNewEmployee_IsImported()
     {
+        var employee = Fakers.CreateEmployeeFaker().Generate();
         _api.ConfigureServices(services =>
         {
             var fileProviderMock = new Mock<IFileProvider>()
                 .SetupJsonFileMock("TestData/Employee.json", new[]
                 {
-                    new EmployeeDto()
-                    {
-                        Id = 1,
-                        FirstName = "Foo",
-                        LastName = "Bar",
-                        Email = "email@foobar.com",
-                        Gender = "Weird",
-                        JobId = 2,
-                        DepartmentId = 3
-                    }
+                    employee.ToDto()
                 })
                 .SetupJsonFileMock("TestData/Job.json", Array.Empty<JobDto>())
                 .SetupJsonFileMock("TestData/Department.json", Array.Empty<DepartmentDto>());
@@ -43,18 +35,8 @@ public class ImportControllerTests
 
         _api.SeedData(context =>
         {
-            context.Jobs.Add(new Job
-            {
-                Id = 2,
-                Name = "Foo",
-            });
-
-            context.Departments.Add(new Department
-            {
-                Id = 3,
-                Name = "Bar",
-                City = "Foo"
-            });
+            context.Jobs.Add(employee.Job);
+            context.Departments.Add(employee.Department);
         });
 
         //Act
@@ -66,16 +48,7 @@ public class ImportControllerTests
         {
             context.Employees.Should().BeEquivalentTo(new []
             {
-                new Employee
-                {
-                    Id = 1,
-                    FirstName = "Foo",
-                    LastName = "Bar",
-                    Email = "email@foobar.com",
-                    Gender = "Weird",
-                    JobId = 2,
-                    DepartmentId = 3
-                }
+                employee
             });
         });
     }
