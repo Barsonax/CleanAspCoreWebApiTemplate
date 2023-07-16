@@ -15,7 +15,7 @@ public static class FileProviderMockExtensions
     public static Mock<IFileProvider> SetupFileMock(this Mock<IFileProvider> mock, string path, byte[] content)
     {
         var fileInfoMock = new Mock<IFileInfo>();
-        fileInfoMock.Setup(x => x.CreateReadStream()).Returns(new MemoryStream(content));
+        fileInfoMock.Setup(x => x.CreateReadStream()).Returns(() => new MemoryStream(content));
 
         mock.Setup(x => x.GetFileInfo(path)).Returns(fileInfoMock.Object);
         return mock;

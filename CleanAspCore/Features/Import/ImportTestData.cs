@@ -59,8 +59,14 @@ public class ImportTestData : IRouteModule
             PropertyNameCaseInsensitive = true
         };
 
-        private async Task<EmployeeDto[]> GetEmployees() => await JsonSerializer.DeserializeAsync<EmployeeDto[]>(_fileProvider.GetFileInfo("TestData/Employee.json").CreateReadStream(), Options) ?? throw new InvalidOperationException();
-        private async Task<JobDto[]> GetJobs() => await JsonSerializer.DeserializeAsync<JobDto[]>(_fileProvider.GetFileInfo("TestData/Job.json").CreateReadStream(), Options) ?? throw new InvalidOperationException();
-        private async Task<DepartmentDto[]> GetDepartments() => await JsonSerializer.DeserializeAsync<DepartmentDto[]>(_fileProvider.GetFileInfo("TestData/Department.json").CreateReadStream(), Options) ?? throw new InvalidOperationException();
+        private async Task<EmployeeDto[]> GetEmployees() => await ReadJson<EmployeeDto[]>("TestData/Employee.json");
+        private async Task<JobDto[]> GetJobs() => await ReadJson<JobDto[]>("TestData/Job.json");
+        private async Task<DepartmentDto[]> GetDepartments() => await ReadJson<DepartmentDto[]>("TestData/Department.json");
+        
+        private async Task<T> ReadJson<T>(string path)
+        {
+            var json = _fileProvider.GetFileInfo(path).CreateReadStream();
+            return await JsonSerializer.DeserializeAsync<T>(json, Options) ?? throw new InvalidOperationException();
+        }
     }
 }

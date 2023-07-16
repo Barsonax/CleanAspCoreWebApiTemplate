@@ -52,4 +52,44 @@ public class ImportControllerTests
             });
         });
     }
+    
+    [Fact]
+    public async Task Import_SameEmployeeTwice_IsImportedOnce_NoErrors()
+    {
+        var employee = Fakers.CreateEmployeeFaker().Generate();
+        _api.ConfigureServices(services =>
+        {
+            var fileProviderMock = new Mock<IFileProvider>()
+                .SetupJsonFileMock("TestData/Employee.json", new[]
+                {
+                    employee.ToDto()
+                })
+                .SetupJsonFileMock("TestData/Job.json", Array.Empty<JobDto>())
+                .SetupJsonFileMock("TestData/Department.json", Array.Empty<DepartmentDto>());
+
+            services.Replace(new ServiceDescriptor(typeof(IFileProvider), fileProviderMock.Object));
+        });
+
+        _api.SeedData(context =>
+        {
+            context.Jobs.Add(employee.Job!);
+            context.Departments.Add(employee.Department!);
+        });
+        var client = _api.CreateClient();
+        
+        //Act
+        var result1 = await client.PutAsync("Import", null);
+        result1.EnsureSuccessStatusCode();
+        var result2 = await client.PutAsync("Import", null);
+        result2.EnsureSuccessStatusCode();
+
+        //Assert
+        _api.AssertDatabase(context =>
+        {
+            context.Employees.Should().BeEquivalentTo(new []
+            {
+                employee
+            });
+        });
+    }
 }
