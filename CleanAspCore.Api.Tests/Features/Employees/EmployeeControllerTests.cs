@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Domain.Employees;
+﻿using CleanAspCore.Domain;
+using CleanAspCore.Domain.Employees;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
 
@@ -24,8 +25,8 @@ public class EmployeeControllerTests
         //Assert
         result.Should().BeEquivalentTo(new[]
         {
-            employee.ToDto()
-        });
+            employee
+        }, c => c.ComparingByMembers<Entity>().ExcludingMissingMembers());
     }
 
     [Fact]
@@ -38,11 +39,9 @@ public class EmployeeControllerTests
             context.Departments.Add(employee.Department);
             context.Jobs.Add(employee.Job);
         });
-
-        var newEmployee = employee.ToDto();
-
+        
         //Act
-        var result = await _api.CreateClient().PostAsJsonAsync("Employee", newEmployee);
+        var result = await _api.CreateClient().PostAsJsonAsync("Employee", employee.ToDto());
 
         //Assert
         result.EnsureSuccessStatusCode();
@@ -50,7 +49,7 @@ public class EmployeeControllerTests
         {
             context.Employees.Should().BeEquivalentTo(new[]
             {
-                newEmployee.ToDomain()
+                employee
             });
         });
     }
@@ -78,7 +77,7 @@ public class EmployeeControllerTests
             context.Employees.Should().BeEquivalentTo(new[]
             {
                 updatedEmployee.ToDomain()
-            }, c => c.ComparingByMembers<Employee>());
+            });
         });
     }
 

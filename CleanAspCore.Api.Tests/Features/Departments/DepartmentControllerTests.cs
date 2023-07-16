@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Domain.Departments;
+﻿using CleanAspCore.Domain;
+using CleanAspCore.Domain.Departments;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
 
@@ -24,7 +25,7 @@ public class DepartmentControllerTests
         //Assert
         result.Should().BeEquivalentTo(new[]
         {
-            department.ToDto()
-        });
+            department
+        }, c => c.ComparingByMembers<Entity>().ExcludingMissingMembers());
     }
 }

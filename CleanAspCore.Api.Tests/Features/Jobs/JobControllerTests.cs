@@ -1,3 +1,4 @@
+using CleanAspCore.Domain;
 using CleanAspCore.Domain.Jobs;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
@@ -25,7 +26,7 @@ public class JobControllerTests
         //Assert
         result.Should().BeEquivalentTo(new[]
         {
-            job.ToDto()
-        });
+            job
+        }, c => c.ComparingByMembers<Entity>().ExcludingMissingMembers());
     }
 }

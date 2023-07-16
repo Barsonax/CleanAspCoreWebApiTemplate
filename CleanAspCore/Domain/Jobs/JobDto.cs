@@ -1,7 +1,3 @@
 ﻿namespace CleanAspCore.Domain.Jobs;
 
-public class JobDto
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-}
+public sealed record JobDto(int Id, string Name);
