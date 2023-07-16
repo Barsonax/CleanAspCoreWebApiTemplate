@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Domain.Employees;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Employees;
 
@@ -7,13 +8,16 @@ public class AddEmployee : IRouteModule
 {
     public void AddRoutes(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("Employee", async ([FromBody] EmployeeDto employeeDto, ISender sender) => await sender.Send(new Request(employeeDto)).ToHttpResultAsync())
+        endpoints.MapPost("Employee", async ([FromBody] EmployeeDto employeeDto, ISender sender) =>
+                (await sender.Send(new Request(employeeDto))).Match<Results<Created<EmployeeDto>, ValidationProblem>>(
+                    result => TypedResults.Created($"Employee/{result.Value.Id}", result.Value),
+                    validationError => TypedResults.ValidationProblem(validationError.Errors)))
             .WithTags("Employee");
     }
 
-    public record Request(EmployeeDto Employee) : IRequest<OneOf<Success, ValidationError>>;
+    public record Request(EmployeeDto Employee) : IRequest<OneOf<Result<EmployeeDto>, ValidationError>>;
 
-    public class Handler : IRequestHandler<Request, OneOf<Success, ValidationError>>
+    public class Handler : IRequestHandler<Request, OneOf<Result<EmployeeDto>, ValidationError>>
     {
         private readonly HrContext _context;
         private readonly IValidator<Employee> _validator;
@@ -24,7 +28,7 @@ public class AddEmployee : IRouteModule
             _validator = validator;
         }
 
-        public async ValueTask<OneOf<Success, ValidationError>> Handle(Request request, CancellationToken cancellationToken)
+        public async ValueTask<OneOf<Result<EmployeeDto>, ValidationError>> Handle(Request request, CancellationToken cancellationToken)
         {
             var employee = request.Employee.ToDomain();
             var validationResult = _validator.Validate(employee);
@@ -35,7 +39,7 @@ public class AddEmployee : IRouteModule
 
             _context.Employees.AddRange(employee);
             await _context.SaveChangesAsync(cancellationToken);
-            return new Success();
+            return new Result<EmployeeDto>(employee.ToDto());
         }
     }
 }

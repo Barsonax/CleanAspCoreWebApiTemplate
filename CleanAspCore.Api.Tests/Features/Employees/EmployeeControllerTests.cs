@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Domain;
 using CleanAspCore.Domain.Employees;
+using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
 
@@ -39,17 +40,22 @@ public class EmployeeControllerTests
             context.Departments.Add(employee.Department!);
             context.Jobs.Add(employee.Job!);
         });
-        
+
+        employee.DepartmentId = employee.Department.Id;
+        employee.JobId = employee.Job.Id;
+
         //Act
         var result = await _api.CreateClient().PostAsJsonAsync("Employee", employee.ToDto());
+        result.EnsureSuccessStatusCode();
+        var createdEmployee = await result.Content.ReadFromJsonAsync<EmployeeDto>();
 
         //Assert
-        result.EnsureSuccessStatusCode();
+        createdEmployee.Should().NotBeNull();
         _api.AssertDatabase(context =>
         {
             context.Employees.Should().BeEquivalentTo(new[]
             {
-                employee
+                createdEmployee!.ToDomain()
             });
         });
     }

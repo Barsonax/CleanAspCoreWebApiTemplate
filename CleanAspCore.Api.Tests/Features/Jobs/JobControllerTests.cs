@@ -1,5 +1,6 @@
 using CleanAspCore.Domain;
 using CleanAspCore.Domain.Jobs;
+using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 

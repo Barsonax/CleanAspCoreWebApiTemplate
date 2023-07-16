@@ -3,7 +3,7 @@ using CleanAspCore.Domain.Departments;
 using CleanAspCore.Domain.Employees;
 using CleanAspCore.Domain.Jobs;
 
-namespace CleanAspCore.Api.Tests;
+namespace CleanAspCore.Features.Import;
 
 public class Fakers
 {
@@ -16,10 +16,10 @@ public class Fakers
         .UseSeed(1)
         .RuleFor(x => x.Name, f => f.Name.JobTitle());
 
-    public static Faker<Employee> CreateEmployeeFaker()
+    public static Faker<Employee> CreateEmployeeFaker(List<Job>? jobs = null, List<Department>? departments = null)
     {
-        var jobFaker = CreateJobFaker();
-        var departmentFaker = CreateDepartmentFaker();
+        jobs ??= CreateJobFaker().Generate(1);
+        departments ??= CreateDepartmentFaker().Generate(1);
 
         var employeeFaker = new Faker<Employee>()
             .UseSeed(3)
@@ -27,8 +27,8 @@ public class Fakers
             .RuleFor(x => x.LastName, f => f.Name.LastName())
             .RuleFor(x => x.Email, f => new EmailAddress(f.Internet.Email()))
             .RuleFor(x => x.Gender, f => f.PickRandom("Male", "Female"))
-            .RuleFor(x => x.Department, f => departmentFaker.Generate())
-            .RuleFor(x => x.Job, f => jobFaker.Generate());
+            .RuleFor(x => x.Department, f => f.PickRandom(departments))
+            .RuleFor(x => x.Job, f => f.PickRandom(jobs));
 
         return employeeFaker;
     }

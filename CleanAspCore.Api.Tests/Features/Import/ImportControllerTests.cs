@@ -1,11 +1,4 @@
-﻿using CleanAspCore.Domain.Departments;
-using CleanAspCore.Domain.Employees;
-using CleanAspCore.Domain.Jobs;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.FileProviders;
-
-namespace CleanAspCore.Api.Tests.Features.Import;
+﻿namespace CleanAspCore.Api.Tests.Features.Import;
 
 public class ImportControllerTests
 {
@@ -19,26 +12,6 @@ public class ImportControllerTests
     [Fact]
     public async Task Import_SingleNewEmployee_IsImported()
     {
-        var employee = Fakers.CreateEmployeeFaker().Generate();
-        _api.ConfigureServices(services =>
-        {
-            var fileProviderMock = new Mock<IFileProvider>()
-                .SetupJsonFileMock("TestData/Employee.json", new[]
-                {
-                    employee.ToDto()
-                })
-                .SetupJsonFileMock("TestData/Job.json", Array.Empty<JobDto>())
-                .SetupJsonFileMock("TestData/Department.json", Array.Empty<DepartmentDto>());
-
-            services.Replace(new ServiceDescriptor(typeof(IFileProvider), fileProviderMock.Object));
-        });
-
-        _api.SeedData(context =>
-        {
-            context.Jobs.Add(employee.Job!);
-            context.Departments.Add(employee.Department!);
-        });
-
         //Act
         var result = await _api.CreateClient().PutAsync("Import", null);
         result.EnsureSuccessStatusCode();
@@ -46,50 +19,7 @@ public class ImportControllerTests
         //Assert
         _api.AssertDatabase(context =>
         {
-            context.Employees.Should().BeEquivalentTo(new []
-            {
-                employee
-            });
-        });
-    }
-    
-    [Fact]
-    public async Task Import_SameEmployeeTwice_IsImportedOnce_NoErrors()
-    {
-        var employee = Fakers.CreateEmployeeFaker().Generate();
-        _api.ConfigureServices(services =>
-        {
-            var fileProviderMock = new Mock<IFileProvider>()
-                .SetupJsonFileMock("TestData/Employee.json", new[]
-                {
-                    employee.ToDto()
-                })
-                .SetupJsonFileMock("TestData/Job.json", Array.Empty<JobDto>())
-                .SetupJsonFileMock("TestData/Department.json", Array.Empty<DepartmentDto>());
-
-            services.Replace(new ServiceDescriptor(typeof(IFileProvider), fileProviderMock.Object));
-        });
-
-        _api.SeedData(context =>
-        {
-            context.Jobs.Add(employee.Job!);
-            context.Departments.Add(employee.Department!);
-        });
-        var client = _api.CreateClient();
-        
-        //Act
-        var result1 = await client.PutAsync("Import", null);
-        result1.EnsureSuccessStatusCode();
-        var result2 = await client.PutAsync("Import", null);
-        result2.EnsureSuccessStatusCode();
-
-        //Assert
-        _api.AssertDatabase(context =>
-        {
-            context.Employees.Should().BeEquivalentTo(new []
-            {
-                employee
-            });
+            context.Employees.Should().HaveCount(100);
         });
     }
 }

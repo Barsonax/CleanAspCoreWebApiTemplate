@@ -1,8 +1,4 @@
-﻿using System.Text.Json;
-using CleanAspCore.Data;
-using CleanAspCore.Domain.Departments;
-using CleanAspCore.Domain.Employees;
-using CleanAspCore.Domain.Jobs;
+﻿using CleanAspCore.Data;
 using Microsoft.Extensions.FileProviders;
 
 namespace CleanAspCore.Features.Import;
@@ -30,20 +26,20 @@ public class ImportTestData : IRouteModule
 
         public async ValueTask<OneOf<Success, ValidationError>> Handle(Request request, CancellationToken cancellationToken)
         {
-            var newJobs = await GetJobs();
-            foreach (var newJob in newJobs.Select(x => x.ToDomain()))
+            var newJobs = Fakers.CreateJobFaker().Generate(10);
+            foreach (var newJob in newJobs)
             {
                 _context.Jobs.AddIfNotExists(newJob);
             }
-            
-            var newDepartments = await GetDepartments();
-            foreach (var newDepartment in newDepartments.Select(x => x.ToDomain()))
+
+            var newDepartments = Fakers.CreateDepartmentFaker().Generate(5);
+            foreach (var newDepartment in newDepartments)
             {
                 _context.Departments.AddIfNotExists(newDepartment);
             }
-            
-            var newEmployees = await GetEmployees();
-            foreach (var newEmployee in newEmployees.Select(x => x.ToDomain()))
+
+            var newEmployees = Fakers.CreateEmployeeFaker(newJobs, newDepartments).Generate(100);
+            foreach (var newEmployee in newEmployees)
             {
                 _context.Employees.AddIfNotExists(newEmployee);
             }
@@ -51,22 +47,6 @@ public class ImportTestData : IRouteModule
             await _context.SaveChangesAsync(cancellationToken);
             
             return new Success();
-        }
-        
-
-        private static readonly JsonSerializerOptions Options = new()
-        {
-            PropertyNameCaseInsensitive = true
-        };
-
-        private async Task<EmployeeDto[]> GetEmployees() => await ReadJson<EmployeeDto[]>("TestData/Employee.json");
-        private async Task<JobDto[]> GetJobs() => await ReadJson<JobDto[]>("TestData/Job.json");
-        private async Task<DepartmentDto[]> GetDepartments() => await ReadJson<DepartmentDto[]>("TestData/Department.json");
-        
-        private async Task<T> ReadJson<T>(string path)
-        {
-            var json = _fileProvider.GetFileInfo(path).CreateReadStream();
-            return await JsonSerializer.DeserializeAsync<T>(json, Options) ?? throw new InvalidOperationException();
         }
     }
 }
