@@ -5,14 +5,14 @@ namespace CleanAspCore.Domain.Employees;
 
 public class Employee : Entity
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public EmailAddress Email { get; set; }
-    public string Gender { get; set; }
-    public virtual Department Department { get; set; }
-    public int DepartmentId { get; set; }
-    public virtual Job Job { get; set; }
-    public int JobId { get; set; }
+    public required string FirstName { get; set; }
+    public required string LastName { get; set; }
+    public required EmailAddress Email { get; set; }
+    public required string Gender { get; set; }
+    public virtual Department? Department { get; set; }
+    public required int DepartmentId { get; set; }
+    public virtual Job? Job { get; set; }
+    public required int JobId { get; set; }
 }
 
 public class EmployeeValidator : AbstractValidator<Employee>

@@ -35,8 +35,8 @@ public class ImportControllerTests
 
         _api.SeedData(context =>
         {
-            context.Jobs.Add(employee.Job);
-            context.Departments.Add(employee.Department);
+            context.Jobs.Add(employee.Job!);
+            context.Departments.Add(employee.Department!);
         });
 
         //Act

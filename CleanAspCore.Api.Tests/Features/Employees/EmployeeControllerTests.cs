@@ -36,8 +36,8 @@ public class EmployeeControllerTests
         var employee = Fakers.CreateEmployeeFaker().Generate();
         _api.SeedData(context =>
         {
-            context.Departments.Add(employee.Department);
-            context.Jobs.Add(employee.Job);
+            context.Departments.Add(employee.Department!);
+            context.Jobs.Add(employee.Job!);
         });
         
         //Act

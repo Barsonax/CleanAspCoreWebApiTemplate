@@ -2,6 +2,6 @@
 
 public class Department : Entity
 {
-    public string Name { get; set; }
-    public string City { get; set; }
+    public required string Name { get; set; }
+    public required string City { get; set; }
 }
