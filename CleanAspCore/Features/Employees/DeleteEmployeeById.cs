@@ -1,4 +1,5 @@
 ﻿using CleanAspCore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Employees;
 
@@ -23,17 +24,15 @@ public class DeleteEmployeeById : IRouteModule
     
         public async ValueTask<OneOf<Success, NotFound>> Handle(Request request, CancellationToken cancellationToken)
         {
-            var employee = _context.Employees.FirstOrDefault(x => x.Id == request.Id);
-            if (employee != null)
+            var result = await _context.Employees
+                .Where(x => x.Id == request.Id)
+                .ExecuteDeleteAsync(cancellationToken);
+            
+            return result switch
             {
-                _context.Employees.Remove(employee);
-                await _context.SaveChangesAsync(cancellationToken);
-                return new Success();
-            }
-            else
-            {
-                return new NotFound();
-            }
+                1 => new Success(),
+                _ => new NotFound()
+            };
         }
     }
 }
