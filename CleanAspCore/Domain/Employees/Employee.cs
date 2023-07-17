@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Domain.Departments;
 using CleanAspCore.Domain.Jobs;
+using Riok.Mapperly.Abstractions;
 
 namespace CleanAspCore.Domain.Employees;
 
@@ -15,6 +16,8 @@ public class Employee : Entity
     public required int JobId { get; set; }
 }
 
+public sealed record EmployeeDto(int? Id, string FirstName, string LastName, string Email, string Gender, int DepartmentId, int JobId);
+
 public class EmployeeValidator : AbstractValidator<Employee>
 {
     public EmployeeValidator()
@@ -23,4 +26,14 @@ public class EmployeeValidator : AbstractValidator<Employee>
         RuleFor(x => x.LastName).NotEmpty();
         RuleFor(x => x.Email).NotNull();
     }
+}
+
+[Mapper]
+public static partial class EmployeeMapper
+{
+    public static partial EmployeeDto ToDto(this Employee employee);
+
+    public static partial Employee ToDomain(this EmployeeDto employee);
+    
+    public static partial StoredEmployee ToStored(this Employee employee);
 }
