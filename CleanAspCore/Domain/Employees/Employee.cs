@@ -34,6 +34,4 @@ public static partial class EmployeeMapper
     public static partial EmployeeDto ToDto(this Employee employee);
 
     public static partial Employee ToDomain(this EmployeeDto employee);
-    
-    public static partial StoredEmployee ToStored(this Employee employee);
 }
