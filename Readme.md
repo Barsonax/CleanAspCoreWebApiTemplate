@@ -6,7 +6,7 @@ Some 'features' in this template:
 - Vertical Slice architecture (grouping based on features instead of technical layers)
 - CQS pattern with mediator
 
-The application itself is currently just doing simple CRUD and as such alot of the patterns shown will be over engineered but the point is to experiment and show the patterns.
+The application itself is currently just doing simple CRUD and as such alot of the patterns shown will be over engineered but the point is to experiment and show the patterns. Feel free to mix and match parts of it in your solutions. Don't forget to give a star while you are at it.
 
 ## Running tests
 
@@ -15,14 +15,4 @@ Run the following command to run the tests:
 
 ```cmd
 dotnet test
-```
-
-
-## Setting up https for when running in a docker container
-
-Run these commands to generate a https certificate for development:
-
-```cmd
- dotnet dev-certs https -ep "$env:USERPROFILE\.aspnet\https\aspnetapp.pfx"  -p "password"
- dotnet dev-certs https --trust
 ```
