@@ -1,9 +1,10 @@
-﻿using CleanAspCore.Api.Tests.TestSetup;
+﻿using System.Diagnostics.CodeAnalysis;
 using CleanAspCore.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
 [assembly: Parallelizable(ParallelScope.Children)]
+[assembly: ExcludeFromCodeCoverage]
 
 namespace CleanAspCore.Api.Tests;
 
