@@ -4,25 +4,20 @@ using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 
-public class JobControllerTests
+public class JobControllerTests : TestBase
 {
-    private readonly TestWebApi _api;
-
-    public JobControllerTests(TestWebApi api)
-    {
-        _api = api;
-    }
-
-
-    [Fact]
+    [Test]
     public async Task SearchJobs_ReturnsExpectedJobs()
     {
         //Arrange
         var job = Fakers.CreateJobFaker().Generate();
-        _api.SeedData(context => { context.Jobs.Add(job); });
+        Sut.SeedData(context =>
+        {
+            context.Jobs.Add(job);
+        });
 
         //Act
-        var result = await _api.CreateClient().GetFromJsonAsync<JobDto[]>("Job");
+        var result = await Sut.CreateClient().GetFromJsonAsync<JobDto[]>("Job");
 
         //Assert
         result.Should().BeEquivalentTo(new[]

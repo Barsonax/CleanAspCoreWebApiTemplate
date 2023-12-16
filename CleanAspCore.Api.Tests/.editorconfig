@@ -1,0 +1,3 @@
+[*.cs]
+# NUnit1032: An IDisposable field/property should be Disposed in a TearDown method
+dotnet_diagnostic.nunit1032.severity = none

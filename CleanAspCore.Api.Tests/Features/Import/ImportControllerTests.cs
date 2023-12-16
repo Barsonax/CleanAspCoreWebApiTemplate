@@ -1,23 +1,16 @@
 ﻿namespace CleanAspCore.Api.Tests.Features.Import;
 
-public class ImportControllerTests
+public class ImportControllerTests : TestBase
 {
-    private readonly TestWebApi _api;
-
-    public ImportControllerTests(TestWebApi api)
-    {
-        _api = api;
-    }
-    
-    [Fact]
+    [Test]
     public async Task Import_SingleNewEmployee_IsImported()
     {
         //Act
-        var result = await _api.CreateClient().PutAsync("Import", null);
+        var result = await Sut.CreateClient().PutAsync("Import", null);
         result.EnsureSuccessStatusCode();
 
         //Assert
-        _api.AssertDatabase(context =>
+        Sut.AssertDatabase(context =>
         {
             context.Employees.Should().HaveCount(100);
         });

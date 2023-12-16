@@ -4,24 +4,20 @@ using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
 
-public class DepartmentControllerTests
+public class DepartmentControllerTests : TestBase
 {
-    private readonly TestWebApi _api;
-
-    public DepartmentControllerTests(TestWebApi api)
-    {
-        _api = api;
-    }
-
-    [Fact]
+    [Test]
     public async Task SearchDepartments_ReturnsExpectedDepartments()
     {
         //Arrange
         var department = Fakers.CreateDepartmentFaker().Generate();
-        _api.SeedData(context => { context.Departments.Add(department); });
+        Sut.SeedData(context =>
+        {
+            context.Departments.Add(department);
+        });
 
         //Act
-        var result = await _api.CreateClient().GetFromJsonAsync<DepartmentDto[]>("Department");
+        var result = await Sut.CreateClient().GetFromJsonAsync<DepartmentDto[]>("Department");
 
         //Assert
         result.Should().BeEquivalentTo(new[]
