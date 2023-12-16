@@ -9,12 +9,12 @@ public record EmailAddress
         Email = email;
         Validator.Instance.ValidateAndThrow(this);
     }
-    
+
     public static implicit operator string(EmailAddress emailAddress) => emailAddress.Email;
-    
+
     public override string ToString() => Email;
 
-    private class Validator : AbstractValidator<EmailAddress>
+    private sealed class Validator : AbstractValidator<EmailAddress>
     {
         public static readonly Validator Instance = new();
 

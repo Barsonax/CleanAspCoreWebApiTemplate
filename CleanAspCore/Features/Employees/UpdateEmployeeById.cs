@@ -1,5 +1,7 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Domain.Employees;
+using Microsoft.AspNetCore.Http.HttpResults;
+using NotFound = Microsoft.AspNetCore.Http.HttpResults.NotFound;
 
 namespace CleanAspCore.Features.Employees;
 
@@ -7,52 +9,39 @@ public class UpdateEmployeeById : IRouteModule
 {
     public void AddRoutes(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPut("Employee", async ([FromBody] EmployeeDto employeeDto, ISender sender) => await sender.Send(new Request(employeeDto)).ToHttpResultAsync())
+        endpoints.MapPut("Employee", PutEmployee)
             .WithTags("Employee");
     }
 
-    public record Request(EmployeeDto EmployeeDto) : IRequest<OneOf<Success, NotFound, ValidationError>>;
-    
-    public class Handler : IRequestHandler<Request, OneOf<Success, NotFound, ValidationError>>
+    private static async Task<Results<Ok, NotFound, ValidationProblem>> PutEmployee(
+        [FromBody] EmployeeDto employeeDto, HrContext context, IValidator<Employee> validator, CancellationToken cancellationToken)
     {
-        private readonly HrContext _context;
-        private readonly IValidator<Employee> _validator;
+        var updatedEmployee = employeeDto.ToDomain();
 
-        public Handler(HrContext context, IValidator<Employee> _validator)
+        var validationResult = await validator.ValidateAsync(updatedEmployee, cancellationToken);
+
+        if (!validationResult.IsValid)
         {
-            _context = context;
-            this._validator = _validator;
+            return TypedResults.ValidationProblem(validationResult.ToDictionary());
         }
-    
-        public async ValueTask<OneOf<Success, NotFound, ValidationError>> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var updatedEmployee = request.EmployeeDto.ToDomain();
-            
-            var validationResult = _validator.Validate(updatedEmployee);
 
-            if (!validationResult.IsValid)
-            {
-                return new ValidationError(validationResult.ToDictionary());
-            }
-            
-            var employee = _context.Employees.FirstOrDefault(x => x.Id == updatedEmployee.Id);
-            if (employee != null)
-            {
-                employee.FirstName = updatedEmployee.FirstName;
-                employee.LastName = updatedEmployee.LastName;
-                employee.Email = updatedEmployee.Email;
-                employee.Gender = updatedEmployee.Gender;
-            
-                employee.DepartmentId = updatedEmployee.DepartmentId;
-                employee.JobId = updatedEmployee.JobId;
-            
-                await _context.SaveChangesAsync(cancellationToken);
-                return new Success();
-            }
-            else
-            {
-                return new NotFound();
-            }
+        var employee = context.Employees.FirstOrDefault(x => x.Id == updatedEmployee.Id);
+        if (employee != null)
+        {
+            employee.FirstName = updatedEmployee.FirstName;
+            employee.LastName = updatedEmployee.LastName;
+            employee.Email = updatedEmployee.Email;
+            employee.Gender = updatedEmployee.Gender;
+
+            employee.DepartmentId = updatedEmployee.DepartmentId;
+            employee.JobId = updatedEmployee.JobId;
+
+            await context.SaveChangesAsync(cancellationToken);
+            return TypedResults.Ok();
+        }
+        else
+        {
+            return TypedResults.NotFound();
         }
     }
 }

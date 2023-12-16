@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Domain.Jobs;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Jobs;
@@ -8,25 +9,15 @@ public class GetJobs : IRouteModule
 {
     public void AddRoutes(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("Job", async (ISender sender) => TypedResults.Json(await sender.Send(new Request())))
+        endpoints.MapGet("Job", GetAllJobs)
             .WithTags("Job");
     }
 
-    public record Request : IRequest<List<JobDto>>;
-
-    public record Handler : IRequestHandler<Request, List<JobDto>>
+    private static async Task<JsonHttpResult<List<JobDto>>> GetAllJobs(HrContext context, CancellationToken cancellationToken)
     {
-        private readonly HrContext _context;
-
-        public Handler(HrContext context)
-        {
-            _context = context;
-        }
-
-        public async ValueTask<List<JobDto>> Handle(Request request, CancellationToken cancellationToken) => new(await
-            _context.Jobs
-                .Select(x => x.ToDto())
-                .AsNoTracking()
-                .ToListAsync(cancellationToken));
+        var results = await context.Jobs.Select(x => x.ToDto())
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+        return TypedResults.Json(results);
     }
 }

@@ -8,38 +8,23 @@ public class AddEmployee : IRouteModule
 {
     public void AddRoutes(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("Employee", async ([FromBody] EmployeeDto employeeDto, ISender sender) =>
-                (await sender.Send(new Request(employeeDto))).Match<Results<Created<EmployeeDto>, ValidationProblem>>(
-                    result => TypedResults.Created($"Employee/{result.Value.Id}", result.Value),
-                    validationError => TypedResults.ValidationProblem(validationError.Errors)))
+        endpoints.MapPost("Employee", PostEmployee)
             .WithTags("Employee");
     }
 
-    public record Request(EmployeeDto Employee) : IRequest<OneOf<Result<EmployeeDto>, ValidationError>>;
-
-    public class Handler : IRequestHandler<Request, OneOf<Result<EmployeeDto>, ValidationError>>
+    private static async Task<Results<Ok<EmployeeDto>, ValidationProblem>> PostEmployee(
+        [FromBody] EmployeeDto employeeDto, HrContext context, IValidator<Employee> validator, CancellationToken cancellationToken)
     {
-        private readonly HrContext _context;
-        private readonly IValidator<Employee> _validator;
-
-        public Handler(HrContext context, IValidator<Employee> validator)
+        var employee = employeeDto.ToDomain();
+        var validationResult = await validator.ValidateAsync(employee, cancellationToken);
+        if (!validationResult.IsValid)
         {
-            _context = context;
-            _validator = validator;
+            return TypedResults.ValidationProblem(validationResult.ToDictionary());
         }
 
-        public async ValueTask<OneOf<Result<EmployeeDto>, ValidationError>> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var employee = request.Employee.ToDomain();
-            var validationResult = _validator.Validate(employee);
-            if (!validationResult.IsValid)
-            {
-                return new ValidationError(validationResult.ToDictionary());
-            }
+        context.Employees.AddRange(employee);
+        await context.SaveChangesAsync(cancellationToken);
 
-            _context.Employees.AddRange(employee);
-            await _context.SaveChangesAsync(cancellationToken);
-            return new Result<EmployeeDto>(employee.ToDto());
-        }
+        return TypedResults.Ok(employee.ToDto());
     }
 }
