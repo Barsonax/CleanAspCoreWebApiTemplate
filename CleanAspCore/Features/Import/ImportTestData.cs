@@ -6,7 +6,7 @@ namespace CleanAspCore.Features.Import;
 
 internal static class ImportTestData
 {
-    public static async Task<Ok> Handle(HrContext context, CancellationToken cancellationToken)
+    internal static async Task<Ok> Handle(HrContext context, CancellationToken cancellationToken)
     {
         var newJobs = new JobFaker().Generate(10);
         foreach (var newJob in newJobs)

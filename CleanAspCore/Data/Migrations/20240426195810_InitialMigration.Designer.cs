@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace CleanAspCore.Persistance.Migrations
+namespace CleanAspCore.Migrations
 {
     [DbContext(typeof(HrContext))]
-    [Migration("20240426115911_UseGuid")]
-    partial class UseGuid
+    [Migration("20240426195810_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace CleanAspCore.Persistance.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CleanAspCore.Domain.Departments.Department", b =>
+            modelBuilder.Entity("CleanAspCore.Data.Models.Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace CleanAspCore.Persistance.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("CleanAspCore.Domain.Employees.Employee", b =>
+            modelBuilder.Entity("CleanAspCore.Data.Models.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +77,7 @@ namespace CleanAspCore.Persistance.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("CleanAspCore.Domain.Jobs.Job", b =>
+            modelBuilder.Entity("CleanAspCore.Data.Models.Job", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,21 +92,21 @@ namespace CleanAspCore.Persistance.Migrations
                     b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("CleanAspCore.Domain.Employees.Employee", b =>
+            modelBuilder.Entity("CleanAspCore.Data.Models.Employee", b =>
                 {
-                    b.HasOne("CleanAspCore.Domain.Departments.Department", "Department")
+                    b.HasOne("CleanAspCore.Data.Models.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CleanAspCore.Domain.Jobs.Job", "Job")
+                    b.HasOne("CleanAspCore.Data.Models.Job", "Job")
                         .WithMany()
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("CleanAspCore.Domain.Employees.EmailAddress", "Email", b1 =>
+                    b.OwnsOne("CleanAspCore.Domain.EmailAddress", "Email", b1 =>
                         {
                             b1.Property<Guid>("EmployeeId")
                                 .HasColumnType("uuid");
