@@ -24,12 +24,13 @@ public static class ServiceCollectionExtensions
 
         var container = new PostgreSqlBuilder().Build();
         Utils.RunWithoutSynchronizationContext(() => container.StartAsync().Wait());
+
         services.AddSingleton(container);
     }
 
     public static void RegisterMigrationInitializer<TContext>(this IServiceCollection services)
-        where TContext : DbContext
+        where TContext : DbContext, new()
     {
-        services.AddTransient<IDatabaseInitializer, DbContextMigrationInitializer<TContext>>();
+        services.AddSingleton<IDatabaseInitializer, DbContextMigrationInitializer<TContext>>();
     }
 }
