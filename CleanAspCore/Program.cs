@@ -16,8 +16,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<HrContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
-builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
