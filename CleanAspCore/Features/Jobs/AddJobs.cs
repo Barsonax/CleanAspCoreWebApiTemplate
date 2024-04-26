@@ -27,3 +27,11 @@ internal static class AddJobs
         Name = createJobRequest.Name
     };
 }
+
+public class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
+{
+    public CreateJobRequestValidator()
+    {
+        RuleFor(x => x.Name).NotEmpty();
+    }
+}

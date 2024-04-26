@@ -16,15 +16,9 @@ public sealed class CreateEmployeeRequest
 
 internal static class AddEmployee
 {
-    internal static async Task<Results<CreatedAtRoute, ValidationProblem>> Handle([FromBody] CreateEmployeeRequest request, HrContext context, [FromServices] IValidator<CreateEmployeeRequest> validator,
+    internal static async Task<CreatedAtRoute> Handle([FromBody] CreateEmployeeRequest request, HrContext context, [FromServices] IValidator<CreateEmployeeRequest> validator,
         CancellationToken cancellationToken)
     {
-        var validationResult = await validator.ValidateAsync(request, cancellationToken);
-        if (!validationResult.IsValid)
-        {
-            return TypedResults.ValidationProblem(validationResult.ToDictionary());
-        }
-
         var employee = request.ToEmployee();
 
         context.Employees.AddRange(employee);

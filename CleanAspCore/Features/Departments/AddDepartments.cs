@@ -29,3 +29,12 @@ internal static class AddDepartments
         City = department.City
     };
 }
+
+public class CreateDepartmentRequestValidator : AbstractValidator<CreateDepartmentRequest>
+{
+    public CreateDepartmentRequestValidator()
+    {
+        RuleFor(x => x.Name).NotEmpty();
+        RuleFor(x => x.City).NotEmpty();
+    }
+}
