@@ -1,13 +1,21 @@
 root = true
+# EditorConfig is awesome: http://EditorConfig.org
 
+# top-most EditorConfig file
+
+# Global settings
 [*]
-end_of_line = crlf
 insert_final_newline = true
 trim_trailing_whitespace = true
 max_line_length = 190
 
+
+# ReSharper properties
+resharper_max_initializer_elements_on_line = 1
+
+
 # Xml project files
-[*.csproj]
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
 indent_style = space
 indent_size = 2
 
@@ -24,38 +32,153 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-# Code style
-csharp_keep_existing_declaration_block_arrangement = true
-csharp_place_simple_blocks_on_single_line = false
-dotnet_code_quality.null_check_validation_methods = ThrowIfArgumentIsNull
+# New line preferences
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
 
-# Dispose objects before losing scope
-dotnet_diagnostic.CA2000.severity = none
-# Do not directly await a Task
-dotnet_diagnostic.CA2007.severity = none
-# Use the LoggerMessage delegates
-dotnet_diagnostic.CA1848.severity = none
-# Validate arguments of public methods
-dotnet_diagnostic.CA1062.severity = none
-# Do not pass literals as localized parameters
-dotnet_diagnostic.CA1303.severity = none
-# Do not catch general exception types
-dotnet_diagnostic.CA1031.severity = none
-#Do not expose generic lists
-dotnet_diagnostic.CA1002.severity = none
-# Identifiers should not contain underscores
+# Indentation preferences
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = one_less_than_current
+
+# avoid this. unless absolutely necessary
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
+
+# only use var when it's obvious what the variable type is
+csharp_style_var_for_built_in_types = false:none
+csharp_style_var_when_type_is_apparent = false:none
+csharp_style_var_elsewhere = false:suggestion
+
+# use language keywords instead of BCL types
+dotnet_style_predefined_type_for_locals_parameters_members = true:error
+dotnet_style_predefined_type_for_member_access = true:error
+
+# name all constant fields using PascalCase
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols = constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case_style
+
+dotnet_naming_symbols.constant_fields.applicable_kinds = field
+dotnet_naming_symbols.constant_fields.required_modifiers = const
+
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+dotnet_naming_rule.private_members_with_underscore.symbols = private_fields
+dotnet_naming_rule.private_members_with_underscore.style = prefix_underscore
+dotnet_naming_rule.private_members_with_underscore.severity = suggestion
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.prefix_underscore.capitalization = camel_case
+dotnet_naming_style.prefix_underscore.required_prefix = _
+
+# Code style defaults
+csharp_using_directive_placement = outside_namespace:warning
+csharp_style_namespace_declarations = file_scoped:warning
+dotnet_sort_system_directives_first = true
+csharp_preserve_single_line_blocks = true
+csharp_preserve_single_line_statements = false
+
+# Expression-level preferences
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = true:none
+csharp_style_expression_bodied_constructors = false:none
+csharp_style_expression_bodied_operators = false:none
+csharp_style_expression_bodied_properties = true:none
+csharp_style_expression_bodied_indexers = true:none
+csharp_style_expression_bodied_accessors = true:none
+
+# Pattern matching
+csharp_style_pattern_matching_over_is_with_cast_check = true:error
+csharp_style_pattern_matching_over_as_with_null_check = true:error
+csharp_style_inlined_variable_declaration = true:error
+
+# Null checking preferences
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:suggestion
+
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:error
+dotnet_style_readonly_field = true:error
+
+# Space preferences
+csharp_space_after_cast = false
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_after_comma = true
+csharp_space_after_dot = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_around_declaration_statements = do_not_ignore
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_open_square_brackets = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_between_attribute_sections = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_between_square_brackets = false
+
+# FxCop Analyzers
+#dotnet_diagnostic.ca1056.severity = none
+#dotnet_diagnostic.ca1054.severity = none
+#dotnet_diagnostic.ca1002.severity = none
+#dotnet_diagnostic.ca1051.severity = none
+#dotnet_diagnostic.ca1030.severity = none
+#dotnet_diagnostic.ca1848.severity = none
+#dotnet_diagnostic.ca1716.severity = none
+#dotnet_diagnostic.ca1034.severity = none
+# In externally visible method validate parameter is non-null before using it.
+dotnet_diagnostic.ca1062.severity = none
+#dotnet_diagnostic.ca2227.severity = none
+#dotnet_diagnostic.ca1810.severity = none
+#dotnet_diagnostic.ca2234.severity = none
+#dotnet_diagnostic.ca1707.severity = none
+
+
+dotnet_code_quality.ca1062.exclude_extension_method_this_parameter = true
+dotnet_code_quality.exclude_extension_method_this_parameter = true
+dotnet_code_quality.null_check_validation_methods = ThrowIfArgumentIsNull
+# CA2007: Do not directly await a Task
+dotnet_diagnostic.ca2007.severity = none
+# CA1303: Do not pass literals as localized parameters
+dotnet_diagnostic.ca1303.severity = none
+
+# NUnit1032: An IDisposable field/property should be Disposed in a TearDown method
+dotnet_diagnostic.nunit1032.severity = none
+# CA1812: Avoid uninstantiated internal classes
+dotnet_diagnostic.ca1812.severity = none
+# Properties should not return arrays
+dotnet_diagnostic.ca1819.severity = none
+
+dotnet_diagnostic.ca1014.severity = none
+
+[**.Tests/**.cs]
+# Remove the underscores from member name
 dotnet_diagnostic.CA1707.severity = none
-# Avoid uninstantiated internal classes
-dotnet_diagnostic.CA1812.severity = none
-#Identifiers should not have incorrect suffix
-dotnet_diagnostic.CA1711.severity = none
-#Pass System.Uri objects instead of strings
+
 dotnet_diagnostic.CA2234.severity = none
-#Nested types should not be visible
-dotnet_diagnostic.CA1034.severity = none
-#Static holder types should be Static or NotInheritable
-dotnet_diagnostic.CA1052.severity = none
-#Do not raise reserved exception types
-dotnet_diagnostic.CA2201.severity = none
-#Normalize strings to uppercase
-dotnet_diagnostic.CA1308.severity = none
+

@@ -1,26 +1,18 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Domain.Departments;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Departments;
 
-public static class AddDepartments
+internal static class AddDepartments
 {
-    public record Request(List<Department> Departments) : IRequest;
-    
-    public class Handler : IRequestHandler<Request>
+    public static async Task<CreatedAtRoute> Handle(HrContext context, DepartmentDto createDepartmentRequest, CancellationToken cancellationToken)
     {
-        private readonly HrContext _context;
+        var department = createDepartmentRequest.ToDomain();
 
-        public Handler(HrContext context)
-        {
-            _context = context;
-        }
+        context.Departments.AddRange(department);
+        await context.SaveChangesAsync(cancellationToken);
 
-        public async ValueTask<Unit> Handle(Request request, CancellationToken cancellationToken)
-        {
-            _context.Departments.AddRange(request.Departments);
-            await _context.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
-        }
+        return TypedResults.CreatedAtRoute(nameof(GetDepartmentById), new { department.Id });
     }
 }

@@ -5,18 +5,15 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Jobs;
 
-public class AddJobs : IRouteModule
+internal static class AddJobs
 {
-    public void AddRoutes(IEndpointRouteBuilder endpoints)
+    internal static async Task<CreatedAtRoute> Handle([FromBody] JobDto createJobRequest, HrContext context, CancellationToken cancellationToken)
     {
-        endpoints.MapPost("Jobs", PostJobs)
-            .WithTags("Jobs");
-    }
+        var job = createJobRequest.ToDomain();
 
-    private static async Task<Ok> PostJobs([FromBody] List<Job> jobs, HrContext context, IValidator<Employee> validator, CancellationToken cancellationToken)
-    {
-        context.Jobs.AddRange(jobs);
+        context.Jobs.AddRange(job);
         await context.SaveChangesAsync(cancellationToken);
-        return TypedResults.Ok();
+
+        return TypedResults.CreatedAtRoute(nameof(GetJobById), new { job.Id });
     }
 }

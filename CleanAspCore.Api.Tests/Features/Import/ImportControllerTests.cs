@@ -6,7 +6,7 @@ public class ImportControllerTests : TestBase
     public async Task Import_SingleNewEmployee_IsImported()
     {
         //Act
-        var result = await Sut.CreateClient().PutAsync("Import", null);
+        var result = await Sut.CreateClient().PutAsync("import", null);
         result.EnsureSuccessStatusCode();
 
         //Assert

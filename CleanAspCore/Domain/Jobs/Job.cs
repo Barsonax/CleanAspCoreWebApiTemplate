@@ -1,17 +1,22 @@
-﻿using Riok.Mapperly.Abstractions;
-
-namespace CleanAspCore.Domain.Jobs;
+﻿namespace CleanAspCore.Domain.Jobs;
 
 public class Job : Entity
 {
     public required string Name { get; set; }
 }
 
-public sealed record JobDto(int Id, string Name);
+public sealed record JobDto(Guid Id, string Name);
 
-[Mapper]
-public static partial class JobMapper
+public static class JobMapper
 {
-    public static partial JobDto ToDto(this Job department);
-    public static partial Job ToDomain(this JobDto department);
+    public static JobDto ToDto(this Job department) => new(
+        department.Id,
+        department.Name
+    );
+
+    public static Job ToDomain(this JobDto department) => new()
+    {
+        Id = Guid.NewGuid(),
+        Name = department.Name
+    };
 }
