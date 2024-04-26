@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Domain.Employees;
+﻿namespace CleanAspCore.Domain;
 
 public record EmailAddress
 {

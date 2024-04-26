@@ -1,6 +1,5 @@
-﻿using System.Net;
-using CleanAspCore.Domain;
-using CleanAspCore.Domain.Departments;
+﻿using CleanAspCore.Clients;
+using CleanAspCore.Features.Departments;
 using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
@@ -18,24 +17,27 @@ public class DepartmentControllerTests : TestBase
         });
 
         //Act
-        var result = await Sut.CreateClient().GetFromJsonAsync<DepartmentDto>($"departments/{department.Id}");
+        var response = await Sut.CreateClientFor<IDepartmentApiClient>().GetDepartmentById(department.Id);
+
 
         //Assert
-        result.Should().BeEquivalentTo(department.ToDto());
+        await response.AssertStatusCode(HttpStatusCode.OK);
+        var departmentDto = await response.Content.ReadFromJsonAsync<DepartmentDto>();
+        departmentDto.Should().BeEquivalentTo(department.ToDto());
     }
 
     [Test]
-    public async Task AddDepartment_IsAdded()
+    public async Task CreateDepartment_IsAdded()
     {
         //Arrange
-        var department = new DepartmentFaker().Generate();
+        var department = new CreateDepartmentRequestFaker().Generate();
 
         //Act
-        var response = await Sut.CreateClient().PostAsJsonAsync("departments", department.ToDto());
-        await response.AssertStatusCode(HttpStatusCode.Created);
-        var createdId = response.GetGuidFromLocationHeader();
+        var response = await Sut.CreateClientFor<IDepartmentApiClient>().CreateDepartment(department);
 
         //Assert
+        await response.AssertStatusCode(HttpStatusCode.Created);
+        var createdId = response.GetGuidFromLocationHeader();
         Sut.AssertDatabase(context =>
         {
             context.Departments.Should().BeEquivalentTo(new[]

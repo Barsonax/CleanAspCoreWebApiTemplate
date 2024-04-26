@@ -1,9 +1,11 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Domain.Departments;
+using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Departments;
+
+public sealed record DepartmentDto(Guid Id, string Name, string City);
 
 internal static class GetDepartmentById
 {
@@ -16,4 +18,14 @@ internal static class GetDepartmentById
 
         return TypedResults.Ok(department);
     }
+}
+
+public static class DepartmentMapper
+{
+    public static DepartmentDto ToDto(this Department department) => new
+    (
+        department.Id,
+        department.Name,
+        department.City
+    );
 }

@@ -1,4 +1,4 @@
-﻿using CleanAspCore.Domain.Employees;
+﻿using CleanAspCore.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

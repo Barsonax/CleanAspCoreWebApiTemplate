@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Refit;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
@@ -61,4 +62,6 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
         var context = scope.ServiceProvider.GetRequiredService<HrContext>();
         seedAction(context);
     }
+
+    public T CreateClientFor<T>() => RestService.For<T>(CreateClient());
 }

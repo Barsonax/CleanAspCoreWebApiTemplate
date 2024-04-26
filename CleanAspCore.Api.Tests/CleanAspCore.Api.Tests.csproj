@@ -17,6 +17,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.4" />
 
     <PackageReference Include="Testcontainers.PostgreSql" Version="3.8.0" />
     <PackageReference Include="Npgsql" Version="8.0.2" />
@@ -37,6 +38,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CleanAspCore\CleanAspCore.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fakers\" />
   </ItemGroup>
 
 </Project>

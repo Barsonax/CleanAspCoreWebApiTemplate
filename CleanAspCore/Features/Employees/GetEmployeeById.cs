@@ -1,9 +1,11 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Domain.Employees;
+using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Employees;
+
+public sealed record EmployeeDto(string FirstName, string LastName, string Email, string Gender, Guid DepartmentId, Guid JobId);
 
 internal static class GetEmployeeById
 {
@@ -15,4 +17,16 @@ internal static class GetEmployeeById
             .FirstAsync(cancellationToken);
         return TypedResults.Json(result);
     }
+}
+
+public static class EmployeeMapper
+{
+    public static EmployeeDto ToDto(this Employee employee) => new(
+        employee.FirstName,
+        employee.LastName,
+        employee.Email.ToString(),
+        employee.Gender,
+        employee.DepartmentId,
+        employee.JobId
+    );
 }

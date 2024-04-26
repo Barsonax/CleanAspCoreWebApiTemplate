@@ -1,6 +1,4 @@
-﻿using CleanAspCore.Domain.Departments;
-using CleanAspCore.Domain.Employees;
-using CleanAspCore.Domain.Jobs;
+﻿using CleanAspCore.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Data;

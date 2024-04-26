@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Domain;
+﻿namespace CleanAspCore.Data.Models;
 
 public abstract class Entity
 {

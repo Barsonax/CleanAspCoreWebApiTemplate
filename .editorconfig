@@ -142,39 +142,10 @@ csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_between_square_brackets = false
 
-# FxCop Analyzers
-#dotnet_diagnostic.ca1056.severity = none
-#dotnet_diagnostic.ca1054.severity = none
-#dotnet_diagnostic.ca1002.severity = none
-#dotnet_diagnostic.ca1051.severity = none
-#dotnet_diagnostic.ca1030.severity = none
-#dotnet_diagnostic.ca1848.severity = none
-#dotnet_diagnostic.ca1716.severity = none
-#dotnet_diagnostic.ca1034.severity = none
 # In externally visible method validate parameter is non-null before using it.
 dotnet_diagnostic.ca1062.severity = none
-#dotnet_diagnostic.ca2227.severity = none
-#dotnet_diagnostic.ca1810.severity = none
-#dotnet_diagnostic.ca2234.severity = none
-#dotnet_diagnostic.ca1707.severity = none
-
-
-dotnet_code_quality.ca1062.exclude_extension_method_this_parameter = true
-dotnet_code_quality.exclude_extension_method_this_parameter = true
-dotnet_code_quality.null_check_validation_methods = ThrowIfArgumentIsNull
-# CA2007: Do not directly await a Task
+# Do not directly await a Task
 dotnet_diagnostic.ca2007.severity = none
-# CA1303: Do not pass literals as localized parameters
-dotnet_diagnostic.ca1303.severity = none
-
-# NUnit1032: An IDisposable field/property should be Disposed in a TearDown method
-dotnet_diagnostic.nunit1032.severity = none
-# CA1812: Avoid uninstantiated internal classes
-dotnet_diagnostic.ca1812.severity = none
-# Properties should not return arrays
-dotnet_diagnostic.ca1819.severity = none
-
-dotnet_diagnostic.ca1014.severity = none
 
 [**.Tests/**.cs]
 # Remove the underscores from member name

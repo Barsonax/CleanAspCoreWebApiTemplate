@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using CleanAspCore.Domain.Jobs;
+using CleanAspCore.Data.Models;
 
 namespace CleanAspCore.Features.Import;
 

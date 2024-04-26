@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Web;
-using CleanAspCore.Domain;
-using CleanAspCore.Domain.Employees;
+﻿using CleanAspCore.Clients;
 using CleanAspCore.Features.Employees;
 using CleanAspCore.Features.Import;
 
@@ -20,29 +17,31 @@ public class EmployeeControllerTests : TestBase
         });
 
         //Act
-        var result = await Sut.CreateClient().GetFromJsonAsync<EmployeeDto>($"employees/{employee.Id}");
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>().GetEmployeeById(employee.Id);
 
         //Assert
-        result.Should().BeEquivalentTo(employee.ToDto());
+        await response.AssertStatusCode(HttpStatusCode.OK);
+        var employeeDto = await response.Content.ReadFromJsonAsync<EmployeeDto>();
+        employeeDto.Should().BeEquivalentTo(employee.ToDto());
     }
 
     [Test]
-    public async Task AddEmployee_IsAdded()
+    public async Task CreateEmployee_IsAdded()
     {
         //Arrange
-        var employee = new EmployeeFaker().Generate();
+        var createEmployeeRequest = new CreateEmployeeRequestFaker().Generate();
         Sut.SeedData(context =>
         {
-            context.Departments.Add(employee.Department!);
-            context.Jobs.Add(employee.Job!);
+            context.Departments.Add(new DepartmentFaker().RuleFor(x => x.Id, createEmployeeRequest.DepartmentId).Generate());
+            context.Jobs.Add(new JobFaker().RuleFor(x => x.Id, createEmployeeRequest.JobId).Generate());
         });
 
         //Act
-        var response = await Sut.CreateClient().PostAsJsonAsync("employees", employee.ToDto());
-        await response.AssertStatusCode(HttpStatusCode.Created);
-        var createdId = response.GetGuidFromLocationHeader();
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>().CreateEmployee(createEmployeeRequest);
 
         //Assert
+        await response.AssertStatusCode(HttpStatusCode.Created);
+        var createdId = response.GetGuidFromLocationHeader();
         Sut.AssertDatabase(context =>
         {
             context.Employees.Should().BeEquivalentTo(new[]
@@ -56,7 +55,7 @@ public class EmployeeControllerTests : TestBase
     }
 
     [Test]
-    public async Task UpdateEmployee_IsUpdated()
+    public async Task UpdateEmployeeById_IsUpdated()
     {
         //Arrange
         var employee = new EmployeeFaker().Generate();
@@ -68,10 +67,10 @@ public class EmployeeControllerTests : TestBase
         };
 
         //Act
-        var result = await Sut.CreateClient().PutAsJsonAsync($"employees/{employee.Id}", updateEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>().UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
-        await result.AssertStatusCode(HttpStatusCode.NoContent);
+        await response.AssertStatusCode(HttpStatusCode.NoContent);
         Sut.AssertDatabase(context =>
         {
             context.Employees.Should().BeEquivalentTo(new[]
@@ -86,7 +85,7 @@ public class EmployeeControllerTests : TestBase
     }
 
     [Test]
-    public async Task DeleteEmployee_IsDeleted()
+    public async Task DeleteEmployeeById_IsDeleted()
     {
         //Arrange
         var employee = new EmployeeFaker().Generate();
@@ -96,10 +95,10 @@ public class EmployeeControllerTests : TestBase
         });
 
         //Act
-        var result = await Sut.CreateClient().DeleteAsync($"employees/{employee.Id}");
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>().DeleteEmployeeById(employee.Id);
 
         //Assert
-        result.EnsureSuccessStatusCode();
+        await response.AssertStatusCode(HttpStatusCode.OK);
         Sut.AssertDatabase(context => { context.Employees.Should().BeEmpty(); });
     }
 }

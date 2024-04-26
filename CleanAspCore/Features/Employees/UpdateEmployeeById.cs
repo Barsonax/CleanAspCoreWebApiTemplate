@@ -1,20 +1,11 @@
-﻿using System.Linq.Expressions;
-using CleanAspCore.Data;
-using CleanAspCore.Domain.Employees;
+﻿using CleanAspCore.Data;
+using CleanAspCore.Data.Extensions;
+using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using NotFound = Microsoft.AspNetCore.Http.HttpResults.NotFound;
 
 namespace CleanAspCore.Features.Employees;
-
-public class UpdateEmployeeRequestValidator : AbstractValidator<UpdateEmployeeRequest>
-{
-    public UpdateEmployeeRequestValidator()
-    {
-        RuleFor(x => x.Email).EmailAddress();
-    }
-}
 
 public sealed class UpdateEmployeeRequest
 {
@@ -58,38 +49,10 @@ internal static class UpdateEmployeeById
     }
 }
 
-public class SetPropertyBuilder<TSource>
+public class UpdateEmployeeRequestValidator : AbstractValidator<UpdateEmployeeRequest>
 {
-    public Expression<Func<SetPropertyCalls<TSource>, SetPropertyCalls<TSource>>> SetPropertyCalls { get; private set; } = b => b;
-
-    public SetPropertyBuilder<TSource> SetProperty<TProperty>(
-        Expression<Func<TSource, TProperty>> propertyExpression,
-        TProperty value
-    ) => SetProperty(propertyExpression, _ => value);
-
-    public SetPropertyBuilder<TSource> SetPropertyIfNotNull<TProperty>(
-        Expression<Func<TSource, TProperty>> propertyExpression,
-        TProperty value
-    ) => value != null ? SetProperty(propertyExpression, _ => value) : this;
-
-    public SetPropertyBuilder<TSource> SetProperty<TProperty>(
-        Expression<Func<TSource, TProperty>> propertyExpression,
-        Expression<Func<TSource, TProperty>> valueExpression
-    )
+    public UpdateEmployeeRequestValidator()
     {
-        SetPropertyCalls = SetPropertyCalls.Update(
-            body: Expression.Call(
-                instance: SetPropertyCalls.Body,
-                methodName: nameof(SetPropertyCalls<TSource>.SetProperty),
-                typeArguments: new[] { typeof(TProperty) },
-                arguments: new Expression[] {
-                    propertyExpression,
-                    valueExpression
-                }
-            ),
-            parameters: SetPropertyCalls.Parameters
-        );
-
-        return this;
+        RuleFor(x => x.Email).EmailAddress();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Net;
-using FluentAssertions.Execution;
+﻿using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Http;
 
 namespace CleanAspCore.Api.Tests;

@@ -1,5 +1,6 @@
 ﻿using Bogus;
-using CleanAspCore.Domain.Employees;
+using CleanAspCore.Data.Models;
+using CleanAspCore.Features.Employees;
 
 namespace CleanAspCore.Features.Import;
 

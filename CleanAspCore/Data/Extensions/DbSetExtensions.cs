@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CleanAspCore.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace CleanAspCore;
+namespace CleanAspCore.Data.Extensions;
 
 public static class DbSetExtensions
 {

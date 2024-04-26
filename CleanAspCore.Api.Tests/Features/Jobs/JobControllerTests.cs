@@ -1,14 +1,13 @@
-using System.Net;
-using CleanAspCore.Domain;
-using CleanAspCore.Domain.Jobs;
+using CleanAspCore.Clients;
 using CleanAspCore.Features.Import;
+using CleanAspCore.Features.Jobs;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 
 public class JobControllerTests : TestBase
 {
     [Test]
-    public async Task SearchJobs_ReturnsExpectedJobs()
+    public async Task GetJobById_ReturnsExpectedJob()
     {
         //Arrange
         var job = new JobFaker().Generate();
@@ -18,24 +17,26 @@ public class JobControllerTests : TestBase
         });
 
         //Act
-        var result = await Sut.CreateClient().GetFromJsonAsync<JobDto>($"jobs/{job.Id}");
+        var response = await Sut.CreateClientFor<IJobApiClient>().GetJobById(job.Id);
 
         //Assert
-        result.Should().BeEquivalentTo(job.ToDto());
+        await response.AssertStatusCode(HttpStatusCode.OK);
+        var jobDto = await response.Content.ReadFromJsonAsync<JobDto>();
+        jobDto.Should().BeEquivalentTo(job.ToDto());
     }
 
     [Test]
-    public async Task AddJob_IsAdded()
+    public async Task CreateJob_IsAdded()
     {
         //Arrange
-        var job = new JobFaker().Generate();
+        var createJobRequest = new CreateJobRequestFaker().Generate();
 
         //Act
-        var response = await Sut.CreateClient().PostAsJsonAsync("jobs", job.ToDto());
-        await response.AssertStatusCode(HttpStatusCode.Created);
-        var createdId = response.GetGuidFromLocationHeader();
+        var response = await Sut.CreateClientFor<IJobApiClient>().CreateJob(createJobRequest);
 
         //Assert
+        await response.AssertStatusCode(HttpStatusCode.Created);
+        var createdId = response.GetGuidFromLocationHeader();
         Sut.AssertDatabase(context =>
         {
             context.Jobs.Should().BeEquivalentTo(new[]

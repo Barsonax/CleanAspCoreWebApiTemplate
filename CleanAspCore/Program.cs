@@ -3,8 +3,6 @@ using System.Runtime.CompilerServices;
 using CleanAspCore;
 using CleanAspCore.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-
 
 [assembly: InternalsVisibleTo("CleanAspCore.Api.Tests")]
 
@@ -37,4 +35,7 @@ app.AddRoutes();
 
 app.Run();
 
-public partial class Program { }
+namespace CleanAspCore
+{
+    public partial class Program { }
+}
