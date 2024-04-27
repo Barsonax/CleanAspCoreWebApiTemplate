@@ -1,7 +1,9 @@
 ﻿using CleanAspCore.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -29,6 +31,14 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
                 { "ConnectionStrings:Default", _pooledDatabase.ConnectionString },
                 { "Logging:LogLevel:Microsoft.AspNetCore.Routing", "Information" },
             });
+        });
+
+        builder.ConfigureServices(services =>
+        {
+            services.RemoveAll(typeof(DbContextOptions<HrContext>));
+            services.AddDbContext<HrContext>(c => c
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors());
         });
 
         builder.ConfigureLogging(loggingBuilder =>
