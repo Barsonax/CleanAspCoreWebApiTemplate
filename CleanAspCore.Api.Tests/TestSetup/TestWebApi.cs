@@ -26,7 +26,8 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
         {
             config.AddInMemoryCollection(new Dictionary<string, string?>
             {
-                { "ConnectionStrings:Default", _pooledDatabase.ConnectionString }
+                { "ConnectionStrings:Default", _pooledDatabase.ConnectionString },
+                { "Logging:LogLevel:Microsoft.AspNetCore.Routing", "Information" },
             });
         });
 
