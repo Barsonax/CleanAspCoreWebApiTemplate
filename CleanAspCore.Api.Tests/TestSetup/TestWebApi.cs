@@ -38,6 +38,7 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
         });
 
         var app = base.CreateHost(builder);
+
         _pooledDatabase.EnsureDatabaseIsReadyForTest(app);
 
         return app;
@@ -64,5 +65,8 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
         seedAction(context);
     }
 
-    public T CreateClientFor<T>() => RestService.For<T>(CreateClient());
+    public T CreateClientFor<T>() => RestService.For<T>(CreateClient(new WebApplicationFactoryClientOptions()
+    {
+        BaseAddress = new Uri("https://localhost") // Prevents https redirection warnings.
+    }));
 }
