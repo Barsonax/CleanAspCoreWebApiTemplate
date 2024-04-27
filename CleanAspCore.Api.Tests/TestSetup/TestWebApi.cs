@@ -34,7 +34,7 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
         builder.ConfigureLogging(loggingBuilder =>
         {
             loggingBuilder.ClearProviders();
-            loggingBuilder.Services.AddSingleton(_loggerProvider);
+            loggingBuilder.AddProvider(_loggerProvider);
         });
 
         var app = base.CreateHost(builder);
