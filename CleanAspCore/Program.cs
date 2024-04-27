@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using CleanAspCore;
 using CleanAspCore.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 [assembly: InternalsVisibleTo("CleanAspCore.Api.Tests")]
 
@@ -12,7 +13,11 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes();
 });
+
 builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
+
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<HrContext>();
 
@@ -32,7 +37,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.AddRoutes();
 
 app.Run();
