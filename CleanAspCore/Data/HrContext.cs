@@ -13,14 +13,17 @@ public class HrContext : DbContext
 
     public HrContext() { }
 
-    public HrContext(IConfiguration configuration)
+    public HrContext(DbContextOptions<HrContext> context, IConfiguration configuration) : base(context)
     {
         _connectionString = configuration.GetConnectionString("Default");
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(_connectionString);
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseNpgsql(_connectionString);
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
