@@ -38,6 +38,6 @@ public static class HrContextExtensions
     {
         using var serviceScope = host.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
         var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();
-        context.Database.Migrate();
+        context.Database.EnsureCreated();
     }
 }

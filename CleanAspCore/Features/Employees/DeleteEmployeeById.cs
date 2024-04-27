@@ -8,7 +8,8 @@ internal static class DeleteEmployeeById
 {
     internal static async Task<Results<Ok, NotFound>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
     {
-        var result = await context.Employees.Where(x => x.Id == id)
+        var result = await context.Employees
+            .Where(x => x.Id == id)
             .ExecuteDeleteAsync(cancellationToken);
 
         return result switch

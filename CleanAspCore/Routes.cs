@@ -9,7 +9,9 @@ public static class EndpointRouteBuilderExtensions
 {
     public static void AddRoutes(this IEndpointRouteBuilder host)
     {
-        var departmentGroup = host.MapGroup("/departments");
+        var departmentGroup = host
+            .MapGroup("/departments")
+            .WithTags("Departments");
 
         departmentGroup.MapPost("/", AddDepartments.Handle)
             .WithRequestValidation<CreateDepartmentRequest>();
@@ -17,7 +19,9 @@ public static class EndpointRouteBuilderExtensions
         departmentGroup.MapGet("/{id:guid}", GetDepartmentById.Handle)
             .WithName(nameof(GetDepartmentById));
 
-        var employeeGroup = host.MapGroup("/employees");
+        var employeeGroup = host
+            .MapGroup("/employees")
+            .WithTags("Employees");
 
         employeeGroup.MapPost("/", AddEmployee.Handle)
             .WithRequestValidation<CreateEmployeeRequest>();
@@ -30,7 +34,9 @@ public static class EndpointRouteBuilderExtensions
         employeeGroup.MapPut("/{id:guid}", UpdateEmployeeById.Handle);
 
 
-        var jobGroup = host.MapGroup("/jobs");
+        var jobGroup = host
+            .MapGroup("/jobs")
+            .WithTags("Jobs");
 
         jobGroup.MapPost("/",AddJobs.Handle)
             .WithRequestValidation<CreateJobRequest>();
