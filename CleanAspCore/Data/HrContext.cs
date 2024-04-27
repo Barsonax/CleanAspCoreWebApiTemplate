@@ -5,24 +5,22 @@ namespace CleanAspCore.Data;
 
 public class HrContext : DbContext
 {
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<Department> Departments { get; set; }
-    public DbSet<Job> Jobs { get; set; }
+    public DbSet<Employee> Employees => Set<Employee>();
+    public DbSet<Department> Departments => Set<Department>();
+    public DbSet<Job> Jobs => Set<Job>();
 
-    public HrContext()
-    {
-    }
+    private readonly string? _connectionString;
 
-    public HrContext(DbContextOptions<HrContext> context) : base(context)
+    public HrContext() { }
+
+    public HrContext(IConfiguration configuration)
     {
+        _connectionString = configuration.GetConnectionString("Default");
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseNpgsql("Host=localhost;Database=hr;Username=postgres;Password=postgres");
-        }
+        optionsBuilder.UseNpgsql(_connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

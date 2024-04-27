@@ -2,7 +2,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using CleanAspCore;
 using CleanAspCore.Data;
-using Microsoft.EntityFrameworkCore;
 
 [assembly: InternalsVisibleTo("CleanAspCore.Api.Tests")]
 
@@ -15,7 +14,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddAuthorization();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-builder.Services.AddDbContext<HrContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddDbContext<HrContext>();
 
 var app = builder.Build();
 
