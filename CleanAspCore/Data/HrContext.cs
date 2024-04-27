@@ -32,7 +32,7 @@ public class HrContext : DbContext
 
 public static class HrContextExtensions
 {
-    public static void MigrateHrContext(this IHost host)
+    public static void EnsureHrContextDatabaseIsCreated(this IHost host)
     {
         using var serviceScope = host.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
         var context = serviceScope.ServiceProvider.GetRequiredService<HrContext>();

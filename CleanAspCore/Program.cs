@@ -20,7 +20,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MigrateHrContext();
+    app.EnsureHrContextDatabaseIsCreated();
 }
 
 // Configure the HTTP request pipeline.
