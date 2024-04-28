@@ -1,6 +1,6 @@
 ﻿namespace CleanAspCore.Api.Tests.Features.Import;
 
-public class ImportControllerTests : TestBase
+public class ImportTests : TestBase
 {
     [Test]
     public async Task Import_SingleNewEmployee_IsImported()
