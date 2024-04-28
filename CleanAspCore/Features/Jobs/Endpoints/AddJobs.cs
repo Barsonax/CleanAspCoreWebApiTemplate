@@ -26,12 +26,12 @@ internal static class AddJobs
         Id = Guid.NewGuid(),
         Name = createJobRequest.Name
     };
-}
 
-public class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
-{
-    public CreateJobRequestValidator()
+    private class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
     {
-        RuleFor(x => x.Name).NotEmpty();
+        public CreateJobRequestValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty();
+        }
     }
 }

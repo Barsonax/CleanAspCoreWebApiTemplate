@@ -37,14 +37,14 @@ internal static class AddEmployee
         DepartmentId = employee.DepartmentId,
         JobId = employee.JobId
     };
-}
 
-public class CreateEmployeeRequestValidator : AbstractValidator<CreateEmployeeRequest>
-{
-    public CreateEmployeeRequestValidator()
+    private class CreateEmployeeRequestValidator : AbstractValidator<CreateEmployeeRequest>
     {
-        RuleFor(x => x.FirstName).NotEmpty();
-        RuleFor(x => x.LastName).NotEmpty();
-        RuleFor(x => x.Email).EmailAddress().NotNull();
+        public CreateEmployeeRequestValidator()
+        {
+            RuleFor(x => x.FirstName).NotEmpty();
+            RuleFor(x => x.LastName).NotEmpty();
+            RuleFor(x => x.Email).EmailAddress().NotNull();
+        }
     }
 }
