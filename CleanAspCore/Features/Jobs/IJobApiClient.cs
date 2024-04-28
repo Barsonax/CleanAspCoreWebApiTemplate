@@ -1,7 +1,7 @@
-﻿using CleanAspCore.Features.Jobs;
+﻿using CleanAspCore.Features.Jobs.Endpoints;
 using Refit;
 
-namespace CleanAspCore.Clients;
+namespace CleanAspCore.Features.Jobs;
 
 public interface IJobApiClient
 {

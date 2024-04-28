@@ -3,7 +3,7 @@ using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Features.Jobs;
+namespace CleanAspCore.Features.Jobs.Endpoints;
 
 public sealed record JobDto(Guid Id, string Name);
 

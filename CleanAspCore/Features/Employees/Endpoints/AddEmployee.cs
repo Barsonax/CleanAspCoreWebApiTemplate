@@ -2,7 +2,7 @@
 using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace CleanAspCore.Features.Employees;
+namespace CleanAspCore.Features.Employees.Endpoints;
 
 public sealed class CreateEmployeeRequest
 {

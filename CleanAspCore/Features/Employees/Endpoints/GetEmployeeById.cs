@@ -3,7 +3,7 @@ using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Features.Employees;
+namespace CleanAspCore.Features.Employees.Endpoints;
 
 public sealed record EmployeeDto(string FirstName, string LastName, string Email, string Gender, Guid DepartmentId, Guid JobId);
 

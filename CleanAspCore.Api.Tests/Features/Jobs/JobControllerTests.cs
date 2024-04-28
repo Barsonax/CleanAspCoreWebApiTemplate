@@ -1,6 +1,6 @@
-using CleanAspCore.Clients;
 using CleanAspCore.Features.Import;
 using CleanAspCore.Features.Jobs;
+using CleanAspCore.Features.Jobs.Endpoints;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 

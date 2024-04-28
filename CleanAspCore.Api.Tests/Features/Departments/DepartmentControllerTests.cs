@@ -1,5 +1,5 @@
-﻿using CleanAspCore.Clients;
-using CleanAspCore.Features.Departments;
+﻿using CleanAspCore.Features.Departments;
+using CleanAspCore.Features.Departments.Endpoints;
 using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;

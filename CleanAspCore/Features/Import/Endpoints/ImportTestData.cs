@@ -2,7 +2,7 @@
 using CleanAspCore.Data.Extensions;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace CleanAspCore.Features.Import;
+namespace CleanAspCore.Features.Import.Endpoints;
 
 internal static class ImportTestData
 {

@@ -2,7 +2,7 @@
 using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace CleanAspCore.Features.Departments;
+namespace CleanAspCore.Features.Departments.Endpoints;
 
 public sealed class CreateDepartmentRequest
 {

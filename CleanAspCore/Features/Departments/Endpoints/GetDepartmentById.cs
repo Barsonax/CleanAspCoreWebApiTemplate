@@ -3,7 +3,7 @@ using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Features.Departments;
+namespace CleanAspCore.Features.Departments.Endpoints;
 
 public sealed record DepartmentDto(Guid Id, string Name, string City);
 

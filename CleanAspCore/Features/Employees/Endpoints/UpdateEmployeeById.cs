@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using NotFound = Microsoft.AspNetCore.Http.HttpResults.NotFound;
 
-namespace CleanAspCore.Features.Employees;
+namespace CleanAspCore.Features.Employees.Endpoints;
 
 public sealed class UpdateEmployeeRequest
 {

@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using CleanAspCore.Data.Models;
 using CleanAspCore.Features.Employees;
+using CleanAspCore.Features.Employees.Endpoints;
 
 namespace CleanAspCore.Features.Import;
 

@@ -2,7 +2,7 @@
 using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace CleanAspCore.Features.Jobs;
+namespace CleanAspCore.Features.Jobs.Endpoints;
 
 public sealed class CreateJobRequest
 {

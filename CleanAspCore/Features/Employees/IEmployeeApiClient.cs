@@ -1,7 +1,7 @@
-﻿using CleanAspCore.Features.Employees;
+﻿using CleanAspCore.Features.Employees.Endpoints;
 using Refit;
 
-namespace CleanAspCore.Clients;
+namespace CleanAspCore.Features.Employees;
 
 public interface IEmployeeApiClient
 {

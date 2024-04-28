@@ -1,5 +1,6 @@
 using Bogus;
 using CleanAspCore.Features.Departments;
+using CleanAspCore.Features.Departments.Endpoints;
 
 namespace CleanAspCore.Features.Import;
 
