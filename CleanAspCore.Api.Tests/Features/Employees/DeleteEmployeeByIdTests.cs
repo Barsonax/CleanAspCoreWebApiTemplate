@@ -22,4 +22,17 @@ public class DeleteEmployeeByIdTests : TestBase
         await response.AssertStatusCode(HttpStatusCode.OK);
         Sut.AssertDatabase(context => { context.Employees.Should().BeEmpty(); });
     }
+
+    [Test]
+    public async Task DeleteEmployeeById_DoesNotExist_ReturnsNotFound()
+    {
+        //Arrange
+        var id = Guid.NewGuid();
+
+        //Act
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>().DeleteEmployeeById(id);
+
+        //Assert
+        await response.AssertStatusCode(HttpStatusCode.NotFound);
+    }
 }

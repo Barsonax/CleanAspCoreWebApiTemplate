@@ -35,4 +35,22 @@ public class UpdateEmployeeByIdTests : TestBase
             });
         });
     }
+
+    [Test]
+    public async Task UpdateEmployeeById_DoesNotExist_ReturnsNotFound()
+    {
+        //Arrange
+        var employee = new EmployeeFaker().Generate();
+
+        UpdateEmployeeRequest updateEmployeeRequest = new()
+        {
+            FirstName = "Updated"
+        };
+
+        //Act
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>().UpdateEmployeeById(employee.Id, updateEmployeeRequest);
+
+        //Assert
+        await response.AssertStatusCode(HttpStatusCode.NotFound);
+    }
 }

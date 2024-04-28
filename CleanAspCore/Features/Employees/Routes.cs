@@ -19,6 +19,7 @@ internal static class Routes
 
         employeeGroup.MapDelete("/{id:guid}", DeleteEmployeeById.Handle);
 
-        employeeGroup.MapPut("/{id:guid}", UpdateEmployeeById.Handle);
+        employeeGroup.MapPatch("/{id:guid}", UpdateEmployeeById.Handle)
+            .WithRequestValidation<UpdateEmployeeRequest>();;
     }
 }

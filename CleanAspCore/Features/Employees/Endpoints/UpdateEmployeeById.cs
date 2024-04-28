@@ -19,16 +19,9 @@ public sealed class UpdateEmployeeRequest
 
 internal static class UpdateEmployeeById
 {
-    internal static async Task<Results<NoContent, NotFound, ValidationProblem>> Handle(Guid id,
-        [FromBody] UpdateEmployeeRequest updateEmployeeRequest, HrContext context, [FromServices] IValidator<UpdateEmployeeRequest> validator, CancellationToken cancellationToken)
+    internal static async Task<Results<NoContent, NotFound, ValidationProblem>> Handle(
+        Guid id, [FromBody] UpdateEmployeeRequest updateEmployeeRequest, HrContext context, CancellationToken cancellationToken)
     {
-        var validationResult = await validator.ValidateAsync(updateEmployeeRequest, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            return TypedResults.ValidationProblem(validationResult.ToDictionary());
-        }
-
         var builder = new SetPropertyBuilder<Employee>()
             .SetPropertyIfNotNull(x => x.FirstName, updateEmployeeRequest.FirstName)
             .SetPropertyIfNotNull(x => x.LastName, updateEmployeeRequest.LastName)

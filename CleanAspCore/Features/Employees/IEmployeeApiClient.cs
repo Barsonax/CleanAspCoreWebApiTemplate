@@ -11,7 +11,7 @@ public interface IEmployeeApiClient
     [Post("/employees")]
     Task<HttpResponseMessage> CreateEmployee(CreateEmployeeRequest createEmployeeRequest);
 
-    [Put("/employees/{id}")]
+    [Patch("/employees/{id}")]
     Task<HttpResponseMessage> UpdateEmployeeById(Guid id, UpdateEmployeeRequest updateEmployeeRequest);
 
     [Delete("/employees/{id}")]
