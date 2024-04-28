@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Employees.Endpoints;
 
-public sealed record EmployeeDto(string FirstName, string LastName, string Email, string Gender, Guid DepartmentId, Guid JobId);
+public sealed record EmployeeDto(Guid Id, string FirstName, string LastName, string Email, string Gender, Guid DepartmentId, Guid JobId);
 
 internal static class GetEmployeeById
 {
@@ -19,6 +19,7 @@ internal static class GetEmployeeById
     }
 
     private static EmployeeDto ToDto(this Employee employee) => new(
+        employee.Id,
         employee.FirstName,
         employee.LastName,
         employee.Email.ToString(),
