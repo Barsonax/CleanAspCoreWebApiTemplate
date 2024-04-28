@@ -40,7 +40,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.AddRoutes();
+app.AddAppRoutes();
 
 app.Run();
 

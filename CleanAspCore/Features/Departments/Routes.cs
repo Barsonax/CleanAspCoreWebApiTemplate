@@ -1,4 +1,5 @@
 ﻿using CleanAspCore.Features.Departments.Endpoints;
+using CleanAspCore.Utils;
 
 namespace CleanAspCore.Features.Departments;
 

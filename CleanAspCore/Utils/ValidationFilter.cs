@@ -1,4 +1,4 @@
-namespace CleanAspCore;
+namespace CleanAspCore.Utils;
 
 public class ValidationFilter<TRequest> : IEndpointFilter
 {

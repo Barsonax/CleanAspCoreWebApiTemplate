@@ -5,17 +5,13 @@ using CleanAspCore.Features.Jobs;
 
 namespace CleanAspCore;
 
-public static class EndpointRouteBuilderExtensions
+public static class Routes
 {
-    internal static void AddRoutes(this IEndpointRouteBuilder host)
+    internal static void AddAppRoutes(this IEndpointRouteBuilder host)
     {
         host.AddDepartmentsRoutes();
         host.AddEmployeesRoutes();
         host.AddJobsRoutes();
         host.AddImportRoutes();
     }
-
-    public static RouteHandlerBuilder WithRequestValidation<TRequest>(this  RouteHandlerBuilder host) =>
-        host.AddEndpointFilter<ValidationFilter<TRequest>>()
-            .ProducesValidationProblem();
 }

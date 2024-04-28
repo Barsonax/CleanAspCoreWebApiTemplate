@@ -1,4 +1,5 @@
 ﻿using CleanAspCore.Features.Jobs.Endpoints;
+using CleanAspCore.Utils;
 
 namespace CleanAspCore.Features.Jobs;
 
