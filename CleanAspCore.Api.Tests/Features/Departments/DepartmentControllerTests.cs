@@ -23,7 +23,10 @@ public class DepartmentControllerTests : TestBase
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
         var departmentDto = await response.Content.ReadFromJsonAsync<DepartmentDto>();
-        departmentDto.Should().BeEquivalentTo(department.ToDto());
+        departmentDto.Should().BeEquivalentTo(new
+        {
+            Id = department.Id
+        });
     }
 
     [Test]

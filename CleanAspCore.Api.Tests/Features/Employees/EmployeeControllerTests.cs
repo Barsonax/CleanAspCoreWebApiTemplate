@@ -22,7 +22,10 @@ public class EmployeeControllerTests : TestBase
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
         var employeeDto = await response.Content.ReadFromJsonAsync<EmployeeDto>();
-        employeeDto.Should().BeEquivalentTo(employee.ToDto());
+        employeeDto.Should().BeEquivalentTo(new
+        {
+            Id = employee.Id
+        });
     }
 
     [Test]

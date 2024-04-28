@@ -17,11 +17,8 @@ internal static class GetJobById
             .FirstAsync(cancellationToken);
         return TypedResults.Json(results);
     }
-}
 
-public static class JobMapper
-{
-    public static JobDto ToDto(this Job department) => new(
+    private static JobDto ToDto(this Job department) => new(
         department.Id,
         department.Name
     );

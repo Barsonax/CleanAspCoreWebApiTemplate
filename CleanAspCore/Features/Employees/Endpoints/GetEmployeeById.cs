@@ -17,11 +17,8 @@ internal static class GetEmployeeById
             .FirstAsync(cancellationToken);
         return TypedResults.Json(result);
     }
-}
 
-public static class EmployeeMapper
-{
-    public static EmployeeDto ToDto(this Employee employee) => new(
+    private static EmployeeDto ToDto(this Employee employee) => new(
         employee.FirstName,
         employee.LastName,
         employee.Email.ToString(),

@@ -18,11 +18,8 @@ internal static class GetDepartmentById
 
         return TypedResults.Ok(department);
     }
-}
 
-public static class DepartmentMapper
-{
-    public static DepartmentDto ToDto(this Department department) => new
+    private static DepartmentDto ToDto(this Department department) => new
     (
         department.Id,
         department.Name,
