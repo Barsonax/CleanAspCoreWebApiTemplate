@@ -1,5 +1,4 @@
 ﻿using CleanAspCore.Features.Departments;
-using CleanAspCore.Features.Departments.Endpoints;
 using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
@@ -22,10 +21,6 @@ public class GetDepartmentByIdTests : TestBase
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        var departmentDto = await response.Content.ReadFromJsonAsync<DepartmentDto>();
-        departmentDto.Should().BeEquivalentTo(new
-        {
-            Id = department.Id
-        });
+        await response.AssertJsonBodyIsEquivalentTo(new { Id = department.Id });
     }
 }

@@ -4,8 +4,6 @@ using CleanAspCore;
 using CleanAspCore.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-[assembly: InternalsVisibleTo("CleanAspCore.Api.Tests")]
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();

@@ -29,6 +29,12 @@ public static class HttpAssertionExtensions
         }
     }
 
+    public static async Task AssertJsonBodyIsEquivalentTo<T>(this HttpResponseMessage response, T expected)
+    {
+        var body = await response.Content.ReadFromJsonAsync<T>();
+        body.Should().BeEquivalentTo(expected);
+    }
+
     public static Guid GetGuidFromLocationHeader(this HttpResponseMessage response)
     {
         var segments = response.Headers.Location!.Segments;

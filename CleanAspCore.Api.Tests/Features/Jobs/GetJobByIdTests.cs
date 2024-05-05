@@ -1,6 +1,5 @@
 ﻿using CleanAspCore.Features.Import;
 using CleanAspCore.Features.Jobs;
-using CleanAspCore.Features.Jobs.Endpoints;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 
@@ -21,10 +20,6 @@ public class GetJobByIdTests : TestBase
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        var jobDto = await response.Content.ReadFromJsonAsync<JobDto>();
-        jobDto.Should().BeEquivalentTo(new
-        {
-            Id = job.Id
-        });
+        await response.AssertJsonBodyIsEquivalentTo(new { Id = job.Id });
     }
 }

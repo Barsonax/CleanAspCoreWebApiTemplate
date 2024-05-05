@@ -1,5 +1,4 @@
 ﻿using CleanAspCore.Features.Employees;
-using CleanAspCore.Features.Employees.Endpoints;
 using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
@@ -21,7 +20,6 @@ public class GetEmployeeByIdTests : TestBase
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        var employeeDto = await response.Content.ReadFromJsonAsync<EmployeeDto>();
-        employeeDto.Should().BeEquivalentTo(new { Id = employee.Id });
+        await response.AssertJsonBodyIsEquivalentTo(new { Id = employee.Id });
     }
 }
