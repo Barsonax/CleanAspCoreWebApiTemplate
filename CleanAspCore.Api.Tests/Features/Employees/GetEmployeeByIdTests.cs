@@ -20,6 +20,6 @@ public class GetEmployeeByIdTests : TestBase
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new { Id = employee.Id });
+        await response.AssertJsonBodyIsEquivalentTo(new { Id = employee.Id.Value });
     }
 }

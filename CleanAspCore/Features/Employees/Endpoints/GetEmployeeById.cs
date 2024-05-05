@@ -7,7 +7,7 @@ namespace CleanAspCore.Features.Employees.Endpoints;
 
 public sealed class GetEmployeeResponse
 {
-    public required Guid Id { get; init; }
+    public required EmployeeId Id { get; init; }
     public required string FirstName { get; init; }
     public required string LastName { get; init; }
     public required string Email { get; init; }
@@ -18,7 +18,7 @@ public sealed class GetEmployeeResponse
 
 internal static class GetEmployeeById
 {
-    internal static async Task<JsonHttpResult<GetEmployeeResponse>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
+    internal static async Task<JsonHttpResult<GetEmployeeResponse>> Handle(EmployeeId id, HrContext context, CancellationToken cancellationToken)
     {
         var result = await context.Employees
             .Where(x => x.Id == id)

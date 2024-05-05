@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using CleanAspCore;
 using CleanAspCore.Data;
+using CleanAspCore.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes();
+});
+
+builder.Services.ConfigureHttpJsonOptions(c =>
+{
+    c.SerializerOptions.Converters.Add(new StrongIdJsonConverter<EmployeeId>());
 });
 
 builder.Services.AddAuthorization();

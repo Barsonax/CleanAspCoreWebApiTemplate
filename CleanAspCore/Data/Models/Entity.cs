@@ -1,4 +1,6 @@
-﻿namespace CleanAspCore.Data.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace CleanAspCore.Data.Models;
 
 public abstract class Entity
 {

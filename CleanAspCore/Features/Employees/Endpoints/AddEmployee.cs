@@ -29,7 +29,7 @@ internal static class AddEmployee
 
     private static Employee ToEmployee(this CreateEmployeeRequest employee) => new()
     {
-        Id = Guid.NewGuid(),
+        Id = EmployeeId.CreateNew(),
         FirstName = employee.FirstName,
         LastName = employee.LastName,
         Email = new EmailAddress(employee.Email),

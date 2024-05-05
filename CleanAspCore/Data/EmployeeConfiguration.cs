@@ -8,7 +8,10 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
+        builder.Property(c => c.Id)
+            .HasConversion(c => c.Value, c => new(c));
+
         builder.Property(c => c.Email)
-            .HasConversion(c => c.Email, c => new EmailAddress(c));
+            .HasConversion(c => c.Email, c => new (c));
     }
 }

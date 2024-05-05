@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Features.Employees.Endpoints;
+﻿using CleanAspCore.Data.Models;
+using CleanAspCore.Features.Employees.Endpoints;
 using Refit;
 
 namespace CleanAspCore.Features.Employees;
@@ -6,14 +7,14 @@ namespace CleanAspCore.Features.Employees;
 public interface IEmployeeApiClient
 {
     [Get("/employees/{id}")]
-    Task<HttpResponseMessage> GetEmployeeById(Guid id);
+    Task<HttpResponseMessage> GetEmployeeById(EmployeeId id);
 
     [Post("/employees")]
     Task<HttpResponseMessage> CreateEmployee(CreateEmployeeRequest createEmployeeRequest);
 
     [Patch("/employees/{id}")]
-    Task<HttpResponseMessage> UpdateEmployeeById(Guid id, UpdateEmployeeRequest updateEmployeeRequest);
+    Task<HttpResponseMessage> UpdateEmployeeById(EmployeeId id, UpdateEmployeeRequest updateEmployeeRequest);
 
     [Delete("/employees/{id}")]
-    Task<HttpResponseMessage> DeleteEmployeeById(Guid id);
+    Task<HttpResponseMessage> DeleteEmployeeById(EmployeeId id);
 }

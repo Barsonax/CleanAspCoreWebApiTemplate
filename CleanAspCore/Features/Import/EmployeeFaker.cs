@@ -10,6 +10,7 @@ public sealed class EmployeeFaker : Faker<Employee>
     public EmployeeFaker()
     {
         UseSeed(3);
+        RuleFor(x => x.Id, f => new (f.Random.Guid()));
         RuleFor(x => x.FirstName, f => f.Name.FirstName());
         RuleFor(x => x.LastName, f => f.Name.LastName());
         RuleFor(x => x.Email, f => new EmailAddress(f.Internet.Email()));

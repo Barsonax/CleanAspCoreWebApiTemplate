@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Features.Employees;
+﻿using CleanAspCore.Data.Models;
+using CleanAspCore.Features.Employees;
 using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
@@ -24,7 +25,7 @@ public class CreateEmployeeTests : TestBase
         var createdId = response.GetGuidFromLocationHeader();
         Sut.AssertDatabase(context =>
         {
-            context.Employees.Should().BeEquivalentTo(new[] { new { Id = createdId } });
+            context.Employees.Should().BeEquivalentTo(new[] { new { Id = new EmployeeId(createdId) } });
         });
     }
 

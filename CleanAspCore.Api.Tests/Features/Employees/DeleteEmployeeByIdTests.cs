@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Features.Employees;
+﻿using CleanAspCore.Data.Models;
+using CleanAspCore.Features.Employees;
 using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
@@ -27,7 +28,7 @@ public class DeleteEmployeeByIdTests : TestBase
     public async Task DeleteEmployeeById_DoesNotExist_ReturnsNotFound()
     {
         //Arrange
-        var id = Guid.NewGuid();
+        var id = EmployeeId.CreateNew();
 
         //Act
         var response = await Sut.CreateClientFor<IEmployeeApiClient>().DeleteEmployeeById(id);

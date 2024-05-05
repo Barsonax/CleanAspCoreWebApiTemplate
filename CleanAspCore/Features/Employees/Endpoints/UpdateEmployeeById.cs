@@ -20,7 +20,7 @@ public sealed class UpdateEmployeeRequest
 internal static class UpdateEmployeeById
 {
     internal static async Task<Results<NoContent, NotFound>> Handle(
-        Guid id, [FromBody] UpdateEmployeeRequest updateEmployeeRequest, HrContext context, CancellationToken cancellationToken)
+        EmployeeId id, [FromBody] UpdateEmployeeRequest updateEmployeeRequest, HrContext context, CancellationToken cancellationToken)
     {
         var builder = new SetPropertyBuilder<Employee>()
             .SetPropertyIfNotNull(x => x.FirstName, updateEmployeeRequest.FirstName)
