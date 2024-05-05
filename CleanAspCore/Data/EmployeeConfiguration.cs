@@ -8,6 +8,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
-        builder.OwnsOne(x => x.Email).Property(x => x.Email).HasColumnName("Email");
+        builder.Property(c => c.Email)
+            .HasConversion(c => c.Email, c => new EmailAddress(c));
     }
 }

@@ -29,7 +29,7 @@ internal static class AddDepartments
         City = department.City
     };
 
-    private class CreateDepartmentRequestValidator : AbstractValidator<CreateDepartmentRequest>
+    private sealed class CreateDepartmentRequestValidator : AbstractValidator<CreateDepartmentRequest>
     {
         public CreateDepartmentRequestValidator()
         {

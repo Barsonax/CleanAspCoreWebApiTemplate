@@ -38,7 +38,7 @@ internal static class AddEmployee
         JobId = employee.JobId
     };
 
-    private class CreateEmployeeRequestValidator : AbstractValidator<CreateEmployeeRequest>
+    private sealed class CreateEmployeeRequestValidator : AbstractValidator<CreateEmployeeRequest>
     {
         public CreateEmployeeRequestValidator()
         {

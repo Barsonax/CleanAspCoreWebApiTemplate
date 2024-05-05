@@ -4,7 +4,7 @@ namespace CleanAspCore.Api.Tests.Data;
 
 public class EntityTests
 {
-    private class TestEntity : Entity;
+    private sealed class TestEntity : Entity;
 
     [Test]
     public void EntityWithDifferentId_OpEqual_ReturnsFalse()

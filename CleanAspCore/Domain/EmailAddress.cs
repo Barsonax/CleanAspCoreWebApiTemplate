@@ -1,6 +1,6 @@
 ﻿namespace CleanAspCore.Domain;
 
-public record EmailAddress
+public readonly record struct EmailAddress
 {
     public string Email { get; }
 

@@ -7,8 +7,8 @@ namespace CleanAspCore.Features.Jobs.Endpoints;
 
 public sealed class JobDto
 {
-    public Guid Id { get; init; }
-    public string Name { get; init; }
+    public required Guid Id { get; init; }
+    public required string Name { get; init; }
 }
 
 internal static class GetJobById

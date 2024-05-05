@@ -27,7 +27,7 @@ internal static class AddJobs
         Name = createJobRequest.Name
     };
 
-    private class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
+    private sealed class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
     {
         public CreateJobRequestValidator()
         {
