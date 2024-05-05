@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Jobs.Endpoints;
 
-public sealed record JobDto(Guid Id, string Name);
+public sealed class JobDto
+{
+    public Guid Id { get; init; }
+    public string Name { get; init; }
+}
 
 internal static class GetJobById
 {
@@ -18,8 +22,9 @@ internal static class GetJobById
         return TypedResults.Json(results);
     }
 
-    private static JobDto ToDto(this Job department) => new(
-        department.Id,
-        department.Name
-    );
+    private static JobDto ToDto(this Job department) => new()
+    {
+        Id = department.Id,
+        Name = department.Name
+    };
 }

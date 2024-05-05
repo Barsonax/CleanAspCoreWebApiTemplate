@@ -31,6 +31,7 @@ public static class HttpAssertionExtensions
 
     public static async Task AssertJsonBodyIsEquivalentTo<T>(this HttpResponseMessage response, T expected)
     {
+        using var scope = new AssertionScope();
         response.Content.Headers.ContentType.Should().NotBeNull();
         response.Content.Headers.ContentType!.MediaType.Should().Be("application/json");
         response.Content.Headers.ContentType!.CharSet.Should().Be("utf-8");

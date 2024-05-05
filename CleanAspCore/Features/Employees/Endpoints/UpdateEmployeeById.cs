@@ -19,7 +19,7 @@ public sealed class UpdateEmployeeRequest
 
 internal static class UpdateEmployeeById
 {
-    internal static async Task<Results<NoContent, NotFound, ValidationProblem>> Handle(
+    internal static async Task<Results<NoContent, NotFound>> Handle(
         Guid id, [FromBody] UpdateEmployeeRequest updateEmployeeRequest, HrContext context, CancellationToken cancellationToken)
     {
         var builder = new SetPropertyBuilder<Employee>()

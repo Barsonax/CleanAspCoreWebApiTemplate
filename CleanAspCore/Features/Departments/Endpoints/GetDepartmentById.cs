@@ -5,7 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Departments.Endpoints;
 
-public sealed record DepartmentDto(Guid Id, string Name, string City);
+public sealed class DepartmentDto
+{
+    public required Guid Id { get; init; }
+    public required string Name { get; init; }
+    public required string City { get; init; }
+}
 
 internal static class GetDepartmentById
 {
@@ -19,10 +24,10 @@ internal static class GetDepartmentById
         return TypedResults.Ok(department);
     }
 
-    private static DepartmentDto ToDto(this Department department) => new
-    (
-        department.Id,
-        department.Name,
-        department.City
-    );
+    private static DepartmentDto ToDto(this Department department) => new()
+    {
+        Id = department.Id,
+        Name = department.Name,
+        City = department.City
+    };
 }

@@ -19,7 +19,7 @@ public class DeleteEmployeeByIdTests : TestBase
         var response = await Sut.CreateClientFor<IEmployeeApiClient>().DeleteEmployeeById(employee.Id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
+        await response.AssertStatusCode(HttpStatusCode.NoContent);
         Sut.AssertDatabase(context => { context.Employees.Should().BeEmpty(); });
     }
 
