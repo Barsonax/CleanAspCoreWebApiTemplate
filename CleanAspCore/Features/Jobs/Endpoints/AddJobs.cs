@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Data.Models;
+using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Jobs.Endpoints;
@@ -31,7 +32,7 @@ internal static class AddJobs
     {
         public CreateJobRequestValidator()
         {
-            RuleFor(x => x.Name).NotEmpty();
+            this.ValidateNullableReferences();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Data.Extensions;
 using CleanAspCore.Data.Models;
+using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using NotFound = Microsoft.AspNetCore.Http.HttpResults.NotFound;
@@ -46,6 +47,8 @@ public class UpdateEmployeeRequestValidator : AbstractValidator<UpdateEmployeeRe
 {
     public UpdateEmployeeRequestValidator()
     {
+        this.ValidateNullableReferences();
+
         RuleFor(x => x.Email).EmailAddress();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Data.Models;
+using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Departments.Endpoints;
@@ -33,8 +34,7 @@ internal static class AddDepartments
     {
         public CreateDepartmentRequestValidator()
         {
-            RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.City).NotEmpty();
+            this.ValidateNullableReferences();
         }
     }
 }

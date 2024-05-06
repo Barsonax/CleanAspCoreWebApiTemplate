@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Data.Models;
+using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Employees.Endpoints;
@@ -42,9 +43,9 @@ internal static class AddEmployee
     {
         public CreateEmployeeRequestValidator()
         {
-            RuleFor(x => x.FirstName).NotEmpty();
-            RuleFor(x => x.LastName).NotEmpty();
-            RuleFor(x => x.Email).EmailAddress().NotNull();
+            this.ValidateNullableReferences();
+
+            RuleFor(x => x.Email).EmailAddress();
         }
     }
 }
