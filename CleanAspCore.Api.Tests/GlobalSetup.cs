@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using CleanAspCore.Data;
+﻿using CleanAspCore.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: FixtureLifeCycle(LifeCycle.InstancePerTestCase)]

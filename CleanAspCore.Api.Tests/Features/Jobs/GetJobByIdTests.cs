@@ -1,5 +1,4 @@
 ﻿using CleanAspCore.Api.Tests.Fakers;
-using CleanAspCore.Features.Jobs;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;
 
