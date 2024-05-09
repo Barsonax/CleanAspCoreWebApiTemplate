@@ -32,7 +32,7 @@ public class MigrationTests
     }
 
     [TestCaseSource(typeof(MigrationTestCases))]
-    public async Task MigrationsUpAndDown_NoErrors2(MigrationScript migration)
+    public async Task MigrationsUpAndDown_NoErrors(MigrationScript migration)
     {
         var databaseName = "migrationstest";
         var createDatabaseResult = await _databaseContainer.CreateDatabase(databaseName);
