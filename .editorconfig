@@ -144,7 +144,7 @@ csharp_space_between_square_brackets = false
 
 # In externally visible method validate parameter is non-null before using it.
 dotnet_diagnostic.ca1062.severity = none
-# Do not directly await a Task
+# Do not directly await a Task, this is intended for libraries and not for a web app.
 dotnet_diagnostic.ca2007.severity = none
 # Use logger message delegates
 dotnet_diagnostic.CA1848.severity = none
@@ -152,6 +152,3 @@ dotnet_diagnostic.CA1848.severity = none
 [**.Tests/**.cs]
 # Remove the underscores from member name
 dotnet_diagnostic.CA1707.severity = none
-
-dotnet_diagnostic.CA2234.severity = none
-
