@@ -1,6 +1,7 @@
 using System.Reflection;
 using CleanAspCore;
 using CleanAspCore.Data;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes();
 });
+builder.Services.AddFluentValidationRulesToSwagger();
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
