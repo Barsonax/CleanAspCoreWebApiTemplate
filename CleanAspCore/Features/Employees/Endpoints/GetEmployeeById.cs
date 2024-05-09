@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Employees.Endpoints;
 
+/// <summary>
+/// 
+/// </summary>
 public sealed class GetEmployeeResponse
 {
     public required Guid Id { get; init; }

@@ -47,7 +47,7 @@ public class MigrationTests
         upResult.ExitCode.Should().Be(0, $"Error during migration up2: {upResult2.Stderr}");
     }
 
-    [SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes")]
+    [SuppressMessage("CodeQuality", "CA1812:Avoid uninstantiated internal classes")]
     private sealed class MigrationTestCases : IEnumerable
     {
         public IEnumerator GetEnumerator()

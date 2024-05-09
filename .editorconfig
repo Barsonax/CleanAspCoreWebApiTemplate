@@ -148,6 +148,14 @@ dotnet_diagnostic.ca1062.severity = none
 dotnet_diagnostic.ca2007.severity = none
 # Use logger message delegates
 dotnet_diagnostic.CA1848.severity = none
+# Use logger message delegates
+dotnet_diagnostic.CA1812.severity = none
+# Is an internal class that is apparently never instantiated, too many false positives.
+dotnet_diagnostic.CS1591.severity = none
+
+[**/Endpoints/**.cs]
+# Missing XML comment
+dotnet_diagnostic.CS1591.severity = warning
 
 [**.Tests/**.cs]
 # Remove the underscores from member name

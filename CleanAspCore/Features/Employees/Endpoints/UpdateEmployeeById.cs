@@ -18,7 +18,7 @@ public sealed class UpdateEmployeeRequest
     public Guid? JobId { get; init; }
 }
 
-public class UpdateEmployeeRequestValidator : AbstractValidator<UpdateEmployeeRequest>
+internal sealed class UpdateEmployeeRequestValidator : AbstractValidator<UpdateEmployeeRequest>
 {
     public UpdateEmployeeRequestValidator()
     {

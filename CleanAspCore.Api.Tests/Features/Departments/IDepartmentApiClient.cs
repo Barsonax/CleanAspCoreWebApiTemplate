@@ -1,7 +1,7 @@
 using CleanAspCore.Features.Departments.Endpoints;
 using Refit;
 
-namespace CleanAspCore.Features.Departments;
+namespace CleanAspCore.Api.Tests.Features.Departments;
 
 public interface IDepartmentApiClient
 {

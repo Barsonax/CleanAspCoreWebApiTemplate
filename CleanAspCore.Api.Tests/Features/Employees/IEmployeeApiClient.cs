@@ -1,7 +1,7 @@
 ﻿using CleanAspCore.Features.Employees.Endpoints;
 using Refit;
 
-namespace CleanAspCore.Features.Employees;
+namespace CleanAspCore.Api.Tests.Features.Employees;
 
 public interface IEmployeeApiClient
 {

@@ -5,13 +5,23 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Departments.Endpoints;
 
+/// <summary>
+/// A request to create a new department.
+/// </summary>
 public sealed class CreateDepartmentRequest
 {
+    /// <summary>
+    /// The name of the to be created department.
+    /// </summary>
     public required string Name { get; init; }
+
+    /// <summary>
+    /// The city in which this to be created department is in.
+    /// </summary>
     public required string City { get; init; }
 }
 
-public sealed class CreateDepartmentRequestValidator : AbstractValidator<CreateDepartmentRequest>
+internal sealed class CreateDepartmentRequestValidator : AbstractValidator<CreateDepartmentRequest>
 {
     public CreateDepartmentRequestValidator()
     {

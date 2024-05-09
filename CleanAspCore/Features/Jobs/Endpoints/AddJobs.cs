@@ -10,7 +10,7 @@ public sealed class CreateJobRequest
     public required string Name { get; init; }
 }
 
-public sealed class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
+internal sealed class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
 {
     public CreateJobRequestValidator()
     {

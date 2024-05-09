@@ -5,16 +5,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Departments.Endpoints;
 
-public sealed class DepartmentDto
+/// <summary>
+///
+/// </summary>
+public sealed class GetDepartmentResponse
 {
+    /// <summary>
+    /// The id of this department.
+    /// </summary>
     public required Guid Id { get; init; }
+
+    /// <summary>
+    /// The name of this department.
+    /// </summary>
     public required string Name { get; init; }
+
+    /// <summary>
+    /// The city which this department is in.
+    /// </summary>
     public required string City { get; init; }
 }
 
 internal static class GetDepartmentById
 {
-    internal static async Task<Ok<DepartmentDto>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
+    internal static async Task<Ok<GetDepartmentResponse>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
     {
         var department = await context.Departments
             .Where(x => x.Id == id)
@@ -24,7 +38,7 @@ internal static class GetDepartmentById
         return TypedResults.Ok(department);
     }
 
-    private static DepartmentDto ToDto(this Department department) => new()
+    private static GetDepartmentResponse ToDto(this Department department) => new()
     {
         Id = department.Id,
         Name = department.Name,
