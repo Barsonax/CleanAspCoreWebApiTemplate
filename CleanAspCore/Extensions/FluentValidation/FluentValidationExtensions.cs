@@ -1,10 +1,17 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+using CleanAspCore.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Extensions.FluentValidation;
 
 public static class FluentValidationExtensions
 {
+    public static IRuleBuilderOptions<TModel, Guid> EntityShouldExist<TModel, TEntity>(this IRuleBuilder<TModel, Guid> rule, DbSet<TEntity> entities)
+        where TEntity : Entity =>
+        rule.MustAsync((id, t) => entities.AnyAsync(y => y.Id == id, t))
+            .WithMessage((x, y) => $"{typeof(TEntity).Name} with id {y} does not exist.");
+
     public static void ValidateNullableReferences<TModel>(this AbstractValidator<TModel> validator)
     {
         IEnumerable<PropertyInfo> properties = GetNonNullableProperties<TModel>(new NullabilityInfoContext());

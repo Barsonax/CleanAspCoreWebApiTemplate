@@ -52,8 +52,8 @@ internal sealed class CreateEmployeeRequestValidator : AbstractValidator<CreateE
         this.ValidateNullableReferences();
 
         RuleFor(x => x.Email).EmailAddress();
-        RuleFor(x => x.JobId).MustAsync((id, t) => context.Jobs.AnyAsync(y => y.Id == id, t));
-        RuleFor(x => x.DepartmentId).MustAsync((id, t) => context.Departments.AnyAsync(y => y.Id == id, t));
+        RuleFor(x => x.JobId).EntityShouldExist(context.Jobs);
+        RuleFor(x => x.DepartmentId).EntityShouldExist(context.Departments);
     }
 }
 
