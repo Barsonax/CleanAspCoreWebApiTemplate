@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace CleanAspCore.Features.Departments.Endpoints;
 
 /// <summary>
-///
+/// The get department response.
 /// </summary>
 public sealed class GetDepartmentResponse
 {
@@ -18,11 +18,13 @@ public sealed class GetDepartmentResponse
     /// <summary>
     /// The name of this department.
     /// </summary>
+    /// <example>Engineering</example>
     public required string Name { get; init; }
 
     /// <summary>
     /// The city which this department is in.
     /// </summary>
+    /// <example>Amsterdam</example>
     public required string City { get; init; }
 }
 

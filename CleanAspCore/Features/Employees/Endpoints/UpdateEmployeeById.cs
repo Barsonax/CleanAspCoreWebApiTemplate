@@ -8,13 +8,42 @@ using NotFound = Microsoft.AspNetCore.Http.HttpResults.NotFound;
 
 namespace CleanAspCore.Features.Employees.Endpoints;
 
+/// <summary>
+/// A request to update a employee.
+/// </summary>
 public sealed class UpdateEmployeeRequest
 {
+    /// <summary>
+    /// The firstname of this employee.
+    /// </summary>
+    /// <example>Mary</example>
     public string? FirstName { get; init; }
+
+    /// <summary>
+    /// The lastname of this employee.
+    /// </summary>
+    /// <example>Poppins</example>
     public string? LastName { get; init; }
+
+    /// <summary>
+    /// The email of this employee.
+    /// </summary>
     public string? Email { get; init; }
+
+    /// <summary>
+    /// The gender of this employee.
+    /// </summary>
+    /// <example>Female</example>
     public string? Gender { get; init; }
+
+    /// <summary>
+    /// The department id of which this employee is in.
+    /// </summary>
     public Guid? DepartmentId { get; init; }
+
+    /// <summary>
+    /// The job id of this employee.
+    /// </summary>
     public Guid? JobId { get; init; }
 }
 

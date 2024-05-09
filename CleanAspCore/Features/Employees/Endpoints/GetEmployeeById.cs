@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace CleanAspCore.Features.Employees.Endpoints;
 
 /// <summary>
-///
+/// The get employee response.
 /// </summary>
 public sealed class GetEmployeeResponse
 {

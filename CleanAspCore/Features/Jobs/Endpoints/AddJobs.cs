@@ -5,8 +5,15 @@ using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Features.Jobs.Endpoints;
 
+/// <summary>
+/// A request to create a new job.
+/// </summary>
 public sealed class CreateJobRequest
 {
+    /// <summary>
+    /// The name of this job.
+    /// </summary>
+    /// <example>Software Engineer</example>
     public required string Name { get; init; }
 }
 

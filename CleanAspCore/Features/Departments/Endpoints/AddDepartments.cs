@@ -13,11 +13,13 @@ public sealed class CreateDepartmentRequest
     /// <summary>
     /// The name of the to be created department.
     /// </summary>
+    /// <example>Engineering</example>
     public required string Name { get; init; }
 
     /// <summary>
     /// The city in which this to be created department is in.
     /// </summary>
+    /// <example>Amsterdam</example>
     public required string City { get; init; }
 }
 
