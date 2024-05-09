@@ -9,17 +9,15 @@ public static class HttpAssertionExtensions
     {
         if(expected != HttpStatusCode.BadRequest)
         {
-            using(var _ = new AssertionScope())
+            using var _ = new AssertionScope();
+            response.StatusCode.Should().Be(expected);
+            if (response.StatusCode == HttpStatusCode.BadRequest)
             {
-                response.StatusCode.Should().Be(expected);
-                if (response.StatusCode == HttpStatusCode.BadRequest)
+                var problemDetails = await response.Content.ReadFromJsonAsync<HttpValidationProblemDetails>();
+                if (problemDetails != null)
                 {
-                    var problemDetails = await response.Content.ReadFromJsonAsync<HttpValidationProblemDetails>();
-                    if (problemDetails != null)
-                    {
-                        var message = string.Join(Environment.NewLine, problemDetails.Errors.Select(x => $"{x.Key}: {x.Value[0]}"));
-                        _.FailWith(message);
-                    }
+                    var message = string.Join(Environment.NewLine, problemDetails.Errors.Select(x => $"{x.Key}: {x.Value[0]}"));
+                    _.FailWith(message);
                 }
             }
         }
@@ -27,6 +25,16 @@ public static class HttpAssertionExtensions
         {
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         }
+    }
+
+    public static async Task AssertBadRequest(this HttpResponseMessage response, params string[] expectedErrors)
+    {
+        using var _ = new AssertionScope();
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        var problemDetails = await response.Content.ReadFromJsonAsync<HttpValidationProblemDetails>();
+        problemDetails.Should().NotBeNull();
+        var propertiesWithErrors = problemDetails!.Errors.Select(x => x.Key);
+        propertiesWithErrors.Should().BeEquivalentTo(expectedErrors);
     }
 
     public static async Task AssertJsonBodyIsEquivalentTo<T>(this HttpResponseMessage response, T expected)
