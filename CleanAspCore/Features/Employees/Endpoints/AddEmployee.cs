@@ -2,6 +2,7 @@
 using CleanAspCore.Data.Models;
 using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Features.Employees.Endpoints;
 
@@ -46,11 +47,13 @@ public sealed class CreateEmployeeRequest
 
 internal sealed class CreateEmployeeRequestValidator : AbstractValidator<CreateEmployeeRequest>
 {
-    public CreateEmployeeRequestValidator()
+    public CreateEmployeeRequestValidator(HrContext context)
     {
         this.ValidateNullableReferences();
 
         RuleFor(x => x.Email).EmailAddress();
+        RuleFor(x => x.JobId).MustAsync((id, t) => context.Jobs.AnyAsync(y => y.Id == id, t));
+        RuleFor(x => x.DepartmentId).MustAsync((id, t) => context.Departments.AnyAsync(y => y.Id == id, t));
     }
 }
 
