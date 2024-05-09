@@ -1,7 +1,8 @@
 ﻿namespace CleanAspCore.Data.Models;
 
-public class Employee : Entity
+public class Employee : IEntity
 {
+    public required Guid Id { get; init; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required EmailAddress Email { get; set; }

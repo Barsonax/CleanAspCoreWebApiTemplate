@@ -7,7 +7,7 @@ namespace CleanAspCore.Data.Extensions;
 public static class DbSetExtensions
 {
     public static EntityEntry<T>? AddIfNotExists<T>(this DbSet<T> dbSet, T entity)
-        where T : Entity
+        where T : class, IEntity
     {
         return !dbSet.Any(x => x.Id == entity.Id) ? dbSet.Add(entity) : null;
     }
