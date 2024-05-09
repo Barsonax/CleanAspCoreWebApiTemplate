@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using CleanAspCore;
 using CleanAspCore.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

@@ -1,6 +1,5 @@
 ﻿using CleanAspCore.Features.Departments;
 using CleanAspCore.Features.Employees;
-using CleanAspCore.Features.Import;
 using CleanAspCore.Features.Jobs;
 
 namespace CleanAspCore;
@@ -12,6 +11,5 @@ public static class Routes
         host.AddDepartmentsRoutes();
         host.AddEmployeesRoutes();
         host.AddJobsRoutes();
-        host.AddImportRoutes();
     }
 }

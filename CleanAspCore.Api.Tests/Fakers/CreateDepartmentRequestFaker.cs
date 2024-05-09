@@ -1,8 +1,7 @@
 using Bogus;
-using CleanAspCore.Features.Departments;
 using CleanAspCore.Features.Departments.Endpoints;
 
-namespace CleanAspCore.Features.Import;
+namespace CleanAspCore.Api.Tests.Fakers;
 
 public sealed class CreateDepartmentRequestFaker : Faker<CreateDepartmentRequest>
 {

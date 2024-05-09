@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using CleanAspCore.Data.Models;
 
-namespace CleanAspCore.Features.Import;
+namespace CleanAspCore.Api.Tests.Fakers;
 
 public sealed class DepartmentFaker : Faker<Department>
 {

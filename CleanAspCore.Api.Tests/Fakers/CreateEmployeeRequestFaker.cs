@@ -1,8 +1,7 @@
 using Bogus;
-using CleanAspCore.Features.Employees;
 using CleanAspCore.Features.Employees.Endpoints;
 
-namespace CleanAspCore.Features.Import;
+namespace CleanAspCore.Api.Tests.Fakers;
 
 public sealed class CreateEmployeeRequestFaker : Faker<CreateEmployeeRequest>
 {

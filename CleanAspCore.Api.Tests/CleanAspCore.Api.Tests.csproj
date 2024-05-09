@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
@@ -38,10 +36,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CleanAspCore\CleanAspCore.csproj"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Fakers\" />
   </ItemGroup>
 
 </Project>

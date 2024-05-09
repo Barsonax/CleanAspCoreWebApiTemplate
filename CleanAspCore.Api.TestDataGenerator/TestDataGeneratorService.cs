@@ -1,12 +1,13 @@
-﻿using CleanAspCore.Data;
+﻿using CleanAspCore.Api.Tests.Fakers;
+using CleanAspCore.Data;
 using CleanAspCore.Data.Extensions;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Hosting;
 
-namespace CleanAspCore.Features.Import.Endpoints;
+namespace CleanAspCore.Api.TestDataGenerator;
 
-internal static class ImportTestData
+public class TestDataGeneratorService(HrContext context, IHostApplicationLifetime lifetime) : IHostedService
 {
-    internal static async Task<Ok> Handle(HrContext context, CancellationToken cancellationToken)
+    public async Task StartAsync(CancellationToken cancellationToken)
     {
         var newJobs = new JobFaker().Generate(10);
         foreach (var newJob in newJobs)
@@ -31,6 +32,11 @@ internal static class ImportTestData
 
         await context.SaveChangesAsync(cancellationToken);
 
-        return TypedResults.Ok();
+        lifetime.StopApplication();
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
     }
 }

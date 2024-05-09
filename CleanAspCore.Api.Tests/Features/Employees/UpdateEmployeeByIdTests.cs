@@ -1,6 +1,6 @@
-﻿using CleanAspCore.Features.Employees;
+﻿using CleanAspCore.Api.Tests.Fakers;
+using CleanAspCore.Features.Employees;
 using CleanAspCore.Features.Employees.Endpoints;
-using CleanAspCore.Features.Import;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
 

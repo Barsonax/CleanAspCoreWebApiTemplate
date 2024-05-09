@@ -1,15 +1,15 @@
 ﻿using Bogus;
 using CleanAspCore.Data.Models;
-using CleanAspCore.Features.Employees;
-using CleanAspCore.Features.Employees.Endpoints;
+using CleanAspCore.Domain;
 
-namespace CleanAspCore.Features.Import;
+namespace CleanAspCore.Api.Tests.Fakers;
 
 public sealed class EmployeeFaker : Faker<Employee>
 {
     public EmployeeFaker()
     {
         UseSeed(3);
+        RuleFor(x => x.Id, f => f.Random.Guid());
         RuleFor(x => x.FirstName, f => f.Name.FirstName());
         RuleFor(x => x.LastName, f => f.Name.LastName());
         RuleFor(x => x.Email, f => new EmailAddress(f.Internet.Email()));

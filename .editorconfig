@@ -146,6 +146,8 @@ csharp_space_between_square_brackets = false
 dotnet_diagnostic.ca1062.severity = none
 # Do not directly await a Task
 dotnet_diagnostic.ca2007.severity = none
+# Use logger message delegates
+dotnet_diagnostic.CA1848.severity = none
 
 [**.Tests/**.cs]
 # Remove the underscores from member name

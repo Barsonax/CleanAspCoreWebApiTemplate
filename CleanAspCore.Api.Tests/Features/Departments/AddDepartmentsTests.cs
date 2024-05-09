@@ -1,5 +1,5 @@
-﻿using CleanAspCore.Features.Departments;
-using CleanAspCore.Features.Import;
+﻿using CleanAspCore.Api.Tests.Fakers;
+using CleanAspCore.Features.Departments;
 
 namespace CleanAspCore.Api.Tests.Features.Departments;
 

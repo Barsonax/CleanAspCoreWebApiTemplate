@@ -2,12 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="35.5.0" />
     <PackageReference Include="FluentValidation" Version="11.9.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.1" />
@@ -23,12 +20,6 @@
     <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1"/>
     <PackageReference Include="Refit" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="TestData\Department.json"/>
-    <_ContentIncludedByDefault Remove="TestData\Employee.json"/>
-    <_ContentIncludedByDefault Remove="TestData\Job.json"/>
   </ItemGroup>
 
 </Project>
