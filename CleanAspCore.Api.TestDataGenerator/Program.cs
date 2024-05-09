@@ -1,7 +1,10 @@
-﻿using CleanAspCore.Api.TestDataGenerator;
+﻿using System.Diagnostics.CodeAnalysis;
+using CleanAspCore.Api.TestDataGenerator;
 using CleanAspCore.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+[assembly: ExcludeFromCodeCoverage]
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
