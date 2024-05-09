@@ -13,11 +13,13 @@ public sealed class CreateEmployeeRequest
     /// <summary>
     /// The firstname of this employee.
     /// </summary>
+    /// <example>Mary</example>
     public required string FirstName { get; init; }
 
     /// <summary>
     /// The lastname of this employee.
     /// </summary>
+    /// <example>Poppins</example>
     public required string LastName { get; init; }
 
     /// <summary>
@@ -28,6 +30,7 @@ public sealed class CreateEmployeeRequest
     /// <summary>
     /// The gender of this employee.
     /// </summary>
+    /// <example>Female</example>
     public required string Gender { get; init; }
 
     /// <summary>

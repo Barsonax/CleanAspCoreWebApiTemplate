@@ -12,7 +12,6 @@
     <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
     <method v="2">
       <option name="Build" default="false" projectName="CleanAspCore" projectPath="$PROJECT_DIR$/CleanAspCore/CleanAspCore.csproj" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Run db" run_configuration_type="docker-deploy" />
     </method>
   </configuration>
 </component>
