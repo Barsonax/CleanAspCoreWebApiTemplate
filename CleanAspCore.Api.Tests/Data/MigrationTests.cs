@@ -47,6 +47,14 @@ public class MigrationTests
         upResult.ExitCode.Should().Be(0, $"Error during migration up2: {upResult2.Stderr}");
     }
 
+    [Test]
+    public void ModelShouldNotHavePendingModelChanges()
+    {
+        using DbContext context = new HrContext();
+        var hasPendingModelChanges = context.Database.HasPendingModelChanges();
+        hasPendingModelChanges.Should().BeFalse();
+    }
+
     [SuppressMessage("CodeQuality", "CA1812:Avoid uninstantiated internal classes")]
     private sealed class MigrationTestCases : IEnumerable
     {
