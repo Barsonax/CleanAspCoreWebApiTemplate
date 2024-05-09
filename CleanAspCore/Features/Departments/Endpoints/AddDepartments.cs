@@ -11,6 +11,14 @@ public sealed class CreateDepartmentRequest
     public required string City { get; init; }
 }
 
+public sealed class CreateDepartmentRequestValidator : AbstractValidator<CreateDepartmentRequest>
+{
+    public CreateDepartmentRequestValidator()
+    {
+        this.ValidateNullableReferences();
+    }
+}
+
 internal static class AddDepartments
 {
     public static async Task<CreatedAtRoute> Handle(HrContext context, CreateDepartmentRequest createDepartmentRequest, CancellationToken cancellationToken)
@@ -29,12 +37,4 @@ internal static class AddDepartments
         Name = department.Name,
         City = department.City
     };
-
-    private sealed class CreateDepartmentRequestValidator : AbstractValidator<CreateDepartmentRequest>
-    {
-        public CreateDepartmentRequestValidator()
-        {
-            this.ValidateNullableReferences();
-        }
-    }
 }

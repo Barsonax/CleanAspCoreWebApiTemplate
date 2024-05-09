@@ -21,10 +21,7 @@ public sealed class PooledDatabase : IDisposable
     {
         _database.EnsureInitialized(host);
         // Clean the database before and not after the test so that after a test is run you can inspect the database.
-        Utils.RunWithoutSynchronizationContext(() =>
-        {
-            _database.Clean().GetAwaiter().GetResult();
-        });
+        _database.Clean().RunSynchronouslyWithoutSynchronizationContext();
     }
 
     public void Dispose()

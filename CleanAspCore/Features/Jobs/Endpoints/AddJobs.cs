@@ -10,6 +10,14 @@ public sealed class CreateJobRequest
     public required string Name { get; init; }
 }
 
+public sealed class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
+{
+    public CreateJobRequestValidator()
+    {
+        this.ValidateNullableReferences();
+    }
+}
+
 internal static class AddJobs
 {
     internal static async Task<CreatedAtRoute> Handle([FromBody] CreateJobRequest createJobRequest, HrContext context, CancellationToken cancellationToken)
@@ -27,12 +35,4 @@ internal static class AddJobs
         Id = Guid.NewGuid(),
         Name = createJobRequest.Name
     };
-
-    private sealed class CreateJobRequestValidator : AbstractValidator<CreateJobRequest>
-    {
-        public CreateJobRequestValidator()
-        {
-            this.ValidateNullableReferences();
-        }
-    }
 }

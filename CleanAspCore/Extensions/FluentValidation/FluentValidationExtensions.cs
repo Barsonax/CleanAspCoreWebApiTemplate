@@ -9,7 +9,7 @@ public static class FluentValidationExtensions
     {
         IEnumerable<PropertyInfo> properties = GetNonNullableProperties<TModel>(new NullabilityInfoContext());
 
-        validator.ApplyRuleToProperties(new GenericNotNullOrEmptyRule(), properties);
+        validator.ApplyRuleToProperties(new GenericNotNullRule(), properties);
     }
 
     private static IEnumerable<PropertyInfo> GetNonNullableProperties<TModel>(NullabilityInfoContext nullabilityInfoContext) =>

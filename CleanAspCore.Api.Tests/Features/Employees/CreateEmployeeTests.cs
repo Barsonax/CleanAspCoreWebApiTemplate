@@ -33,7 +33,7 @@ public class CreateEmployeeTests : TestBase
     {
         //Arrange
         var createEmployeeRequest = new CreateEmployeeRequestFaker()
-            .RuleFor(x => x.FirstName, string.Empty)
+            .RuleFor(x => x.FirstName, (string?)null)
             .Generate();
 
         Sut.SeedData(context =>

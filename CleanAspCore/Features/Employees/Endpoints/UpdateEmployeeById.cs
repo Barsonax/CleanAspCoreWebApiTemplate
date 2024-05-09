@@ -18,6 +18,16 @@ public sealed class UpdateEmployeeRequest
     public Guid? JobId { get; init; }
 }
 
+public class UpdateEmployeeRequestValidator : AbstractValidator<UpdateEmployeeRequest>
+{
+    public UpdateEmployeeRequestValidator()
+    {
+        this.ValidateNullableReferences();
+
+        RuleFor(x => x.Email).EmailAddress();
+    }
+}
+
 internal static class UpdateEmployeeById
 {
     internal static async Task<Results<NoContent, NotFound>> Handle(
@@ -40,15 +50,5 @@ internal static class UpdateEmployeeById
             1 => TypedResults.NoContent(),
             _ => TypedResults.NotFound()
         };
-    }
-}
-
-public class UpdateEmployeeRequestValidator : AbstractValidator<UpdateEmployeeRequest>
-{
-    public UpdateEmployeeRequestValidator()
-    {
-        this.ValidateNullableReferences();
-
-        RuleFor(x => x.Email).EmailAddress();
     }
 }

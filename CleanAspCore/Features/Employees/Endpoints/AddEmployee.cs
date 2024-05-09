@@ -15,6 +15,16 @@ public sealed class CreateEmployeeRequest
     public Guid JobId { get; init; }
 }
 
+public sealed class CreateEmployeeRequestValidator : AbstractValidator<CreateEmployeeRequest>
+{
+    public CreateEmployeeRequestValidator()
+    {
+        this.ValidateNullableReferences();
+
+        RuleFor(x => x.Email).EmailAddress();
+    }
+}
+
 internal static class AddEmployee
 {
     internal static async Task<CreatedAtRoute> Handle([FromBody] CreateEmployeeRequest request, HrContext context, [FromServices] IValidator<CreateEmployeeRequest> validator,
@@ -38,14 +48,4 @@ internal static class AddEmployee
         DepartmentId = employee.DepartmentId,
         JobId = employee.JobId
     };
-
-    private sealed class CreateEmployeeRequestValidator : AbstractValidator<CreateEmployeeRequest>
-    {
-        public CreateEmployeeRequestValidator()
-        {
-            this.ValidateNullableReferences();
-
-            RuleFor(x => x.Email).EmailAddress();
-        }
-    }
 }
