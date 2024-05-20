@@ -1,5 +1,4 @@
-﻿using CleanAspCore.Data.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace CleanAspCore.Data.Extensions;

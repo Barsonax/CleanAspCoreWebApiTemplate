@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Data.Models;
+﻿namespace CleanAspCore.Data;
 
 public interface IEntity
 {

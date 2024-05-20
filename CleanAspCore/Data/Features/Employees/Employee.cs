@@ -1,4 +1,7 @@
-﻿namespace CleanAspCore.Data.Models;
+﻿using CleanAspCore.Data.Features.Departments;
+using CleanAspCore.Data.Features.Jobs;
+
+namespace CleanAspCore.Data.Features.Employees;
 
 public class Employee : IEntity
 {

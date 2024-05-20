@@ -1,8 +1,7 @@
-﻿using CleanAspCore.Data.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanAspCore.Data;
+namespace CleanAspCore.Data.Features.Employees;
 
 public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {

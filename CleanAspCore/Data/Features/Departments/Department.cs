@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Data.Models;
+﻿namespace CleanAspCore.Data.Features.Departments;
 
 public class Department : IEntity
 {

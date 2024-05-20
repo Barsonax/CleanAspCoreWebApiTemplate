@@ -1,5 +1,5 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Data.Models;
+using CleanAspCore.Data.Features.Employees;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 

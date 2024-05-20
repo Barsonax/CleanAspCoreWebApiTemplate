@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
-using CleanAspCore.Data.Models;
+using CleanAspCore.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAspCore.Extensions.FluentValidation;

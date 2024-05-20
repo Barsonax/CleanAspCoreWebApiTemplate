@@ -1,5 +1,5 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Data.Models;
+using CleanAspCore.Data.Features.Departments;
 using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
