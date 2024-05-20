@@ -1,4 +1,4 @@
-﻿using CleanAspCore.Features.Jobs.Endpoints;
+﻿using CleanAspCore.Endpoints.Jobs;
 using Refit;
 
 namespace CleanAspCore.Api.Tests.Features.Jobs;

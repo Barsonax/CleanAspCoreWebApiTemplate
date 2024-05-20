@@ -1,12 +1,12 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.Data.Extensions;
-using CleanAspCore.Data.Features.Employees;
+using CleanAspCore.Data.Models.Employees;
 using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using NotFound = Microsoft.AspNetCore.Http.HttpResults.NotFound;
 
-namespace CleanAspCore.Features.Employees.Endpoints;
+namespace CleanAspCore.Endpoints.Employees;
 
 /// <summary>
 /// A request to update a employee.

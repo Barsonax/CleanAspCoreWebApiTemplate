@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Features.Employees.Endpoints;
+namespace CleanAspCore.Endpoints.Employees;
 
 internal static class DeleteEmployeeById
 {

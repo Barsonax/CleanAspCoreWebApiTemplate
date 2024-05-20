@@ -1,9 +1,9 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Data.Features.Jobs;
+using CleanAspCore.Data.Models.Jobs;
 using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace CleanAspCore.Features.Jobs.Endpoints;
+namespace CleanAspCore.Endpoints.Jobs;
 
 /// <summary>
 /// A request to create a new job.

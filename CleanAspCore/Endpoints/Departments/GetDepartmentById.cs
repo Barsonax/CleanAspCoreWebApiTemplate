@@ -1,9 +1,9 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Data.Features.Departments;
+using CleanAspCore.Data.Models.Departments;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Features.Departments.Endpoints;
+namespace CleanAspCore.Endpoints.Departments;
 
 /// <summary>
 /// The get department response.

@@ -1,7 +1,6 @@
-﻿using CleanAspCore.Features.Employees.Endpoints;
-using CleanAspCore.Utils;
+﻿using CleanAspCore.Utils;
 
-namespace CleanAspCore.Features.Employees;
+namespace CleanAspCore.Endpoints.Employees;
 
 internal static class Routes
 {

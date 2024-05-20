@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Data.Features.Jobs;
+﻿namespace CleanAspCore.Data.Models.Jobs;
 
 public class Job : IEntity
 {

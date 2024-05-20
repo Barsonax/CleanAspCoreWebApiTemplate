@@ -1,10 +1,10 @@
-﻿using CleanAspCore.Features.Departments;
-using CleanAspCore.Features.Employees;
-using CleanAspCore.Features.Jobs;
+﻿using CleanAspCore.Endpoints.Departments;
+using CleanAspCore.Endpoints.Employees;
+using CleanAspCore.Endpoints.Jobs;
 
 namespace CleanAspCore;
 
-public static class Routes
+internal static class Routes
 {
     internal static void AddAppRoutes(this IEndpointRouteBuilder host)
     {

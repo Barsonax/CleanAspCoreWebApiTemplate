@@ -1,9 +1,9 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Data.Features.Employees;
+using CleanAspCore.Data.Models.Employees;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Features.Employees.Endpoints;
+namespace CleanAspCore.Endpoints.Employees;
 
 /// <summary>
 /// The get employee response.

@@ -1,7 +1,7 @@
-﻿using CleanAspCore.Data.Features.Departments;
-using CleanAspCore.Data.Features.Jobs;
+﻿using CleanAspCore.Data.Models.Departments;
+using CleanAspCore.Data.Models.Jobs;
 
-namespace CleanAspCore.Data.Features.Employees;
+namespace CleanAspCore.Data.Models.Employees;
 
 public class Employee : IEntity
 {

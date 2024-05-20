@@ -1,7 +1,6 @@
-﻿using CleanAspCore.Features.Departments.Endpoints;
-using CleanAspCore.Utils;
+﻿using CleanAspCore.Utils;
 
-namespace CleanAspCore.Features.Departments;
+namespace CleanAspCore.Endpoints.Departments;
 
 internal static class Routes
 {

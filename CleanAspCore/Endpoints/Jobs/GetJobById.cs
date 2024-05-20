@@ -1,9 +1,9 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Data.Features.Jobs;
+using CleanAspCore.Data.Models.Jobs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanAspCore.Features.Jobs.Endpoints;
+namespace CleanAspCore.Endpoints.Jobs;
 
 /// <summary>
 /// The get job response.

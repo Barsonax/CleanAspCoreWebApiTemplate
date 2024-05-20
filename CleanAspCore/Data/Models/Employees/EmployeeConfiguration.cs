@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanAspCore.Data.Features.Employees;
+namespace CleanAspCore.Data.Models.Employees;
 
-public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
+internal sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {

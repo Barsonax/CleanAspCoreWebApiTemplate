@@ -1,9 +1,9 @@
 ﻿using CleanAspCore.Data;
-using CleanAspCore.Data.Features.Departments;
+using CleanAspCore.Data.Models.Departments;
 using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace CleanAspCore.Features.Departments.Endpoints;
+namespace CleanAspCore.Endpoints.Departments;
 
 /// <summary>
 /// A request to create a new department.
