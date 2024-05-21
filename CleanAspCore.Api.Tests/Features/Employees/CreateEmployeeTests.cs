@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.Tests.Fakers;
 using CleanAspCore.Endpoints.Employees;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;

@@ -1,7 +1,6 @@
 using System.Reflection;
 using CleanAspCore;
 using CleanAspCore.Data;
-using CleanAspCore.Endpoints.Employees;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
