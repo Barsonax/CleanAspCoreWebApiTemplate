@@ -4,6 +4,7 @@ This is a template repository showing how one can implement a clean api with ASP
 Some 'features' in this template:
 - Vertical Slice architecture (grouping based on features instead of technical layers)
 - An easy to use and fast to run integration tests setup with the only dependency being docker with the use of [TestExamplesDotnet](https://github.com/Barsonax/TestExamplesDotnet)
+- Authentication and authorization using jwt tokens (also in the tests)
 
 ## Running tests
 
@@ -16,10 +17,12 @@ dotnet test
 
 ## Running the app
 
-First generate a jwt that you can use for local testing:
+1. First generate a jwt that you can use for local testing:
 
 ```cmd
 dotnet user-jwts create --claim "reademployees=" --claim "writeemployees="
 ```
+NOTE: The jobs and department endpoints only require authentication but the employee endpoints require that you have the correct claims in the jwt token.
 
-Then run the database using the provided docker-compose.yaml then run the app. The jobs and department endpoints only require authentication but the employee endpoints require that you have the correct claims in the jwt token.
+2. Run the database using the provided docker-compose.yaml.
+3. Run the app. You can explore the endpoints using swagger at `/swagger`.
