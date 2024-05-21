@@ -3,6 +3,7 @@ using CleanAspCore;
 using CleanAspCore.Data;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,11 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddFluentValidationRulesToSwagger();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorizationBuilder()
+    .AddFallbackPolicy("Fallback", new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build());
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
 

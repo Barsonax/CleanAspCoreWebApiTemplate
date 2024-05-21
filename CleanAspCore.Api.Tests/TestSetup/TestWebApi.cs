@@ -1,4 +1,6 @@
-﻿using CleanAspCore.Data;
+﻿using System.Net.Http.Headers;
+using System.Security.Claims;
+using CleanAspCore.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,6 +41,7 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
             services.AddDbContext<HrContext>(c => c
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
+            services.ConfigureTestJwt();
         });
 
         builder.ConfigureLogging(loggingBuilder =>
@@ -75,8 +78,14 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
         seedAction(context);
     }
 
-    public T CreateClientFor<T>() => RestService.For<T>(CreateClient(new WebApplicationFactoryClientOptions()
+    public T CreateClientFor<T>(params Claim[] claims)
     {
-        BaseAddress = new Uri("https://localhost") // Prevents https redirection warnings.
-    }));
+        var jwt = TestJwtGenerator.GenerateJwtToken(claims);
+        var client = CreateClient(new WebApplicationFactoryClientOptions
+        {
+            BaseAddress = new Uri("https://localhost") // Prevents https redirection warnings.
+        });
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+        return RestService.For<T>(client);
+    }
 }
