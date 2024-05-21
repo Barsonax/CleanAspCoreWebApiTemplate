@@ -9,5 +9,14 @@ internal sealed class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         builder.Property(c => c.Email)
             .HasConversion(c => c.Email, c => new EmailAddress(c));
+
+        builder.Property(c => c.FirstName)
+            .HasMaxLength(100);
+
+        builder.Property(c => c.LastName)
+            .HasMaxLength(100);
+
+        builder.Property(c => c.Gender)
+            .HasMaxLength(100);
     }
 }
