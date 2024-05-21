@@ -1,6 +1,7 @@
 using System.Reflection;
 using CleanAspCore;
 using CleanAspCore.Data;
+using CleanAspCore.Endpoints.Employees;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,7 @@ builder.Services.AddAuthorizationBuilder()
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
+builder.AddAppServices();
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 builder.Services.AddDbContext<HrContext>();

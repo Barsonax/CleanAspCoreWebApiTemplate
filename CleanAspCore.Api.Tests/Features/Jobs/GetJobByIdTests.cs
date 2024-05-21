@@ -15,7 +15,7 @@ public class GetJobByIdTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IJobApiClient>().GetJobById(job.Id);
+        var response = await Sut.CreateClientFor<IJobApiClient>(ClaimConstants.ReadJobsClaim).GetJobById(job.Id);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);

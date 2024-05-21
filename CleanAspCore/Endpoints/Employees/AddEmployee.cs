@@ -1,6 +1,9 @@
-﻿using CleanAspCore.Data;
+﻿using System.Net;
+using CleanAspCore.Data;
 using CleanAspCore.Data.Models.Employees;
 using CleanAspCore.Extensions.FluentValidation;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Endpoints.Employees;

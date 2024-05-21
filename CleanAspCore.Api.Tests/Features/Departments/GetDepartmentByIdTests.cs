@@ -15,7 +15,7 @@ public class GetDepartmentByIdTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IDepartmentApiClient>().GetDepartmentById(department.Id);
+        var response = await Sut.CreateClientFor<IDepartmentApiClient>(ClaimConstants.ReadDepartmentsClaim).GetDepartmentById(department.Id);
 
 
         //Assert

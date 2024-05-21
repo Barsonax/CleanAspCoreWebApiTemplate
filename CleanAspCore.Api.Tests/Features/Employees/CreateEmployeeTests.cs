@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using System.Security.Claims;
+using CleanAspCore.Api.Tests.Fakers;
 using CleanAspCore.Endpoints.Employees;
 
 namespace CleanAspCore.Api.Tests.Features.Employees;
@@ -17,7 +18,7 @@ public class CreateEmployeeTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>().CreateEmployee(createEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesClaim).CreateEmployee(createEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.Created);
@@ -64,7 +65,7 @@ public class CreateEmployeeTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>().CreateEmployee(createEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesClaim).CreateEmployee(createEmployeeRequest);
 
         //Assert
         await response.AssertBadRequest(scenario.Input.expectedErrors);
