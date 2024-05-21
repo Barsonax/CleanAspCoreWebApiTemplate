@@ -25,4 +25,4 @@ dotnet user-jwts create --claim "reademployees=" --claim "writeemployees="
 NOTE: The jobs and department endpoints only require authentication but the employee endpoints require that you have the correct claims in the jwt token.
 
 2. Run the database using the provided docker-compose.yaml.
-3. Run the app. You can explore the endpoints using swagger at `/swagger`.
+3. Run the app. You can explore the endpoints using swagger at `https://localhost:7162/swagger`.
