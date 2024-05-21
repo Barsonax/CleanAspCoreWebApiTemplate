@@ -11,7 +11,7 @@ public class CreateJobTests : TestBase
         var createJobRequest = new CreateJobRequestFaker().Generate();
 
         //Act
-        var response = await Sut.CreateClientFor<IJobApiClient>(ClaimConstants.WriteJobsClaim).CreateJob(createJobRequest);
+        var response = await Sut.CreateClientFor<IJobApiClient>().CreateJob(createJobRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.Created);

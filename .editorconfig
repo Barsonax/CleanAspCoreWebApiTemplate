@@ -24,9 +24,13 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
-[*.{md,json}]
+[*.md]
 indent_style = space
 indent_size = 4
+
+[*.json]
+indent_style = space
+indent_size = 2
 
 [*.cs]
 indent_style = space

@@ -10,8 +10,8 @@ internal static class EmployeeEndpointConfig
     internal static void AddEmployeeServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddAuthorizationBuilder()
-            .AddPolicy(ReadEmployeesPolicy, policy => policy.RequireClaim("ReadEmployees"))
-            .AddPolicy(WriteEmployeesPolicy, policy => policy.RequireClaim("WriteEmployees"));
+            .AddPolicy(ReadEmployeesPolicy, policy => policy.RequireClaim("reademployees"))
+            .AddPolicy(WriteEmployeesPolicy, policy => policy.RequireClaim("writeemployees"));
     }
 
     internal static void AddEmployeesRoutes(this IEndpointRouteBuilder host)

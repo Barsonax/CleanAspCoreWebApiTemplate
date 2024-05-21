@@ -13,3 +13,11 @@ Run the following command to run the tests:
 ```cmd
 dotnet test
 ```
+
+## Running the app
+First generate a jwt that you can use for local testing:
+```cmd
+dotnet user-jwts create --claim "reademployees=" --claim "writeemployees="
+```
+
+Then run the database using the provided docker-compose.yaml then run the app.

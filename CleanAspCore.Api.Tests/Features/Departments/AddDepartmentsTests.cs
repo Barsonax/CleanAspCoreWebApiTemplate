@@ -11,7 +11,7 @@ public class AddDepartmentsTests : TestBase
         var department = new CreateDepartmentRequestFaker().Generate();
 
         //Act
-        var response = await Sut.CreateClientFor<IDepartmentApiClient>(ClaimConstants.WriteDepartmentsClaim).CreateDepartment(department);
+        var response = await Sut.CreateClientFor<IDepartmentApiClient>().CreateDepartment(department);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.Created);

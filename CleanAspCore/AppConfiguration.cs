@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Endpoints.Departments;
+﻿using System.Net;
+using CleanAspCore.Endpoints.Departments;
 using CleanAspCore.Endpoints.Employees;
 using CleanAspCore.Endpoints.Jobs;
 
@@ -9,8 +10,6 @@ internal static class AppConfiguration
     internal static void AddAppServices(this WebApplicationBuilder builder)
     {
         builder.AddEmployeeServices();
-        builder.AddDepartmentServices();
-        builder.AddJobServices();
     }
 
     internal static void AddAppRoutes(this IEndpointRouteBuilder host)
@@ -19,4 +18,9 @@ internal static class AppConfiguration
         host.AddEmployeesRoutes();
         host.AddJobsRoutes();
     }
+
+    public static RouteHandlerBuilder RequireAuthorization(this RouteHandlerBuilder builder, params string[] policyNames) =>
+        AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization(builder, policyNames)
+            .Produces((int)HttpStatusCode.Unauthorized)
+            .Produces((int)HttpStatusCode.Forbidden);
 }
