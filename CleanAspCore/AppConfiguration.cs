@@ -31,7 +31,10 @@ internal static class AppConfiguration
                 .Build());
 
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
+            {
+                x.TokenValidationParameters.ClockSkew = TimeSpan.FromSeconds(5);
+            });
     }
 
     internal static void AddSwaggerServices(this WebApplicationBuilder builder)
