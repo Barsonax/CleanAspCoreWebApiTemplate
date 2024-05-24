@@ -32,6 +32,8 @@ jobs:
       - name: Restore dependencies
         if: steps.cache-nuget.outputs.cache-hit != 'true'
         run: dotnet restore
+      - name: Check code formatting
+        run: dotnet format --no-restore --verify-no-changes -v diag
       - name: Build
         run: dotnet build --no-restore
       - name: Test
