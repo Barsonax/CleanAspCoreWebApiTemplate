@@ -17,7 +17,12 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.EnsureHrContextDatabaseIsCreated();
+    var watchIteration = app.Configuration.GetValue("DOTNET_WATCH_ITERATION", 1);
+    if (watchIteration == 1)
+    {
+        app.EnsureHrContextDatabaseIsCreated();
+    }
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
