@@ -4,9 +4,11 @@ This is a template repository showing how one can implement a clean api with ASP
 
 Some 'features' in this template:
 
-- Vertical Slice architecture (grouping based on features instead of technical layers)
+- [Vertical Slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/) (grouping based on features instead of technical layers)
 - An easy to use and fast to run integration tests setup with the only dependency being docker with the use of [TestExamplesDotnet](https://github.com/Barsonax/TestExamplesDotnet)
 - Authentication and authorization using jwt tokens (also in the tests)
+- Ready for [OpenTelemetry](https://opentelemetry.io/)
+- Launchprofile for [dotnet watch](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-watch)
 
 ## Running tests
 
@@ -27,5 +29,5 @@ dotnet user-jwts create --role "reademployees" --role "writeemployees"
 
 NOTE: The jobs and department endpoints only require authentication but the employee endpoints require that you have the correct claims in the jwt token.
 
-2. Run the database using the provided docker-compose.yaml.
+2. Run the database using the provided docker-compose.yaml. Optionally also run the aspire dashboard in the compose file to easily see OpenTelemetry output.
 3. Run the app. You can explore the endpoints using swagger at `https://localhost:7162/swagger`.
