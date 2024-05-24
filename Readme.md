@@ -1,8 +1,8 @@
-# Clean ASP.NET minimal api template
+# A productive ASP.NET minimal api template
 
-This is a template repository showing how one can implement a clean api with ASP.NET using minimal apis.
+This is a template repository showing how one can implement a clean api with ASP.NET using minimal apis. The focus on 'features' in this template is on dev productivity, the actual features of the api itself has been kept basic on purpose. Feel free to copy this repository or reuse parts of it, don't forget to give a star if you do.
 
-Some 'features' in this template:
+Some features in this template:
 
 - [Vertical Slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/) (grouping based on features instead of technical layers)
 - An easy to use and fast to run integration tests setup that runs in seconds with the only dependency being docker with the use
