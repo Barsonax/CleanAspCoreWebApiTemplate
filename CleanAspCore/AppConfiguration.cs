@@ -78,6 +78,7 @@ internal static class AppConfiguration
 
         builder.Logging.AddOpenTelemetry(options =>
         {
+            options.IncludeScopes = true;
             options
                 .SetResourceBuilder(
                     ResourceBuilder.CreateDefault()
