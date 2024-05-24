@@ -10,6 +10,7 @@ Some features in this template:
 - Authentication and authorization using jwt tokens. This is also used by the tests which means you can check if your authentication and authorization is working properly inside the tests.
 - Ready for [OpenTelemetry](https://opentelemetry.io/)
 - Launchprofile for [dotnet watch](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-watch)
+- Automated build using github actions that checks code formatting, builds and runs the tests.
 
 ## Running tests
 
