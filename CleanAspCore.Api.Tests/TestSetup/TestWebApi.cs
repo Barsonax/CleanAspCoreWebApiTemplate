@@ -32,6 +32,8 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
             {
                 { "ConnectionStrings:Default", _pooledDatabase.ConnectionString },
                 { "Logging:LogLevel:Microsoft.AspNetCore.Routing", "Information" },
+                { "DisableTelemetry", "false" },
+                { "DisableOpenApi", "false" }
             });
         });
 
