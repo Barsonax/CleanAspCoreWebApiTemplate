@@ -19,9 +19,17 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
+          global-json-file: global.json
+      - name: Cache nuget packages
+        id: cache-nuget
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.nuget/packages
+            **/obj/*
+          key: ${{ runner.os }}-nuget_obj-${{ hashFiles('**/*.csproj', 'global.json', 'Directory.Build.props') }}
       - name: Restore dependencies
+        if: steps.cache-nuget.outputs.cache-hit != 'true'
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
