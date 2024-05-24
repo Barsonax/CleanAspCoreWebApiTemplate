@@ -1,4 +1,4 @@
-# Clean ASP.NET api template
+# Clean ASP.NET minimal api template
 
 This is a template repository showing how one can implement a clean api with ASP.NET using minimal apis.
 
