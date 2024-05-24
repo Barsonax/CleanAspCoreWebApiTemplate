@@ -40,7 +40,7 @@ internal static class AppConfiguration
 
     internal static void AddSwaggerServices(this WebApplicationBuilder builder)
     {
-        if (!builder.Configuration.GetValue<bool>("DisableOpenApi")) return;
+        if (builder.Configuration.GetValue<bool?>("DisableOpenApi") == true) return;
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
@@ -74,7 +74,7 @@ internal static class AppConfiguration
 
     internal static void AddOpenTelemetryServices(this WebApplicationBuilder builder)
     {
-        if (!builder.Configuration.GetValue<bool>("DisableTelemetry")) return;
+        if (builder.Configuration.GetValue<bool?>("DisableTelemetry") == true) return;
 
         builder.Logging.AddOpenTelemetry(options =>
         {
