@@ -5,8 +5,9 @@ This is a template repository showing how one can implement a clean api with ASP
 Some 'features' in this template:
 
 - [Vertical Slice architecture](https://www.jimmybogard.com/vertical-slice-architecture/) (grouping based on features instead of technical layers)
-- An easy to use and fast to run integration tests setup with the only dependency being docker with the use of [TestExamplesDotnet](https://github.com/Barsonax/TestExamplesDotnet)
-- Authentication and authorization using jwt tokens (also in the tests)
+- An easy to use and fast to run integration tests setup that runs in seconds with the only dependency being docker with the use
+  of [TestExamplesDotnet](https://github.com/Barsonax/TestExamplesDotnet)
+- Authentication and authorization using jwt tokens. This is also used by the tests which means you can check if your authentication and authorization is working properly inside the tests.
 - Ready for [OpenTelemetry](https://opentelemetry.io/)
 - Launchprofile for [dotnet watch](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-watch)
 
