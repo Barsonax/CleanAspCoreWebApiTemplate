@@ -15,7 +15,7 @@ public class GetEmployeeByIdTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesClaim).GetEmployeeById(employee.Id);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesRole).GetEmployeeById(employee.Id);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);

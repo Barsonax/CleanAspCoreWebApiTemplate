@@ -18,7 +18,7 @@ public class UpdateEmployeeByIdTests : TestBase
         };
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesClaim).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NoContent);
@@ -47,7 +47,7 @@ public class UpdateEmployeeByIdTests : TestBase
         };
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesClaim).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NotFound);
