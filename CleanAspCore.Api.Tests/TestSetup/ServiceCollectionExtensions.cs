@@ -23,6 +23,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<IPooledObjectPolicy<IDatabase>, PostgreSqlDatabasePoolPolicy>();
 
         var container = new PostgreSqlBuilder()
+            .WithImage("postgres:16.3-alpine")
             .WithReuse(true)
             .Build();
         container.StartAsync().RunSynchronouslyWithoutSynchronizationContext();
