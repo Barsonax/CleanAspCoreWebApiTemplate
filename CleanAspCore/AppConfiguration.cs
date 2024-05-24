@@ -39,7 +39,8 @@ internal static class AppConfiguration
 
     internal static void AddSwaggerServices(this WebApplicationBuilder builder)
     {
-        if (builder.Configuration.GetValue<bool?>("DisableOpenApi") == true) return;
+        if (builder.Configuration.GetValue<bool?>("DisableOpenApi") == true)
+            return;
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>

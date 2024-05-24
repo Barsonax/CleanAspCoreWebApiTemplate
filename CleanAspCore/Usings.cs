@@ -1,3 +1,3 @@
-﻿global using Microsoft.AspNetCore.Mvc;
+﻿global using CleanAspCore.Domain;
 global using FluentValidation;
-global using CleanAspCore.Domain;
+global using Microsoft.AspNetCore.Mvc;

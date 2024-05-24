@@ -33,6 +33,6 @@ internal static class EmployeeEndpointConfig
 
         employeeGroup.MapPatch("/{id:guid}", UpdateEmployeeById.Handle)
             .RequireAuthorization(WriteEmployeesPolicy)
-            .WithRequestValidation<UpdateEmployeeRequest>();;
+            .WithRequestValidation<UpdateEmployeeRequest>();
     }
 }

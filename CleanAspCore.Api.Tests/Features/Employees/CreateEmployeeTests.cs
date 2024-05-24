@@ -28,7 +28,7 @@ public class CreateEmployeeTests : TestBase
         });
     }
 
-    private static TestScenario<(FakerConfigurator<CreateEmployeeRequest>, string[])>[] _validationCases =
+    private static readonly TestScenario<(FakerConfigurator<CreateEmployeeRequest>, string[])>[] _validationCases =
     [
         new("FirstName is null",
             (x => x.RuleFor(y => y.FirstName, (string?)null), ["FirstName"])),

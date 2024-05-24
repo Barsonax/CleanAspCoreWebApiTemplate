@@ -9,7 +9,8 @@ public class EnrichSpanProcessor : BaseProcessor<Activity>
     {
         foreach (var baggage in data.Baggage)
         {
-            if (baggage.Value == null) continue;
+            if (baggage.Value == null)
+                continue;
             data.SetTag(baggage.Key, baggage.Value);
         }
     }

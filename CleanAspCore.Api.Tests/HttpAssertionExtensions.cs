@@ -7,7 +7,7 @@ public static class HttpAssertionExtensions
 {
     public static async Task AssertStatusCode(this HttpResponseMessage response, HttpStatusCode expected)
     {
-        if(expected != HttpStatusCode.BadRequest)
+        if (expected != HttpStatusCode.BadRequest)
         {
             using var _ = new AssertionScope();
             response.StatusCode.Should().Be(expected);
