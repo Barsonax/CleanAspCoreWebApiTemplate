@@ -2,6 +2,7 @@
 using CleanAspCore.Endpoints.Departments;
 using CleanAspCore.Endpoints.Employees;
 using CleanAspCore.Endpoints.Jobs;
+using CleanAspCore.Telemetry;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -79,6 +80,7 @@ internal static class AppConfiguration
         builder.Logging.AddOpenTelemetry(options =>
         {
             options.IncludeScopes = true;
+            options.AddProcessor(new EnrichLogsProcessor());
             options
                 .SetResourceBuilder(
                     ResourceBuilder.CreateDefault()
@@ -88,6 +90,7 @@ internal static class AppConfiguration
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
             .WithTracing(tracing => tracing
+                .AddProcessor(new EnrichSpanProcessor())
                 .AddAspNetCoreInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation()
                 .AddOtlpExporter())
