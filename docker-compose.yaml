@@ -10,3 +10,11 @@ services:
       - POSTGRES_DB=postgres
     ports:
       - "5432:5432"
+  telemetryDashboard:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
+    container_name: "telemetryDashboard"
+    environment:
+      - DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS=true
+    ports:
+      - "127.0.0.1:18888:18888"
+      - "127.0.0.1:4317:18889"
