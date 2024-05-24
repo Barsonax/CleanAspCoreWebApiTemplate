@@ -1,6 +1,7 @@
 using System.Reflection;
 using CleanAspCore;
 using CleanAspCore.Data;
+using CleanAspCore.Telemetry;
 
 var builder = WebApplication.CreateBuilder(args);
 
