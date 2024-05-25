@@ -28,6 +28,10 @@ internal static class EmployeeEndpointConfig
             .RequireAuthorization(ReadEmployeesPolicy)
             .WithName(nameof(GetEmployeeById));
 
+        employeeGroup.MapGet("/", GetEmployees.Handle)
+            .RequireAuthorization(ReadEmployeesPolicy)
+            .WithName(nameof(GetEmployees));
+
         employeeGroup.MapDelete("/{id:guid}", DeleteEmployeeById.Handle)
             .RequireAuthorization(WriteEmployeesPolicy);
 

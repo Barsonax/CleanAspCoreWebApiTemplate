@@ -8,8 +8,8 @@ public interface IEmployeeApiClient
     [Get("/employees/{id}")]
     Task<HttpResponseMessage> GetEmployeeById(Guid id);
 
-    [Get("/employees")]
-    Task<HttpResponseMessage> GetEmployees();
+    [Get("/employees?page={page}")]
+    Task<HttpResponseMessage> GetEmployees(int page);
 
     [Post("/employees")]
     Task<HttpResponseMessage> CreateEmployee(CreateEmployeeRequest createEmployeeRequest);
