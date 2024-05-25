@@ -16,21 +16,21 @@ public static class AppConfigurationExtensions
         {
             options.IncludeScopes = true;
             options.AddProcessor(new EnrichLogsProcessor());
-            options
-                .SetResourceBuilder(
-                    ResourceBuilder.CreateDefault()
-                        .AddService(builder.Environment.ApplicationName))
-                .AddOtlpExporter();
+            options.AddOtlpExporter();
         });
         builder.Services.AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
+            .ConfigureResource(resource => resource.AddService(
+                builder.Environment.ApplicationName,
+                serviceInstanceId: builder.Environment.IsDevelopment() ? builder.Environment.ApplicationName : null))
             .WithTracing(tracing => tracing
+                .AddSource(Instrumentation.ActivitySource.Name)
                 .AddProcessor(new EnrichSpanProcessor())
                 .AddAspNetCoreInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation()
                 .AddOtlpExporter())
             .WithMetrics(metrics => metrics
                 .AddAspNetCoreInstrumentation()
+                .AddMeter(Instrumentation.Meter.Name)
                 .AddOtlpExporter());
     }
 }
