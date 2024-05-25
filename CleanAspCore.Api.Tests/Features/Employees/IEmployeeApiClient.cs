@@ -9,7 +9,7 @@ public interface IEmployeeApiClient
     Task<HttpResponseMessage> GetEmployeeById(Guid id);
 
     [Get("/employees?page={page}")]
-    Task<HttpResponseMessage> GetEmployees(int page);
+    Task<HttpResponseMessage> GetEmployees(int page, int pageSize);
 
     [Post("/employees")]
     Task<HttpResponseMessage> CreateEmployee(CreateEmployeeRequest createEmployeeRequest);

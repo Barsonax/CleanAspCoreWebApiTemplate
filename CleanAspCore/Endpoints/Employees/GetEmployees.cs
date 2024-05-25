@@ -7,12 +7,12 @@ namespace CleanAspCore.Endpoints.Employees;
 
 internal static class GetEmployees
 {
-    internal static async Task<Ok<PagedList<GetEmployeeResponse>>> Handle(HrContext context, [FromQuery] int page, CancellationToken cancellationToken)
+    internal static async Task<Ok<PagedList<GetEmployeeResponse>>> Handle(HrContext context, [FromQuery] int page, [FromQuery] int pageSize, CancellationToken cancellationToken)
     {
         var result = await context.Employees
             .OrderBy(x => x.FirstName)
             .Select(x => x.ToDto())
-            .ToPagedListAsync(page, 10, cancellationToken);
+            .ToPagedListAsync(page, pageSize, cancellationToken);
         return TypedResults.Ok(result);
     }
 
