@@ -21,4 +21,17 @@ public class GetEmployeeByIdTests : TestBase
         await response.AssertStatusCode(HttpStatusCode.OK);
         await response.AssertJsonBodyIsEquivalentTo(new { Id = employee.Id });
     }
+
+    [Test]
+    public async Task GetEmployeeById_DoesNotExist_ReturnsNotFound()
+    {
+        //Arrange
+        var employee = new EmployeeFaker().Generate();
+
+        //Act
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesRole).GetEmployeeById(employee.Id);
+
+        //Assert
+        await response.AssertStatusCode(HttpStatusCode.NotFound);
+    }
 }

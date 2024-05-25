@@ -24,13 +24,19 @@ public sealed class GetJobResponse
 
 internal static class GetJobById
 {
-    internal static async Task<JsonHttpResult<GetJobResponse>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
+    internal static async Task<Results<Ok<GetJobResponse>, NotFound>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
     {
-        var results = await context.Jobs
+        var job = await context.Jobs
             .Where(x => x.Id == id)
             .Select(x => x.ToDto())
-            .FirstAsync(cancellationToken);
-        return TypedResults.Json(results);
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (job == null)
+        {
+            return TypedResults.NotFound();
+        }
+
+        return TypedResults.Ok(job);
     }
 
     private static GetJobResponse ToDto(this Job department) => new()

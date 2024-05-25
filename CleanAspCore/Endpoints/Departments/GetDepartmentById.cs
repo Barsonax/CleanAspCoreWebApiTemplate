@@ -30,12 +30,17 @@ public sealed class GetDepartmentResponse
 
 internal static class GetDepartmentById
 {
-    internal static async Task<Ok<GetDepartmentResponse>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
+    internal static async Task<Results<Ok<GetDepartmentResponse>, NotFound>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
     {
         var department = await context.Departments
             .Where(x => x.Id == id)
             .Select(x => x.ToDto())
-            .FirstAsync(cancellationToken);
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (department == null)
+        {
+            return TypedResults.NotFound();
+        }
 
         return TypedResults.Ok(department);
     }

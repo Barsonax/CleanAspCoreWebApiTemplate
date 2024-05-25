@@ -51,13 +51,19 @@ public sealed class GetEmployeeResponse
 
 internal static class GetEmployeeById
 {
-    internal static async Task<Ok<GetEmployeeResponse>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
+    internal static async Task<Results<Ok<GetEmployeeResponse>, NotFound>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
     {
-        var result = await context.Employees
+        var employee = await context.Employees
             .Where(x => x.Id == id)
             .Select(x => x.ToDto())
-            .FirstAsync(cancellationToken);
-        return TypedResults.Ok(result);
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (employee == null)
+        {
+            return TypedResults.NotFound();
+        }
+
+        return TypedResults.Ok(employee);
     }
 
     private static GetEmployeeResponse ToDto(this Employee employee) => new()
