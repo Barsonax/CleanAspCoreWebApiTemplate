@@ -46,6 +46,8 @@ resource sqlDB 'Microsoft.Sql/servers/databases@2023-08-01-preview' = {
   }
 }
 
+var DbConnectionString = 'Server=tcp:${sqlServer.name}${environment().suffixes.sqlServerHostname},1433;Initial Catalog=db${sqlDB.name};Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication="Active Directory Default";'
+
 resource appServicePlan 'Microsoft.Web/serverfarms@2023-12-01' = {
   name: appServicePlanName
   location: location
@@ -70,6 +72,16 @@ resource appService 'Microsoft.Web/sites@2023-12-01' = {
     siteConfig: {
       linuxFxVersion: 'DOTNETCORE|8.0'
       http20Enabled: true
+      appSettings: [
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: appInsights.properties.ConnectionString
+        }
+        {
+          name: 'ConnectionStrings__Default'
+          value: DbConnectionString
+        }
+      ]
     }
     
     httpsOnly: true
