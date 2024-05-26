@@ -1,4 +1,5 @@
-﻿using OpenTelemetry.Logs;
+﻿using Azure.Monitor.OpenTelemetry.AspNetCore;
+using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -16,9 +17,8 @@ public static class AppConfigurationExtensions
         {
             options.IncludeScopes = true;
             options.AddProcessor(new EnrichLogsProcessor());
-            options.AddOtlpExporter();
         });
-        builder.Services.AddOpenTelemetry()
+        var telemetryBuilder = builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource => resource.AddService(
                 builder.Environment.ApplicationName,
                 serviceInstanceId: builder.Environment.IsDevelopment() ? builder.Environment.ApplicationName : null))
@@ -26,11 +26,18 @@ public static class AppConfigurationExtensions
                 .AddSource(Instrumentation.ActivitySource.Name)
                 .AddProcessor(new EnrichSpanProcessor())
                 .AddAspNetCoreInstrumentation()
-                .AddEntityFrameworkCoreInstrumentation()
-                .AddOtlpExporter())
+                .AddEntityFrameworkCoreInstrumentation())
             .WithMetrics(metrics => metrics
                 .AddAspNetCoreInstrumentation()
-                .AddMeter(Instrumentation.Meter.Name)
-                .AddOtlpExporter());
+                .AddMeter(Instrumentation.Meter.Name));
+
+        if (builder.Environment.IsDevelopment())
+        {
+            telemetryBuilder.UseOtlpExporter();
+        }
+        else
+        {
+            telemetryBuilder.UseAzureMonitor();
+        }
     }
 }
