@@ -45,7 +45,8 @@ jobs:
           --
           RunConfiguration.CollectSourceInformation=true
       - name: dotnet publish
-        run: dotnet publish CleanASpCore/CleanAspCore.csproj --no-build -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: ./CleanASpCore
+        run: dotnet publish --no-build -c Release -o ${{env.DOTNET_ROOT}}/myapp
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
