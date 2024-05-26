@@ -69,8 +69,11 @@ resource appService 'Microsoft.Web/sites@2023-12-01' = {
     serverFarmId: appServicePlan.id
     siteConfig: {
       linuxFxVersion: 'DOTNETCORE|8.0'
+      http20Enabled: true
     }
-  }
+    
+    httpsOnly: true
+  }  
 }
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
