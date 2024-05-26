@@ -37,7 +37,7 @@ internal static class AppConfiguration
             });
     }
 
-    internal static void AddSwaggerServices(this WebApplicationBuilder builder)
+    internal static void AddOpenApiServices(this WebApplicationBuilder builder)
     {
         if (builder.Configuration.GetValue<bool?>("DisableOpenApi") == true)
             return;
@@ -70,5 +70,14 @@ internal static class AppConfiguration
             options.AddSecurityRequirement(new OpenApiSecurityRequirement { { jwtSecurityScheme, Array.Empty<string>() } });
         });
         builder.Services.AddFluentValidationRulesToSwagger();
+    }
+
+    internal static void UseOpenApi(this WebApplication app)
+    {
+        if (app.Configuration.GetValue<bool?>("DisableOpenApi") == true)
+            return;
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
     }
 }

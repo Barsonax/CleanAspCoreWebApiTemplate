@@ -5,7 +5,7 @@ using CleanAspCore.Telemetry;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddSwaggerServices();
+builder.AddOpenApiServices();
 builder.AddAuthServices();
 builder.AddAppServices();
 builder.AddOpenTelemetryServices();
@@ -22,10 +22,9 @@ if (app.Environment.IsDevelopment())
     {
         app.EnsureHrContextDatabaseIsCreated();
     }
-
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
+
+app.UseOpenApi();
 
 app.UseHttpsRedirection();
 
