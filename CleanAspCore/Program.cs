@@ -15,18 +15,9 @@ builder.Services.AddDbContext<HrContext>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    var watchIteration = app.Configuration.GetValue("DOTNET_WATCH_ITERATION", 1);
-    if (watchIteration == 1)
-    {
-        app.EnsureHrContextDatabaseIsCreated();
-    }
-}
+app.RunMigrations();
 
 app.UseOpenApi();
-
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

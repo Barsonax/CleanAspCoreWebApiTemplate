@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using CleanAspCore.Data;
 using CleanAspCore.Endpoints.Departments;
 using CleanAspCore.Endpoints.Employees;
 using CleanAspCore.Endpoints.Jobs;
@@ -79,5 +80,24 @@ internal static class AppConfiguration
 
         app.UseSwagger();
         app.UseSwaggerUI();
+    }
+
+    internal static void RunMigrations(this WebApplication app)
+    {
+        if (app.Configuration.GetValue<bool?>("DisableMigrations") == true)
+            return;
+
+        if (app.Environment.IsDevelopment())
+        {
+            var watchIteration = app.Configuration.GetValue("DOTNET_WATCH_ITERATION", 1);
+            if (watchIteration == 1)
+            {
+                app.EnsureHrContextDatabaseIsCreated();
+            }
+        }
+        else
+        {
+            app.MigrateHrContextDatabase();
+        }
     }
 }
