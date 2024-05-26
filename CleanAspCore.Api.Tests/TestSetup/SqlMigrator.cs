@@ -1,16 +1,16 @@
 ﻿using DotNet.Testcontainers.Containers;
 using Microsoft.Extensions.Logging;
-using Testcontainers.PostgreSql;
+using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public class PostgreSqlMigrator
+public class SqlMigrator
 {
-    private readonly PostgreSqlContainer _container;
+    private readonly MsSqlContainer _container;
     private readonly ILogger _logger;
     private readonly string _databaseName;
 
-    public PostgreSqlMigrator(PostgreSqlContainer container, ILogger logger, string databaseName)
+    public SqlMigrator(MsSqlContainer container, ILogger logger, string databaseName)
     {
         _container = container;
         _logger = logger;

@@ -1,13 +1,13 @@
 ﻿using System.Text;
 using DotNet.Testcontainers.Configurations;
 using DotNet.Testcontainers.Containers;
-using Testcontainers.PostgreSql;
+using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public static class PostgreSqlDatabaseExtensions
+public static class MsSqlContainerExtensions
 {
-    public static async Task<ExecResult> ExecScriptAsync(this PostgreSqlContainer container, string scriptContent, string database, CancellationToken ct = default)
+    public static async Task<ExecResult> ExecScriptAsync(this MsSqlContainer container, string scriptContent, string database, CancellationToken ct = default)
     {
         var scriptFilePath = string.Join("/", string.Empty, "tmp", Guid.NewGuid().ToString("D"), Path.GetRandomFileName());
 
@@ -16,11 +16,14 @@ public static class PostgreSqlDatabaseExtensions
 
         var connectionString = ParseConnectionString(container.GetConnectionString());
 
-        return await container.ExecAsync(new[] { "psql", "--username", connectionString.UserId, "--dbname", database, "--file", scriptFilePath }, ct)
+        return await container
+            .ExecAsync(new[] { "/opt/mssql-tools/bin/sqlcmd", "-b", "-r", "1", "-U", connectionString.UserId, "-P", connectionString.Password, "-d", database, "-i", scriptFilePath, "-I" },
+                ct)
             .ConfigureAwait(false);
     }
 
     private sealed record SqlContainerConnectionString(string UserId, string Password);
+
     private static SqlContainerConnectionString ParseConnectionString(string connectionString)
     {
         var dic = connectionString
@@ -28,11 +31,11 @@ public static class PostgreSqlDatabaseExtensions
             .Select(x => x.Split('='))
             .ToDictionary(x => x[0], x => x[1]);
 
-        return new SqlContainerConnectionString(dic["Username"], dic["Password"]);
+        return new SqlContainerConnectionString(dic["User Id"], dic["Password"]);
     }
 
-    public static async Task<ExecResult> CreateDatabase(this PostgreSqlContainer container, string name)
+    public static async Task CreateDatabase(this MsSqlContainer container, string name)
     {
-        return await container.ExecScriptAsync($"CREATE DATABASE {name};");
+        await container.ExecScriptAsync($"CREATE DATABASE {name}");
     }
 }

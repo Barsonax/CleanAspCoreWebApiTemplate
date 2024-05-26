@@ -1,23 +1,25 @@
-﻿using Microsoft.Extensions.Hosting;
-using Npgsql;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Hosting;
 using Respawn;
-using Testcontainers.PostgreSql;
+using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class PostgreSqlDatabase : IDatabase
+public sealed class MsSqlDatabase : IDatabase
 {
     private readonly IDatabaseInitializer _databaseInitializer;
     private readonly RespawnerOptions _respawnerOptions;
     private Respawner? _respawner;
     private bool _initialized;
+
     public string ConnectionString { get; }
 
-    public PostgreSqlDatabase(PostgreSqlContainer container, IDatabaseInitializer databaseInitializer, RespawnerOptions respawnerOptions)
+    public MsSqlDatabase(MsSqlContainer container, IDatabaseInitializer databaseInitializer, RespawnerOptions respawnerOptions)
     {
         _databaseInitializer = databaseInitializer;
         _respawnerOptions = respawnerOptions;
-        ConnectionString = $"Host=127.0.0.1;Port={container.GetMappedPublicPort(5432)};Database={databaseInitializer.GetUniqueDataBaseName()};Username=postgres;Password=postgres;Include Error Detail=true";
+        ConnectionString =
+            $"Server=127.0.0.1,{container.GetMappedPublicPort(1433)};Database={databaseInitializer.GetUniqueDataBaseName()};User Id=sa;Password=yourStrong(!)Password;TrustServerCertificate=True";
     }
 
     public void EnsureInitialized(IHost host)
@@ -31,7 +33,7 @@ public sealed class PostgreSqlDatabase : IDatabase
 
     public async Task Clean()
     {
-        await using var conn = new NpgsqlConnection(ConnectionString);
+        await using var conn = new SqlConnection(ConnectionString);
         await conn.OpenAsync();
 
         _respawner ??= await Respawner.CreateAsync(conn, _respawnerOptions);

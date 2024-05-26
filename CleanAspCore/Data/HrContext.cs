@@ -24,7 +24,7 @@ public class HrContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql(_connectionString);
+            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 

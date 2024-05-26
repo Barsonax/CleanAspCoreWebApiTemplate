@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.ObjectPool;
 using Respawn;
-using Testcontainers.PostgreSql;
+using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
@@ -16,14 +16,11 @@ public static class ServiceCollectionExtensions
     public static void RegisterPostgreSqlContainer(this IServiceCollection services)
     {
         services.RegisterSharedDatabaseServices();
-        services.AddTransient<RespawnerOptions>(c => new RespawnerOptions
-        {
-            DbAdapter = DbAdapter.Postgres
-        });
-        services.AddTransient<IPooledObjectPolicy<IDatabase>, PostgreSqlDatabasePoolPolicy>();
+        services.AddTransient<RespawnerOptions>(c => new RespawnerOptions { DbAdapter = DbAdapter.SqlServer });
+        services.AddTransient<IPooledObjectPolicy<IDatabase>, MsSqlDatabasePoolPolicy>();
 
-        var container = new PostgreSqlBuilder()
-            .WithImage("postgres:16.3-alpine")
+        var container = new MsSqlBuilder()
+            .WithImage("mcr.microsoft.com/mssql/server:2022-CU12-ubuntu-22.04")
             .WithReuse(true)
             .Build();
         container.StartAsync().RunSynchronouslyWithoutSynchronizationContext();

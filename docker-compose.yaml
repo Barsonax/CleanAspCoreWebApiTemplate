@@ -1,15 +1,14 @@
 version: '3'
 
 services:
-  postgres:
-    image: postgres:16.3-alpine
-    container_name: "postgres"
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-CU12-ubuntu-22.04
+    container_name: "mssql"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      - MSSQL_SA_PASSWORD=yourStrong(!)Password
+      - ACCEPT_EULA=Y
     ports:
-      - "5432:5432"
+      - "127.0.0.1:1433:1433"
   telemetryDashboard:
     image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
     container_name: "telemetryDashboard"

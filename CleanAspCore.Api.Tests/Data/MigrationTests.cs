@@ -3,7 +3,7 @@ using CleanAspCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Testcontainers.PostgreSql;
+using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.Data;
 
@@ -12,7 +12,7 @@ namespace CleanAspCore.Api.Tests.Data;
 public class MigrationTests
 {
 #pragma warning disable NUnit1032
-    private PostgreSqlContainer _databaseContainer = null!;
+    private MsSqlContainer _databaseContainer = null!;
 #pragma warning restore NUnit1032
     private ILogger<MigrationTests> _logger = null!;
     private AsyncServiceScope _scope;
@@ -21,7 +21,7 @@ public class MigrationTests
     public void BeforeTestCase()
     {
         _scope = GlobalSetup.Provider.CreateAsyncScope();
-        _databaseContainer = _scope.ServiceProvider.GetRequiredService<PostgreSqlContainer>();
+        _databaseContainer = _scope.ServiceProvider.GetRequiredService<MsSqlContainer>();
         _logger = _scope.ServiceProvider.GetRequiredService<ILogger<MigrationTests>>();
     }
 
@@ -34,11 +34,9 @@ public class MigrationTests
     [TestCaseSource(typeof(MigrationTestCases))]
     public async Task MigrationsUpAndDown_NoErrors(MigrationScript migration)
     {
-        var databaseName = "migrationstest";
-        var createDatabaseResult = await _databaseContainer.CreateDatabase(databaseName);
-        createDatabaseResult.ExitCode.Should().Be(0, $"Error while creating database for migrations: {createDatabaseResult.Stderr}");
-
-        var migrator = new PostgreSqlMigrator(_databaseContainer, _logger, databaseName);
+        var databaseName = "MigrationsTest";
+        await _databaseContainer.CreateDatabase(databaseName);
+        var migrator = new SqlMigrator(_databaseContainer, _logger, databaseName);
         var upResult = await migrator.Up(migration);
         upResult.ExitCode.Should().Be(0, $"Error during migration up: {upResult.Stderr}");
         var downResult = await migrator.Down(migration);
