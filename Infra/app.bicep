@@ -17,7 +17,7 @@ resource sqlServer 'Microsoft.Sql/servers@2023-08-01-preview' = {
   location: location
   properties: {
     minimalTlsVersion: '1.2'
-    publicNetworkAccess: 'Disabled'
+    publicNetworkAccess: 'Enabled'
     administrators: {
       administratorType: 'ActiveDirectory'
       principalType: 'Group'
@@ -67,6 +67,9 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2023-12-01' = {
 resource appService 'Microsoft.Web/sites@2023-12-01' = {
   name: webSiteName
   location: location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     serverFarmId: appServicePlan.id
     siteConfig: {
@@ -84,7 +87,7 @@ resource appService 'Microsoft.Web/sites@2023-12-01' = {
       ]
     }
     
-    httpsOnly: true
+    httpsOnly: true    
   }  
 }
 
