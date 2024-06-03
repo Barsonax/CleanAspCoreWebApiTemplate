@@ -9,7 +9,7 @@ builder.AddOpenApiServices();
 builder.AddAuthServices();
 builder.AddAppServices();
 builder.AddOpenTelemetryServices();
-
+builder.Services.AddHttpClient();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 builder.Services.AddDbContext<HrContext>();
 

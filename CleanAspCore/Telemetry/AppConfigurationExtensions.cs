@@ -26,8 +26,10 @@ public static class AppConfigurationExtensions
                 .AddSource(Instrumentation.ActivitySource.Name)
                 .AddProcessor(new EnrichSpanProcessor())
                 .AddAspNetCoreInstrumentation()
+                .AddHttpClientInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation())
             .WithMetrics(metrics => metrics
+                .AddHttpClientInstrumentation()
                 .AddAspNetCoreInstrumentation()
                 .AddMeter(Instrumentation.Meter.Name));
 
