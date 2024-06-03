@@ -17,7 +17,7 @@ public class CreateEmployeeTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).CreateEmployee(createEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.Created);
@@ -64,7 +64,7 @@ public class CreateEmployeeTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).CreateEmployee(createEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
 
         //Assert
         await response.AssertBadRequest(scenario.Input.expectedErrors);

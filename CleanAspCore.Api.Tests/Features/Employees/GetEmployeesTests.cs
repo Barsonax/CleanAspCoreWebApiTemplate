@@ -8,7 +8,7 @@ public class GetEmployees : TestBase
     public async Task? GetEmployees_NoEmployees_ReturnsEmptyPage()
     {
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesRole).GetEmployees(1, 10);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
@@ -37,7 +37,7 @@ public class GetEmployees : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesRole).GetEmployees(1, 10);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
@@ -70,7 +70,7 @@ public class GetEmployees : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesRole).GetEmployees(2, 10);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(2, 10);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);

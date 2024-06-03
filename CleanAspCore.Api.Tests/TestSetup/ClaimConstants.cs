@@ -4,6 +4,6 @@ namespace CleanAspCore.Api.Tests.TestSetup;
 
 public static class ClaimConstants
 {
-    public static readonly Claim ReadEmployeesRole = new(ClaimTypes.Role, "reademployees");
-    public static readonly Claim WriteEmployeesRole = new(ClaimTypes.Role, "writeemployees");
+    public static readonly Claim ReadRole = new(ClaimTypes.Role, "read");
+    public static readonly Claim WriteRole = new(ClaimTypes.Role, "write");
 }

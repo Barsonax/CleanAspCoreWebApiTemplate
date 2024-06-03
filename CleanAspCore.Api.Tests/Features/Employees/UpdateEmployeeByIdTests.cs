@@ -12,13 +12,10 @@ public class UpdateEmployeeByIdTests : TestBase
         var employee = new EmployeeFaker().Generate();
         Sut.SeedData(context => { context.Employees.Add(employee); });
 
-        UpdateEmployeeRequest updateEmployeeRequest = new()
-        {
-            FirstName = "Updated"
-        };
+        UpdateEmployeeRequest updateEmployeeRequest = new() { FirstName = "Updated" };
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NoContent);
@@ -41,13 +38,10 @@ public class UpdateEmployeeByIdTests : TestBase
         //Arrange
         var employee = new EmployeeFaker().Generate();
 
-        UpdateEmployeeRequest updateEmployeeRequest = new()
-        {
-            FirstName = "Updated"
-        };
+        UpdateEmployeeRequest updateEmployeeRequest = new() { FirstName = "Updated" };
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NotFound);

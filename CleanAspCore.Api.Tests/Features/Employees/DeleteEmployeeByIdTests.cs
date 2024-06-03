@@ -15,7 +15,7 @@ public class DeleteEmployeeByIdTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).DeleteEmployeeById(employee.Id);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(employee.Id);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NoContent);
@@ -29,7 +29,7 @@ public class DeleteEmployeeByIdTests : TestBase
         var id = Guid.NewGuid();
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteEmployeesRole).DeleteEmployeeById(id);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(id);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NotFound);

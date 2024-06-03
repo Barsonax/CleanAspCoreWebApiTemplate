@@ -15,7 +15,7 @@ public class GetEmployeeByIdTests : TestBase
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesRole).GetEmployeeById(employee.Id);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployeeById(employee.Id);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
@@ -29,7 +29,7 @@ public class GetEmployeeByIdTests : TestBase
         var employee = new EmployeeFaker().Generate();
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadEmployeesRole).GetEmployeeById(employee.Id);
+        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployeeById(employee.Id);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NotFound);

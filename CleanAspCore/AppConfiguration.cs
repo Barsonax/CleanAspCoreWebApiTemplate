@@ -6,6 +6,7 @@ using CleanAspCore.Endpoints.Jobs;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 
 namespace CleanAspCore;
@@ -31,11 +32,15 @@ internal static class AppConfiguration
                 .RequireAuthenticatedUser()
                 .Build());
 
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, x =>
-            {
-                x.TokenValidationParameters.ClockSkew = TimeSpan.FromSeconds(5);
-            });
+        var authBuilder = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
+        if (builder.Environment.IsDevelopment())
+        {
+            authBuilder.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
+        }
+        else
+        {
+            authBuilder.AddMicrosoftIdentityWebApi(builder.Configuration);
+        }
     }
 
     internal static void AddOpenApiServices(this WebApplicationBuilder builder)
@@ -43,6 +48,7 @@ internal static class AppConfiguration
         if (builder.Configuration.GetValue<bool?>("DisableOpenApi") == true)
             return;
 
+        var config = builder.Configuration.GetRequiredSection(Constants.AzureAd).Get<MicrosoftIdentityOptions>()!;
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
         {
@@ -50,19 +56,30 @@ internal static class AppConfiguration
 
             var xmlDocPath = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
             options.IncludeXmlComments(xmlDocPath);
-
             var jwtSecurityScheme = new OpenApiSecurityScheme
             {
                 BearerFormat = "JWT",
                 Name = "JWT Authentication",
                 In = ParameterLocation.Header,
-                Type = SecuritySchemeType.Http,
+                Type = builder.Environment.IsDevelopment() ? SecuritySchemeType.Http : SecuritySchemeType.OAuth2,
                 Scheme = JwtBearerDefaults.AuthenticationScheme,
                 Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
                 Reference = new OpenApiReference
                 {
                     Id = JwtBearerDefaults.AuthenticationScheme,
                     Type = ReferenceType.SecurityScheme
+                },
+                Flows = new OpenApiOAuthFlows()
+                {
+                    AuthorizationCode = new OpenApiOAuthFlow()
+                    {
+                        AuthorizationUrl = new Uri($"https://login.microsoftonline.com/{config.TenantId}/oauth2/v2.0/authorize"),
+                        TokenUrl = new Uri($"https://login.microsoftonline.com/{config.TenantId}/oauth2/v2.0/token"),
+                        Scopes = new Dictionary<string, string>
+                        {
+                            { $"api://{config.ClientId}/default", "read" },
+                        },
+                    }
                 }
             };
 
@@ -77,9 +94,15 @@ internal static class AppConfiguration
     {
         if (app.Configuration.GetValue<bool?>("DisableOpenApi") == true)
             return;
-
+        var config = app.Configuration.GetRequiredSection(Constants.AzureAd).Get<MicrosoftIdentityOptions>()!;
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(setup =>
+        {
+            setup.ConfigObject.AdditionalItems.Add("persistAuthorization", "true");
+            setup.OAuthClientId(config.ClientId);
+            setup.OAuthUsePkce();
+            setup.OAuthScopes($"api://{config.ClientId}/default");
+        });
     }
 
     internal static void RunMigrations(this WebApplication app)
