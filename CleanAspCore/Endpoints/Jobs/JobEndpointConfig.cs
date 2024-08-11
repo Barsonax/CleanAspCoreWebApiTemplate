@@ -1,4 +1,4 @@
-﻿using CleanAspCore.Utils;
+﻿using CleanAspCore.Common.GenericValidation;
 
 namespace CleanAspCore.Endpoints.Jobs;
 

@@ -1,6 +1,6 @@
-﻿using CleanAspCore.Data;
+﻿using CleanAspCore.Common.NullableValidation;
+using CleanAspCore.Data;
 using CleanAspCore.Data.Models.Jobs;
-using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace CleanAspCore.Endpoints.Jobs;

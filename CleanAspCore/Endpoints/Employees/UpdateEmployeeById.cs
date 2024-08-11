@@ -1,7 +1,8 @@
-﻿using CleanAspCore.Data;
+﻿using CleanAspCore.Common.NullableValidation;
+using CleanAspCore.Common.SetProperty;
+using CleanAspCore.Data;
 using CleanAspCore.Data.Extensions;
 using CleanAspCore.Data.Models.Employees;
-using CleanAspCore.Extensions.FluentValidation;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using NotFound = Microsoft.AspNetCore.Http.HttpResults.NotFound;

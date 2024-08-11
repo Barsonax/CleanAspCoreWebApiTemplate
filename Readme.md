@@ -15,7 +15,7 @@ Some features in this template:
 
 ## Running tests
 
-Only docker is required to run the tests. First run can take a bit longer as the docker image is downloaded.
+Only docker is required to run the tests (Tip: podman is free to use). First run can take a bit longer as the docker image is downloaded.
 Run the following command to run the tests:
 
 ```cmd

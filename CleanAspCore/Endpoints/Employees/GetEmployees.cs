@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Data;
+﻿using CleanAspCore.Common.Paging;
+using CleanAspCore.Data;
 using CleanAspCore.Data.Extensions;
 using CleanAspCore.Data.Models.Employees;
 using Microsoft.AspNetCore.Http.HttpResults;

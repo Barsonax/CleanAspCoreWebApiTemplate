@@ -18,11 +18,9 @@ public readonly record struct EmailAddress
     {
         public static readonly AbstractValidator<EmailAddress> Instance = new EmailAddressValidator();
 
-        public EmailAddressValidator()
+        private EmailAddressValidator()
         {
             RuleFor(x => x.Email).NotNull().EmailAddress();
         }
     }
 }
-
-
