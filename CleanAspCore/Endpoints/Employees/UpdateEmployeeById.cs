@@ -1,7 +1,6 @@
 ﻿using CleanAspCore.Common.NullableValidation;
 using CleanAspCore.Common.SetProperty;
 using CleanAspCore.Data;
-using CleanAspCore.Data.Extensions;
 using CleanAspCore.Data.Models.Employees;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;

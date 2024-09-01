@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Domain;
+﻿namespace CleanAspCore.Common.ValueObjects;
 
 public readonly record struct EmailAddress
 {

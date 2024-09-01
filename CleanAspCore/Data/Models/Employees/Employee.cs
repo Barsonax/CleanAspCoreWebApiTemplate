@@ -1,4 +1,5 @@
-﻿using CleanAspCore.Data.Models.Departments;
+﻿using CleanAspCore.Common.ValueObjects;
+using CleanAspCore.Data.Models.Departments;
 using CleanAspCore.Data.Models.Jobs;
 
 namespace CleanAspCore.Data.Models.Employees;

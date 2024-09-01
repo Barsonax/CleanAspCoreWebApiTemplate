@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using CleanAspCore.Data;
 using CleanAspCore.Data.Extensions;
 using CleanAspCore.Endpoints.Departments;
 using CleanAspCore.Endpoints.Employees;
