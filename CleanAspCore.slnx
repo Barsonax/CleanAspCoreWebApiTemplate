@@ -9,6 +9,7 @@
     <File Path="global.json" />
     <File Path="Readme.md" />
     <File Path=".github\workflows\dotnet.yml" />
+    <File Path=".github\workflows\deploy.yml" />
   </Folder>
   <Project Path="CleanAspCore.Api.TestDataGenerator\CleanAspCore.Api.TestDataGenerator.csproj" Type="Classic C#" />
   <Project Path="CleanAspCore.Api.Tests\CleanAspCore.Api.Tests.csproj" Type="Classic C#" />
