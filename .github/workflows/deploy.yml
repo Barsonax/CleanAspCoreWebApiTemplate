@@ -45,7 +45,7 @@ jobs:
           --
           RunConfiguration.CollectSourceInformation=true
       - name: dotnet publish
-        working-directory: CleanAspCore
+        working-directory: CleanAspCore.Api
         run: dotnet publish --no-build -c Release -o ${{env.DOTNET_ROOT}}/myapp
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -67,7 +67,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -82,4 +82,3 @@ jobs:
           app-name: 'rubbed-app'
           slot-name: 'Production'
           package: .
-          
