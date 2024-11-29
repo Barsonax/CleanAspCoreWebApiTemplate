@@ -3,7 +3,7 @@ using Refit;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Departments;
 
-public interface IDepartmentApiClient
+internal interface IDepartmentApiClient
 {
     [Get("/departments/{id}")]
     Task<HttpResponseMessage> GetDepartmentById(Guid id);

@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class NunitLogger(TextWriter output, string name) : ILogger, IDisposable
+internal sealed class NunitLogger(TextWriter output, string name) : ILogger, IDisposable
 {
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull => this;
 

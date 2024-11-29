@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public static class TestJwtGenerator
+internal static class TestJwtGenerator
 {
     private const string Audience = "TestUsers";
     private static readonly string _issuer = Guid.NewGuid().ToString();
@@ -25,7 +25,7 @@ public static class TestJwtGenerator
 
     public static IServiceCollection ConfigureTestJwt(this IServiceCollection services)
     {
-        services.RemoveAll(typeof(IConfigureOptions<JwtBearerOptions>)); // Remove any already configured jwt bearer options configurators as we want to be in control of this in the tests.
+        services.RemoveAll<IConfigureOptions<JwtBearerOptions>>(); // Remove any already configured jwt bearer options configurators as we want to be in control of this in the tests.
         services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
         {
             options.Configuration = new OpenIdConnectConfiguration

@@ -1,8 +1,8 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.TestUtils.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Departments;
 
-public class AddDepartmentsTests : TestBase
+internal sealed class AddDepartmentsTests : TestBase
 {
     [Test]
     public async Task CreateDepartment_IsAdded()

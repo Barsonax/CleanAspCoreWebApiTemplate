@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public abstract class TestBase
+internal abstract class TestBase
 {
 #pragma warning disable NUnit1032
     protected TestWebApi Sut { get; private set; } = null!;

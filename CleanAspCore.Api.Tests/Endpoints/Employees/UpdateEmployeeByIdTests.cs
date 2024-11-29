@@ -1,9 +1,9 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.TestUtils.Fakers;
 using CleanAspCore.Endpoints.Employees;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-public class UpdateEmployeeByIdTests : TestBase
+internal sealed class UpdateEmployeeByIdTests : TestBase
 {
     [Test]
     public async Task UpdateEmployeeById_IsUpdated()

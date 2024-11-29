@@ -4,7 +4,7 @@ using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public class SqlMigrator
+internal sealed class SqlMigrator
 {
     private readonly MsSqlContainer _container;
     private readonly ILogger _logger;

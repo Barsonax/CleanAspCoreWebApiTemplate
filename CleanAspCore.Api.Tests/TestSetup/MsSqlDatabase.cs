@@ -5,7 +5,7 @@ using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class MsSqlDatabase : IDatabase
+internal sealed class MsSqlDatabase : IDatabase
 {
     private readonly IDatabaseInitializer _databaseInitializer;
     private readonly RespawnerOptions _respawnerOptions;

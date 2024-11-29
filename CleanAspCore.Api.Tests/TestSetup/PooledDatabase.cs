@@ -3,7 +3,7 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class PooledDatabase : IDisposable
+internal sealed class PooledDatabase : IDisposable
 {
     private readonly IDatabase _database;
 

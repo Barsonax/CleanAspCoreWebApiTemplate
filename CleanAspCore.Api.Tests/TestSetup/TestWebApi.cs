@@ -12,7 +12,7 @@ using Refit;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class TestWebApi : WebApplicationFactory<Program>
+internal sealed class TestWebApi : WebApplicationFactory<Program>
 {
     private readonly PooledDatabase _pooledDatabase;
     private readonly ILoggerProvider _loggerProvider;
@@ -40,7 +40,7 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
 
         builder.ConfigureServices(services =>
         {
-            services.RemoveAll(typeof(DbContextOptions<HrContext>));
+            services.RemoveAll<DbContextOptions<HrContext>>();
             services.AddDbContext<HrContext>(c => c
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());

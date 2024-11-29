@@ -1,11 +1,11 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.TestUtils.Fakers;
 using CleanAspCore.Data;
 using CleanAspCore.Data.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace CleanAspCore.Api.TestDataGenerator;
 
-public class TestDataGeneratorService(HrContext context, IHostApplicationLifetime lifetime) : IHostedService
+internal sealed class TestDataGeneratorService(HrContext context, IHostApplicationLifetime lifetime) : IHostedService
 {
     public async Task StartAsync(CancellationToken cancellationToken)
     {

@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class NunitLoggerProvider : ILoggerProvider
+internal sealed class NunitLoggerProvider : ILoggerProvider
 {
     public ILogger CreateLogger(string categoryName)
     {

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.Tests", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.TestDataGenerator", "CleanAspCore.Api.TestDataGenerator\CleanAspCore.Api.TestDataGenerator.csproj", "{308E3484-E719-474C-95F5-4094D27204E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.TestUtils", "CleanAspCore.Api.TestUtils\CleanAspCore.Api.TestUtils.csproj", "{78777B6E-16FC-4502-8943-0D5CEC91CC32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +39,9 @@ Global
 		{308E3484-E719-474C-95F5-4094D27204E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{308E3484-E719-474C-95F5-4094D27204E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{308E3484-E719-474C-95F5-4094D27204E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78777B6E-16FC-4502-8943-0D5CEC91CC32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78777B6E-16FC-4502-8943-0D5CEC91CC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78777B6E-16FC-4502-8943-0D5CEC91CC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78777B6E-16FC-4502-8943-0D5CEC91CC32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,8 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.TestUtils.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-public class GetEmployeeByIdTests : TestBase
+internal sealed class GetEmployeeByIdTests : TestBase
 {
     [Test]
     public async Task GetEmployeeById_ReturnsExpectedEmployee()

@@ -4,7 +4,7 @@ using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class MsSqlDatabasePoolPolicy : IPooledObjectPolicy<IDatabase>
+internal sealed class MsSqlDatabasePoolPolicy : IPooledObjectPolicy<IDatabase>
 {
     private readonly MsSqlContainer _container;
     private readonly IDatabaseInitializer _databaseInitializer;

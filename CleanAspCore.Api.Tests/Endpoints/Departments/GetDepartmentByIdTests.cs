@@ -1,8 +1,8 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.TestUtils.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Departments;
 
-public class GetDepartmentByIdTests : TestBase
+internal sealed class GetDepartmentByIdTests : TestBase
 {
     [Test]
     public async Task GetDepartmentById_ReturnsExpectedDepartment()

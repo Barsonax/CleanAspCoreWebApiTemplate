@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public static class LoggingBuilderExtensions
+internal static class LoggingBuilderExtensions
 {
     public static ILoggingBuilder AddNunitLogging(this ILoggingBuilder services)
     {

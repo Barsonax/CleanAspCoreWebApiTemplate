@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace CleanAspCore.Api.Tests;
 
-public static class HttpAssertionExtensions
+internal static class HttpAssertionExtensions
 {
     public static async Task AssertStatusCode(this HttpResponseMessage response, HttpStatusCode expected)
     {

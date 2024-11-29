@@ -1,8 +1,8 @@
-using CleanAspCore.Api.Tests.Fakers;
+using CleanAspCore.Api.TestUtils.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Jobs;
 
-public class CreateJobTests : TestBase
+internal sealed class CreateJobTests : TestBase
 {
     [Test]
     public async Task CreateJob_IsAdded()

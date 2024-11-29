@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace CleanAspCore.Api.Tests;
 
 [SetUpFixture]
-public class GlobalSetup
+internal sealed class GlobalSetup
 {
     internal static IServiceProvider Provider => _serviceProvider;
     private static ServiceProvider _serviceProvider = null!;

@@ -1,6 +1,6 @@
 ﻿namespace CleanAspCore.Api.Tests.TestSetup;
 
-public static class TaskExtensions
+internal static class TaskExtensions
 {
     public static void RunSynchronouslyWithoutSynchronizationContext(this Task task)
     {

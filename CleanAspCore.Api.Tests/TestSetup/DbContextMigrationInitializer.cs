@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class DbContextMigrationInitializer<TDbContext> : IDatabaseInitializer
+internal sealed class DbContextMigrationInitializer<TDbContext> : IDatabaseInitializer
     where TDbContext : DbContext, new()
 {
     private int _counter;

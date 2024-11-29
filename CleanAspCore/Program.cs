@@ -28,7 +28,9 @@ app.Run();
 
 namespace CleanAspCore
 {
+#pragma warning disable CA1515
     public partial class Program
+#pragma warning restore CA1515
     {
     }
 }

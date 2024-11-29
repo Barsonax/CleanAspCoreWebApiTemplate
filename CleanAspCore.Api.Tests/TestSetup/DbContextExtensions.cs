@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public static class DbContextExtensions
+internal static class DbContextExtensions
 {
     public static MigrationScript[] GenerateMigrationScripts(this DbContext context)
     {

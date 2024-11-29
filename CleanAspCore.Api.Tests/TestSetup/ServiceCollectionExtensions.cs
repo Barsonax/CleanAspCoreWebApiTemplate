@@ -6,7 +6,7 @@ using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
     public static void RegisterSharedDatabaseServices(this IServiceCollection services)
     {

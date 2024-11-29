@@ -1,8 +1,8 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.TestUtils.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-public class GetEmployees : TestBase
+internal sealed class GetEmployees : TestBase
 {
     [Test]
     public async Task? GetEmployees_NoEmployees_ReturnsEmptyPage()

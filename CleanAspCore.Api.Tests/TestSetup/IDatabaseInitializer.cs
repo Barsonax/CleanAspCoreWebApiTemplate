@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public interface IDatabaseInitializer
+internal interface IDatabaseInitializer
 {
     void Initialize(IHost app);
     string GetUniqueDataBaseName();

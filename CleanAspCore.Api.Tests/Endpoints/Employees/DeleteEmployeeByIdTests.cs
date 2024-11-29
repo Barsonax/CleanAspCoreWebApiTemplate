@@ -1,8 +1,8 @@
-﻿using CleanAspCore.Api.Tests.Fakers;
+﻿using CleanAspCore.Api.TestUtils.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-public class DeleteEmployeeByIdTests : TestBase
+internal sealed class DeleteEmployeeByIdTests : TestBase
 {
     [Test]
     public async Task DeleteEmployeeById_IsDeleted()

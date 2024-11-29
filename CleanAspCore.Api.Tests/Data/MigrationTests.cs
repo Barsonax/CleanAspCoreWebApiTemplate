@@ -9,7 +9,7 @@ namespace CleanAspCore.Api.Tests.Data;
 
 [FixtureLifeCycle(LifeCycle.SingleInstance)]
 [Parallelizable(ParallelScope.Self)]
-public class MigrationTests
+internal sealed class MigrationTests
 {
 #pragma warning disable NUnit1032
     private MsSqlContainer _databaseContainer = null!;

@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class DatabasePool
+internal sealed class DatabasePool
 {
     private readonly ObjectPool<IDatabase> _pool;
 

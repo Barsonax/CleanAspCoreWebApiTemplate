@@ -1,6 +1,6 @@
 ﻿namespace CleanAspCore.Api.Tests.TestSetup;
 
-public record TestScenario<TInput>
+internal sealed record TestScenario<TInput>
 {
     public TInput Input { get; }
     private string Name { get; }

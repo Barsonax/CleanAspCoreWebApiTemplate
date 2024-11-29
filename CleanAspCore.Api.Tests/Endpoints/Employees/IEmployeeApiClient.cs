@@ -3,7 +3,7 @@ using Refit;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-public interface IEmployeeApiClient
+internal interface IEmployeeApiClient
 {
     [Get("/employees/{id}")]
     Task<HttpResponseMessage> GetEmployeeById(Guid id);

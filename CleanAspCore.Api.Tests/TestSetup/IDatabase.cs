@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public interface IDatabase
+internal interface IDatabase
 {
     string ConnectionString { get; }
 

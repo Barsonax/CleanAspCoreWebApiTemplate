@@ -5,7 +5,7 @@ using Testcontainers.MsSql;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public static class MsSqlContainerExtensions
+internal static class MsSqlContainerExtensions
 {
     public static async Task<ExecResult> ExecScriptAsync(this MsSqlContainer container, string scriptContent, string database, CancellationToken ct = default)
     {
