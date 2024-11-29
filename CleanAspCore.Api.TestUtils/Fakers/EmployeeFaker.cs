@@ -1,6 +1,6 @@
 ﻿using Bogus;
-using CleanAspCore.Common.ValueObjects;
-using CleanAspCore.Data.Models.Employees;
+using CleanAspCore.Core.Common.ValueObjects;
+using CleanAspCore.Core.Data.Models.Employees;
 
 namespace CleanAspCore.Api.TestUtils.Fakers;
 

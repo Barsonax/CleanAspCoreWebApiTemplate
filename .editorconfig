@@ -160,6 +160,8 @@ dotnet_diagnostic.CS1591.severity = none
 [**/Endpoints/**.cs]
 # Missing XML comment
 dotnet_diagnostic.CS1591.severity = warning
+# Types can be made internal
+dotnet_diagnostic.CA1515.severity = none
 
 [**.Tests/**.cs]
 # Remove the underscores from member name

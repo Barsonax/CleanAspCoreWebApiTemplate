@@ -1,4 +1,4 @@
-using CleanAspCore.Endpoints.Departments;
+using CleanAspCore.Api.Endpoints.Departments;
 using Refit;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Departments;

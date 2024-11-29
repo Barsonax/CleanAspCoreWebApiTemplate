@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using CleanAspCore.Data.Models.Departments;
+using CleanAspCore.Core.Data.Models.Departments;
 
 namespace CleanAspCore.Api.TestUtils.Fakers;
 

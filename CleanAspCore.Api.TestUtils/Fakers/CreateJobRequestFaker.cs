@@ -1,5 +1,5 @@
 using Bogus;
-using CleanAspCore.Endpoints.Jobs;
+using CleanAspCore.Api.Endpoints.Jobs;
 
 namespace CleanAspCore.Api.TestUtils.Fakers;
 
