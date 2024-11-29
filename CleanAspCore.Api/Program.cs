@@ -3,7 +3,7 @@ using CleanAspCore.Api;
 using CleanAspCore.Core.Common.Telemetry;
 using CleanAspCore.Data;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.AddOpenApiServices();
 builder.AddAuthServices();

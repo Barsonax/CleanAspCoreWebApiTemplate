@@ -1,5 +1,4 @@
 ﻿using CleanAspCore.Api.Endpoints.Employees;
-using CleanAspCore.Api.TestUtils.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
@@ -30,20 +29,20 @@ internal sealed class CreateEmployeeTests : TestBase
 
     private static readonly TestScenario<(FakerConfigurator<CreateEmployeeRequest>, string[])>[] _validationCases =
     [
-        new("FirstName is null",
-            (x => x.RuleFor(y => y.FirstName, (string?)null), ["FirstName"])),
-        new("LastName is null",
-            (x => x.RuleFor(y => y.LastName, (string?)null), ["LastName"])),
-        new("Gender is null",
-            (x => x.RuleFor(y => y.Gender, (string?)null), ["Gender"])),
-        new("Email is null",
-            (x => x.RuleFor(y => y.Email, (string?)null), ["Email"])),
-        new("Invalid email",
-            (x => x.RuleFor(y => y.Email, "this is not a valid email address"), ["Email"])),
-        new("Job does not exist",
-            (x => x.RuleFor(y => y.JobId, Guid.NewGuid()), ["JobId"])),
-        new("Department does not exist",
-            (x => x.RuleFor(y => y.DepartmentId, Guid.NewGuid()), ["DepartmentId"])),
+        new((string)"FirstName is null",
+            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.FirstName, (string?)null), ["FirstName"])),
+        new((string)"LastName is null",
+            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.LastName, (string?)null), ["LastName"])),
+        new((string)"Gender is null",
+            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.Gender, (string?)null), ["Gender"])),
+        new((string)"Email is null",
+            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.Email, (string?)null), ["Email"])),
+        new((string)"Invalid email",
+            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.Email, "this is not a valid email address"), ["Email"])),
+        new((string)"Job does not exist",
+            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.JobId, Guid.NewGuid()), ["JobId"])),
+        new((string)"Department does not exist",
+            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.DepartmentId, Guid.NewGuid()), ["DepartmentId"])),
     ];
 
     [TestCaseSource(nameof(_validationCases))]

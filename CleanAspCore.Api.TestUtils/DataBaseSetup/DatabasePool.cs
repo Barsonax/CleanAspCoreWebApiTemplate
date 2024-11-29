@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.ObjectPool;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal sealed class DatabasePool
+public sealed class DatabasePool
 {
     private readonly ObjectPool<IDatabase> _pool;
 

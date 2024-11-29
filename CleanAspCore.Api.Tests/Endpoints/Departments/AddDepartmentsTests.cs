@@ -1,6 +1,4 @@
-﻿using CleanAspCore.Api.TestUtils.Fakers;
-
-namespace CleanAspCore.Api.Tests.Endpoints.Departments;
+﻿namespace CleanAspCore.Api.Tests.Endpoints.Departments;
 
 internal sealed class AddDepartmentsTests : TestBase
 {

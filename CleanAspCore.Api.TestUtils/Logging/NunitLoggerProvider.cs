@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using NUnit.Framework;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.Logging;
 
 internal sealed class NunitLoggerProvider : ILoggerProvider
 {

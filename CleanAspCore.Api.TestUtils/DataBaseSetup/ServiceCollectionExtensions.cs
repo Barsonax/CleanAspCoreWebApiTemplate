@@ -4,16 +4,16 @@ using Microsoft.Extensions.ObjectPool;
 using Respawn;
 using Testcontainers.MsSql;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal static class ServiceCollectionExtensions
+public static class ServiceCollectionExtensions
 {
     public static void RegisterSharedDatabaseServices(this IServiceCollection services)
     {
         services.AddSingleton<DatabasePool>();
     }
 
-    public static void RegisterPostgreSqlContainer(this IServiceCollection services)
+    public static void RegisterSqlContainer(this IServiceCollection services)
     {
         services.RegisterSharedDatabaseServices();
         services.AddTransient<RespawnerOptions>(c => new RespawnerOptions { DbAdapter = DbAdapter.SqlServer });

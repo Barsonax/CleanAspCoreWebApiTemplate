@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal static class DbContextExtensions
+public static class DbContextExtensions
 {
     public static MigrationScript[] GenerateMigrationScripts(this DbContext context)
     {

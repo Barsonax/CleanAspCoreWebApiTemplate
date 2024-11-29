@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.Logging;
 
-internal static class LoggingBuilderExtensions
+public static class LoggingBuilderExtensions
 {
     public static ILoggingBuilder AddNunitLogging(this ILoggingBuilder services)
     {

@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.6.1"/>
+    <PackageReference Include="NUnit" Version="4.2.2"/>
+    <PackageReference Include="Testcontainers.MsSql" Version="4.0.0"/>
+    <PackageReference Include="Respawn" Version="6.2.1"/>
   </ItemGroup>
 
   <ItemGroup>

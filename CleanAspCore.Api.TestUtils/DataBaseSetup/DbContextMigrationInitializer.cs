@@ -8,9 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal sealed class DbContextMigrationInitializer<TDbContext> : IDatabaseInitializer
+public sealed class DbContextMigrationInitializer<TDbContext> : IDatabaseInitializer
     where TDbContext : DbContext, new()
 {
     private int _counter;

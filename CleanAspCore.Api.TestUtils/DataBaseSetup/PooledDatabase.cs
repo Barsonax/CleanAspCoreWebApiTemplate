@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.ObjectPool;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal sealed class PooledDatabase : IDisposable
+public sealed class PooledDatabase : IDisposable
 {
     private readonly IDatabase _database;
 

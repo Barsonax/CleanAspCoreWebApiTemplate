@@ -3,9 +3,9 @@ using DotNet.Testcontainers.Configurations;
 using DotNet.Testcontainers.Containers;
 using Testcontainers.MsSql;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal static class MsSqlContainerExtensions
+public static class MsSqlContainerExtensions
 {
     public static async Task<ExecResult> ExecScriptAsync(this MsSqlContainer container, string scriptContent, string database, CancellationToken ct = default)
     {

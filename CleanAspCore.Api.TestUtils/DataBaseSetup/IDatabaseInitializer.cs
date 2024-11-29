@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Hosting;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal interface IDatabaseInitializer
+public interface IDatabaseInitializer
 {
     void Initialize(IHost app);
     string GetUniqueDataBaseName();

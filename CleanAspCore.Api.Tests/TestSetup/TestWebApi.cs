@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Security.Claims;
+using CleanAspCore.Api.TestUtils.DataBaseSetup;
 using CleanAspCore.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

@@ -2,7 +2,7 @@
 using Respawn;
 using Testcontainers.MsSql;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
 internal sealed class MsSqlDatabasePoolPolicy : IPooledObjectPolicy<IDatabase>
 {

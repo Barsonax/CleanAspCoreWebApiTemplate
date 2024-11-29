@@ -1,5 +1,3 @@
-using CleanAspCore.Api.TestUtils.Fakers;
-
 namespace CleanAspCore.Api.Tests.Endpoints.Jobs;
 
 internal sealed class CreateJobTests : TestBase

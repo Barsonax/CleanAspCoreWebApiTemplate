@@ -1,6 +1,4 @@
-﻿using CleanAspCore.Api.TestUtils.Fakers;
-
-namespace CleanAspCore.Api.Tests.Endpoints.Jobs;
+﻿namespace CleanAspCore.Api.Tests.Endpoints.Jobs;
 
 internal sealed class GetJobByIdTests : TestBase
 {

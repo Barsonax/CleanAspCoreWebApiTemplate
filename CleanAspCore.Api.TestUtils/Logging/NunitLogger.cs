@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.Logging;
 
 internal sealed class NunitLogger(TextWriter output, string name) : ILogger, IDisposable
 {

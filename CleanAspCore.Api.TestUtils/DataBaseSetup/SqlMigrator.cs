@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Testcontainers.MsSql;
 
-namespace CleanAspCore.Api.Tests.TestSetup;
+namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
-internal sealed class SqlMigrator
+public sealed class SqlMigrator
 {
     private readonly MsSqlContainer _container;
     private readonly ILogger _logger;

@@ -1,4 +1,4 @@
-﻿namespace CleanAspCore.Api.Tests.TestSetup;
+﻿namespace CleanAspCore.Api.TestUtils.DataBaseSetup;
 
 internal static class TaskExtensions
 {

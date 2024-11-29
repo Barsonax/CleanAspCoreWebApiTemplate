@@ -1,4 +1,6 @@
-﻿using CleanAspCore.Data;
+﻿using CleanAspCore.Api.TestUtils.DataBaseSetup;
+using CleanAspCore.Api.TestUtils.Logging;
+using CleanAspCore.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
@@ -19,7 +21,7 @@ internal sealed class GlobalSetup
         var services = new ServiceCollection();
 
         services.AddLogging(x => x.AddNunitLogging());
-        services.RegisterPostgreSqlContainer();
+        services.RegisterSqlContainer();
         services.AddScoped<TestWebApi>();
         services.RegisterMigrationInitializer<HrContext>();
         _serviceProvider = services.BuildServiceProvider();
