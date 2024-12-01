@@ -156,12 +156,12 @@ dotnet_diagnostic.CA1848.severity = none
 dotnet_diagnostic.CA1812.severity = none
 # Is an internal class that is apparently never instantiated, too many false positives.
 dotnet_diagnostic.CS1591.severity = none
+# Types can be made internal
+dotnet_diagnostic.CA1515.severity = none
 
 [**/Endpoints/**.cs]
 # Missing XML comment
 dotnet_diagnostic.CS1591.severity = warning
-# Types can be made internal
-dotnet_diagnostic.CA1515.severity = none
 
 [**.Tests/**.cs]
 # Remove the underscores from member name

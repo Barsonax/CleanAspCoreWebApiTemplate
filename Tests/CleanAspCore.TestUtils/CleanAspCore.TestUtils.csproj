@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Bogus"/>
+    <PackageReference Include="NUnit"/>
+    <PackageReference Include="Testcontainers.MsSql"/>
+    <PackageReference Include="Respawn"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CleanAspCore.Core\CleanAspCore.Core.csproj"/>
+  </ItemGroup>
+</Project>

@@ -14,15 +14,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.github\workflows\deploy.yml = .github\workflows\deploy.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.Tests", "CleanAspCore.Api.Tests\CleanAspCore.Api.Tests.csproj", "{4B45D679-E787-4236-BD9A-383364CD0E6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.Tests", "Tests\CleanAspCore.Api.Tests\CleanAspCore.Api.Tests.csproj", "{4B45D679-E787-4236-BD9A-383364CD0E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.TestDataGenerator", "CleanAspCore.Api.TestDataGenerator\CleanAspCore.Api.TestDataGenerator.csproj", "{308E3484-E719-474C-95F5-4094D27204E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.TestDataGenerator", "Tests\CleanAspCore.TestDataGenerator\CleanAspCore.TestDataGenerator.csproj", "{308E3484-E719-474C-95F5-4094D27204E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api.TestUtils", "CleanAspCore.Api.TestUtils\CleanAspCore.Api.TestUtils.csproj", "{78777B6E-16FC-4502-8943-0D5CEC91CC32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.TestUtils", "Tests\CleanAspCore.TestUtils\CleanAspCore.TestUtils.csproj", "{78777B6E-16FC-4502-8943-0D5CEC91CC32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Core", "CleanAspCore.Core\CleanAspCore.Core.csproj", "{EFF51E1D-EE7E-42D2-A1A1-325E3EC97459}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAspCore.Api", "CleanAspCore.Api\CleanAspCore.Api.csproj", "{8FD65EE3-5A93-44BB-8335-8FB74EB2D1CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F082E05-E08A-4084-87BF-86A8D0D5B05F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,5 +52,10 @@ Global
 		{8FD65EE3-5A93-44BB-8335-8FB74EB2D1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FD65EE3-5A93-44BB-8335-8FB74EB2D1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FD65EE3-5A93-44BB-8335-8FB74EB2D1CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{308E3484-E719-474C-95F5-4094D27204E5} = {0F082E05-E08A-4084-87BF-86A8D0D5B05F}
+		{4B45D679-E787-4236-BD9A-383364CD0E6F} = {0F082E05-E08A-4084-87BF-86A8D0D5B05F}
+		{78777B6E-16FC-4502-8943-0D5CEC91CC32} = {0F082E05-E08A-4084-87BF-86A8D0D5B05F}
 	EndGlobalSection
 EndGlobal
