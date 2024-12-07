@@ -42,5 +42,3 @@ jobs:
           --no-build
           --verbosity normal
           --logger GitHubActions
-          --
-          RunConfiguration.CollectSourceInformation=true
