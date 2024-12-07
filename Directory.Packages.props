@@ -23,6 +23,8 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0"/>
     <PackageVersion Include="Microsoft.Extensions.Http.Polly" Version="9.0.0"/>
     <PackageVersion Include="Microsoft.Identity.Web" Version="3.4.0"/>
+    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="17.13.1"/>
+    <PackageVersion Include="Microsoft.Testing.Extensions.TrxReport" Version="1.4.3"/>
     <PackageVersion Include="TUnit" Version="0.4.86"/>
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.10.0"/>
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.10.0"/>

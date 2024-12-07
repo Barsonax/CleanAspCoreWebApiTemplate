@@ -35,11 +35,14 @@ jobs:
       - name: Check code formatting
         run: dotnet format --no-restore --verify-no-changes -v diag
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build
+          --no-restore
+          --configuration Release
       - name: Test
+        working-directory: Tests/CleanAspCore.Api.Tests
         run: >
-          dotnet test
+          dotnet run
           --no-build
-          --collect "Code Coverage;Format=cobertura"
-          --verbosity normal
-          --logger GitHubActions
+          --configuration Release
+          --coverage
+          --report-trx
