@@ -3,6 +3,10 @@
 
 name: .NET
 
+permissions:
+  checks: write
+  pull-requests: write
+
 on:
   push:
     branches: [ "main" ]
@@ -46,3 +50,9 @@ jobs:
           --configuration Release
           --coverage
           --report-trx
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            **/*.trx
