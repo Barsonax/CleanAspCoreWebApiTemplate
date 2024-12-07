@@ -1,12 +1,12 @@
 ﻿namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-internal sealed class GetEmployees : TestBase
+internal sealed class GetEmployees(TestWebApi sut)
 {
     [Test]
     public async Task? GetEmployees_NoEmployees_ReturnsEmptyPage()
     {
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
@@ -29,13 +29,13 @@ internal sealed class GetEmployees : TestBase
             .RuleFor(x => x.Department, department)
             .RuleFor(x => x.Job, job)
             .Generate(15);
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Employees.AddRange(employees);
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
@@ -62,13 +62,13 @@ internal sealed class GetEmployees : TestBase
             .RuleFor(x => x.Department, department)
             .RuleFor(x => x.Job, job)
             .Generate(15);
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Employees.AddRange(employees);
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(2, 10);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(2, 10);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
