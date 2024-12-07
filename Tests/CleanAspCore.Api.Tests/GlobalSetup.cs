@@ -1,35 +1,35 @@
-﻿using CleanAspCore.Api.TestUtils.Logging;
+﻿using CleanAspCore.Api.Tests;
 using CleanAspCore.Data;
 using CleanAspCore.TestUtils.DataBaseSetup;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using TUnit.Core.Interfaces;
 
-[assembly: FixtureLifeCycle(LifeCycle.InstancePerTestCase)]
-[assembly: Parallelizable(ParallelScope.Children)]
+[assembly: ClassConstructor<DependencyInjectionClassConstructor>]
 [assembly: ExcludeFromCodeCoverage]
 
 namespace CleanAspCore.Api.Tests;
 
-[SetUpFixture]
-internal sealed class GlobalSetup
+public class DependencyInjectionClassConstructor : IClassConstructor, ITestEndEventReceiver
 {
-    internal static IServiceProvider Provider => _serviceProvider;
-    private static ServiceProvider _serviceProvider = null!;
+    private static readonly IServiceProvider _serviceProvider = CreateServiceProvider();
 
-    [OneTimeSetUp]
-    public void RunBeforeAnyTests()
+    private AsyncServiceScope _scope;
+
+    public T Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(ClassConstructorMetadata classConstructorMetadata)
+        where T : class
     {
-        var services = new ServiceCollection();
-
-        services.AddLogging(x => x.AddNunitLogging());
-        services.RegisterSqlContainer();
-        services.AddScoped<TestWebApi>();
-        services.RegisterMigrationInitializer<HrContext>();
-        _serviceProvider = services.BuildServiceProvider();
+        _scope = _serviceProvider.CreateAsyncScope();
+        return ActivatorUtilities.GetServiceOrCreateInstance<T>(_scope.ServiceProvider);
     }
 
-    [OneTimeTearDown]
-    public async Task RunAfterAnyTests()
-    {
-        await _serviceProvider.DisposeAsync();
-    }
+    public ValueTask OnTestEnd(TestContext testContext) => _scope.DisposeAsync();
+
+    private static ServiceProvider CreateServiceProvider() =>
+        new ServiceCollection()
+            .AddLogging(x => x.AddConsole())
+            .RegisterSqlContainer()
+            .RegisterMigrationInitializer<HrContext>()
+            .AddScoped<TestWebApi>()
+            .BuildServiceProvider();
 }

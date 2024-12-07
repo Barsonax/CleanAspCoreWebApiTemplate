@@ -13,7 +13,7 @@ using Refit;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-internal sealed class TestWebApi : WebApplicationFactory<Program>
+public sealed class TestWebApi : WebApplicationFactory<Program>
 {
     private readonly PooledDatabase _pooledDatabase;
     private readonly ILoggerProvider _loggerProvider;

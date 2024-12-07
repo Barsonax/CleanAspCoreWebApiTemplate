@@ -3,50 +3,51 @@ using CleanAspCore.Api.Tests.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-internal sealed class CreateEmployeeTests : TestBase
+internal sealed class CreateEmployeeTests(TestWebApi sut)
 {
     [Test]
     public async Task CreateEmployee_IsAdded()
     {
         //Arrange
         var createEmployeeRequest = new CreateEmployeeRequestFaker().Generate();
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Departments.Add(new DepartmentFaker().RuleFor(x => x.Id, createEmployeeRequest.DepartmentId).Generate());
             context.Jobs.Add(new JobFaker().RuleFor(x => x.Id, createEmployeeRequest.JobId).Generate());
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.Created);
         var createdId = response.GetGuidFromLocationHeader();
-        Sut.AssertDatabase(context =>
+        sut.AssertDatabase(context =>
         {
             context.Employees.Should().BeEquivalentTo(new[] { new { Id = createdId } });
         });
     }
 
-    private static readonly TestScenario<(FakerConfigurator<CreateEmployeeRequest>, string[])>[] _validationCases =
-    [
-        new((string)"FirstName is null",
-            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.FirstName, (string?)null), ["FirstName"])),
-        new((string)"LastName is null",
-            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.LastName, (string?)null), ["LastName"])),
-        new((string)"Gender is null",
-            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.Gender, (string?)null), ["Gender"])),
-        new((string)"Email is null",
-            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.Email, (string?)null), ["Email"])),
-        new((string)"Invalid email",
-            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.Email, "this is not a valid email address"), ["Email"])),
-        new((string)"Job does not exist",
-            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.JobId, Guid.NewGuid()), ["JobId"])),
-        new((string)"Department does not exist",
-            ((FakerConfigurator<CreateEmployeeRequest>, string[]))(x => x.RuleFor(y => y.DepartmentId, Guid.NewGuid()), ["DepartmentId"])),
-    ];
+    public static IEnumerable<Func<TestScenario<(FakerConfigurator<CreateEmployeeRequest>, string[])>>> ValidationTestCases()
+    {
+        yield return () => new((string)"FirstName is null",
+            (x => x.RuleFor(y => y.FirstName, (string?)null), ["FirstName"]));
+        yield return () => new((string)"LastName is null",
+            (x => x.RuleFor(y => y.LastName, (string?)null), ["LastName"]));
+        yield return () => new((string)"Gender is null",
+            (x => x.RuleFor(y => y.Gender, (string?)null), ["Gender"]));
+        yield return () => new((string)"Email is null",
+            (x => x.RuleFor(y => y.Email, (string?)null), ["Email"]));
+        yield return () => new((string)"Invalid email",
+            (x => x.RuleFor(y => y.Email, "this is not a valid email address"), ["Email"]));
+        yield return () => new((string)"Job does not exist",
+            (x => x.RuleFor(y => y.JobId, Guid.NewGuid()), ["JobId"]));
+        yield return () => new((string)"Department does not exist",
+            (x => x.RuleFor(y => y.DepartmentId, Guid.NewGuid()), ["DepartmentId"]));
+    }
 
-    [TestCaseSource(nameof(_validationCases))]
+    [Test]
+    [MethodDataSource(nameof(ValidationTestCases))]
     public async Task CreateEmployee_InvalidRequest_ReturnsBadRequest(TestScenario<(FakerConfigurator<CreateEmployeeRequest> configurator, string[] expectedErrors)> scenario)
     {
         //Arrange
@@ -57,18 +58,18 @@ internal sealed class CreateEmployeeTests : TestBase
             .RuleFor(x => x.DepartmentId, departmentId)
             .RuleFor(x => x.JobId, jobId)).Generate();
 
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Departments.Add(new DepartmentFaker().RuleFor(x => x.Id, departmentId).Generate());
             context.Jobs.Add(new JobFaker().RuleFor(x => x.Id, jobId).Generate());
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
 
         //Assert
         await response.AssertBadRequest(scenario.Input.expectedErrors);
-        Sut.AssertDatabase(context =>
+        sut.AssertDatabase(context =>
         {
             context.Employees.Should().BeEmpty();
         });
