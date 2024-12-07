@@ -8,6 +8,17 @@ namespace CleanAspCore.Api.Tests.Data;
 
 internal sealed class MigrationTests(MsSqlContainer databaseContainer, ILogger<MigrationTests> logger)
 {
+    public static IEnumerable<Func<MigrationScript>> MigrationTestCases()
+    {
+        using DbContext context = new HrContext();
+        var migrations = context.GenerateMigrationScripts();
+
+        foreach (var migration in migrations)
+        {
+            yield return () => migration;
+        }
+    }
+
     [Test]
     [MethodDataSource(nameof(MigrationTestCases))]
     [NotInParallel("MigrationsTest")]
@@ -30,16 +41,5 @@ internal sealed class MigrationTests(MsSqlContainer databaseContainer, ILogger<M
         using DbContext context = new HrContext();
         var hasPendingModelChanges = context.Database.HasPendingModelChanges();
         hasPendingModelChanges.Should().BeFalse();
-    }
-
-    public static IEnumerable<Func<MigrationScript>> MigrationTestCases()
-    {
-        using DbContext context = new HrContext();
-        var migrations = context.GenerateMigrationScripts();
-
-        foreach (var migration in migrations)
-        {
-            yield return () => migration;
-        }
     }
 }
