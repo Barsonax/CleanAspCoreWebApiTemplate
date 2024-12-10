@@ -1,19 +1,19 @@
 ﻿namespace CleanAspCore.Api.Tests.Endpoints.Jobs;
 
-internal sealed class GetJobByIdTests : TestBase
+internal sealed class GetJobByIdTests(TestWebApi sut)
 {
     [Test]
     public async Task GetJobById_ReturnsExpectedJob()
     {
         //Arrange
         var job = new JobFaker().Generate();
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Jobs.Add(job);
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IJobApiClient>().GetJobById(job.Id);
+        var response = await sut.CreateClientFor<IJobApiClient>().GetJobById(job.Id);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);

@@ -2,23 +2,23 @@
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-internal sealed class UpdateEmployeeByIdTests : TestBase
+internal sealed class UpdateEmployeeByIdTests(TestWebApi sut)
 {
     [Test]
     public async Task UpdateEmployeeById_IsUpdated()
     {
         //Arrange
         var employee = new EmployeeFaker().Generate();
-        Sut.SeedData(context => { context.Employees.Add(employee); });
+        sut.SeedData(context => { context.Employees.Add(employee); });
 
         UpdateEmployeeRequest updateEmployeeRequest = new() { FirstName = "Updated" };
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NoContent);
-        Sut.AssertDatabase(context =>
+        sut.AssertDatabase(context =>
         {
             context.Employees.Should().BeEquivalentTo(new[]
             {
@@ -40,7 +40,7 @@ internal sealed class UpdateEmployeeByIdTests : TestBase
         UpdateEmployeeRequest updateEmployeeRequest = new() { FirstName = "Updated" };
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.NotFound);

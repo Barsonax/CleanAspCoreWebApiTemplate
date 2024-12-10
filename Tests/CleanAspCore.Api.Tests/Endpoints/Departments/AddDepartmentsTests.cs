@@ -2,7 +2,7 @@
 
 namespace CleanAspCore.Api.Tests.Endpoints.Departments;
 
-internal sealed class AddDepartmentsTests : TestBase
+internal sealed class AddDepartmentsTests(TestWebApi sut)
 {
     [Test]
     public async Task CreateDepartment_IsAdded()
@@ -11,12 +11,12 @@ internal sealed class AddDepartmentsTests : TestBase
         var department = new CreateDepartmentRequestFaker().Generate();
 
         //Act
-        var response = await Sut.CreateClientFor<IDepartmentApiClient>().CreateDepartment(department);
+        var response = await sut.CreateClientFor<IDepartmentApiClient>().CreateDepartment(department);
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.Created);
         var createdId = response.GetGuidFromLocationHeader();
-        Sut.AssertDatabase(context =>
+        sut.AssertDatabase(context =>
         {
             context.Departments.Should().BeEquivalentTo(new[] { new { Id = createdId } });
         });

@@ -4,7 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bogus"/>
-    <PackageReference Include="NUnit"/>
     <PackageReference Include="Testcontainers.MsSql"/>
     <PackageReference Include="Respawn"/>
   </ItemGroup>

@@ -5,4 +5,3 @@ global using CleanAspCore.Api.Tests.TestSetup;
 global using CleanAspCore.Api.TestUtils;
 global using CleanAspCore.Api.TestUtils.Fakers;
 global using FluentAssertions;
-global using NUnit.Framework;
