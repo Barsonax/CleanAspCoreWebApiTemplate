@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.TestUtils.DataBaseSetup;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Testcontainers.MsSql;

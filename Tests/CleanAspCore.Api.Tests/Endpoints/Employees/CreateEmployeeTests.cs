@@ -1,5 +1,6 @@
 ﻿using CleanAspCore.Api.Endpoints.Employees;
 using CleanAspCore.Api.Tests.Fakers;
+using FluentAssertions;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
@@ -20,7 +21,7 @@ internal sealed class CreateEmployeeTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.Created);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.Created);
         var createdId = response.GetGuidFromLocationHeader();
         sut.AssertDatabase(context =>
         {
@@ -68,7 +69,7 @@ internal sealed class CreateEmployeeTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).CreateEmployee(createEmployeeRequest);
 
         //Assert
-        await response.AssertBadRequest(scenario.Input.expectedErrors);
+        await Assert.That(response).HasBadRequest(scenario.Input.expectedErrors);
         sut.AssertDatabase(context =>
         {
             context.Employees.Should().BeEmpty();

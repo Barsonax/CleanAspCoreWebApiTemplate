@@ -9,7 +9,7 @@ internal sealed class GetEmployees(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
         await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 0,
@@ -38,7 +38,7 @@ internal sealed class GetEmployees(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
         await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 2,
@@ -71,7 +71,7 @@ internal sealed class GetEmployees(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(2, 10);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
         await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 2,

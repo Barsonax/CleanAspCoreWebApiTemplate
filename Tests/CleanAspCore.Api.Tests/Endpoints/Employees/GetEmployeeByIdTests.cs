@@ -16,7 +16,7 @@ internal sealed class GetEmployeeByIdTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployeeById(employee.Id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
         await Assert.That(response).HasJsonBodyEquivalentTo(new { Id = employee.Id });
     }
 
@@ -30,6 +30,6 @@ internal sealed class GetEmployeeByIdTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployeeById(employee.Id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.NotFound);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.NotFound);
     }
 }

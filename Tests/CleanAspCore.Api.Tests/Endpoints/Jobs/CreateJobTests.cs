@@ -1,4 +1,5 @@
 using CleanAspCore.Api.Tests.Fakers;
+using FluentAssertions;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Jobs;
 
@@ -14,7 +15,7 @@ internal sealed class CreateJobTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IJobApiClient>().CreateJob(createJobRequest);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.Created);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.Created);
         var createdId = response.GetGuidFromLocationHeader();
         sut.AssertDatabase(context =>
         {

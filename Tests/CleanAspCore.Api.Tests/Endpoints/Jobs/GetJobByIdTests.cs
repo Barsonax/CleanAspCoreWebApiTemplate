@@ -16,7 +16,7 @@ internal sealed class GetJobByIdTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IJobApiClient>().GetJobById(job.Id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
         await Assert.That(response).HasJsonBodyEquivalentTo(new { Id = job.Id });
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace CleanAspCore.Api.Tests.Endpoints.Employees;
+﻿using FluentAssertions;
+
+namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
 internal sealed class DeleteEmployeeByIdTests(TestWebApi sut)
 {
@@ -16,7 +18,7 @@ internal sealed class DeleteEmployeeByIdTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(employee.Id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.NoContent);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.NoContent);
         sut.AssertDatabase(context => { context.Employees.Should().BeEmpty(); });
     }
 
@@ -30,6 +32,6 @@ internal sealed class DeleteEmployeeByIdTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.NotFound);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.NotFound);
     }
 }

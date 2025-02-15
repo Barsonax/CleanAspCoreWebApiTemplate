@@ -1,4 +1,5 @@
 ﻿using CleanAspCore.Api.Endpoints.Employees;
+using FluentAssertions;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
@@ -17,7 +18,7 @@ internal sealed class UpdateEmployeeByIdTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.NoContent);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.NoContent);
         sut.AssertDatabase(context =>
         {
             context.Employees.Should().BeEquivalentTo([
@@ -42,6 +43,6 @@ internal sealed class UpdateEmployeeByIdTests(TestWebApi sut)
         var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).UpdateEmployeeById(employee.Id, updateEmployeeRequest);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.NotFound);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.NotFound);
     }
 }
