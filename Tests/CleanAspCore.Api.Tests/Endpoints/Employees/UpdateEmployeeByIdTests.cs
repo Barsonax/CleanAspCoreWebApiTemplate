@@ -1,5 +1,4 @@
 ﻿using CleanAspCore.Api.Endpoints.Employees;
-using FluentAssertions;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
@@ -19,15 +18,11 @@ internal sealed class UpdateEmployeeByIdTests(TestWebApi sut)
 
         //Assert
         await Assert.That(response).HasStatusCode(HttpStatusCode.NoContent);
-        sut.AssertDatabase(context =>
+        await sut.AssertDatabase(async context =>
         {
-            context.Employees.Should().BeEquivalentTo([
-                new
-                {
-                    FirstName = "Updated",
-                    LastName = employee.LastName,
-                }
-            ]);
+            await Assert.That(context.Employees)
+                .HasCount().EqualTo(1).And
+                .Contains(x => x.FirstName == "Updated" && x.LastName == employee.LastName);
         });
     }
 

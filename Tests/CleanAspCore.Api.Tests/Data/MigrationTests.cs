@@ -1,6 +1,5 @@
 ﻿using CleanAspCore.Data;
 using CleanAspCore.TestUtils.DataBaseSetup;
-using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Testcontainers.MsSql;
@@ -29,18 +28,18 @@ internal sealed class MigrationTests(MsSqlContainer databaseContainer, ILogger<M
         await databaseContainer.CreateDatabase(databaseName);
         var migrator = new SqlMigrator(databaseContainer, logger, databaseName);
         var upResult = await migrator.Up(migration);
-        upResult.ExitCode.Should().Be(0, $"Error during migration up: {upResult.Stderr}");
+        await Assert.That(upResult.ExitCode).IsEqualTo(0).Because($"Error during migration up: {upResult.Stderr}");
         var downResult = await migrator.Down(migration);
-        downResult.ExitCode.Should().Be(0, $"Error during migration down: {downResult.Stderr}");
+        await Assert.That(downResult.ExitCode).IsEqualTo(0).Because($"Error during migration down: {downResult.Stderr}");
         var upResult2 = await migrator.Up(migration);
-        upResult.ExitCode.Should().Be(0, $"Error during migration up2: {upResult2.Stderr}");
+        await Assert.That(upResult2.ExitCode).IsEqualTo(0).Because($"Error during migration up2: {upResult2.Stderr}");
     }
 
     [Test]
-    public void ModelShouldNotHavePendingModelChanges()
+    public async Task ModelShouldNotHavePendingModelChanges()
     {
-        using DbContext context = new HrContext();
+        await using DbContext context = new HrContext();
         var hasPendingModelChanges = context.Database.HasPendingModelChanges();
-        hasPendingModelChanges.Should().BeFalse();
+        await Assert.That(hasPendingModelChanges).IsFalse();
     }
 }

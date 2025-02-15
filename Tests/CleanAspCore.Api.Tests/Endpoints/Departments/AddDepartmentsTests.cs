@@ -1,5 +1,4 @@
 ﻿using CleanAspCore.Api.Tests.Fakers;
-using FluentAssertions;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Departments;
 
@@ -18,9 +17,11 @@ internal sealed class AddDepartmentsTests(TestWebApi sut)
         await Assert.That(response).HasStatusCode(HttpStatusCode.Created);
 
         var createdId = response.GetGuidFromLocationHeader();
-        sut.AssertDatabase(context =>
+        await sut.AssertDatabase(async context =>
         {
-            context.Departments.Should().BeEquivalentTo([new { Id = createdId }]);
+            await Assert.That(context.Departments)
+                .HasCount().EqualTo(1).And
+                .Contains(x => x.Id == createdId);
         });
     }
 }

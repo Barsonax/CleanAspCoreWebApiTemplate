@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace CleanAspCore.Api.Tests.Endpoints.Employees;
+﻿namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
 internal sealed class DeleteEmployeeByIdTests(TestWebApi sut)
 {
@@ -19,7 +17,10 @@ internal sealed class DeleteEmployeeByIdTests(TestWebApi sut)
 
         //Assert
         await Assert.That(response).HasStatusCode(HttpStatusCode.NoContent);
-        sut.AssertDatabase(context => { context.Employees.Should().BeEmpty(); });
+        await sut.AssertDatabase(async context =>
+        {
+            await Assert.That(context.Employees).IsEmpty();
+        });
     }
 
     [Test]
