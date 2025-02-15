@@ -17,6 +17,6 @@ internal sealed class GetJobByIdTests(TestWebApi sut)
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new { Id = job.Id });
+        await Assert.That(response).HasJsonBodyEquivalentTo(new { Id = job.Id });
     }
 }

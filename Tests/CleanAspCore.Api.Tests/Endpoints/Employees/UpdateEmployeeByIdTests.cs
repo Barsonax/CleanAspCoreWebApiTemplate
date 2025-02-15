@@ -20,14 +20,13 @@ internal sealed class UpdateEmployeeByIdTests(TestWebApi sut)
         await response.AssertStatusCode(HttpStatusCode.NoContent);
         sut.AssertDatabase(context =>
         {
-            context.Employees.Should().BeEquivalentTo(new[]
-            {
+            context.Employees.Should().BeEquivalentTo([
                 new
                 {
                     FirstName = "Updated",
                     LastName = employee.LastName,
                 }
-            });
+            ]);
         });
     }
 

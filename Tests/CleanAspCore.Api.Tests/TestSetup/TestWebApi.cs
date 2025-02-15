@@ -13,16 +13,9 @@ using Refit;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
 
-public sealed class TestWebApi : WebApplicationFactory<Program>
+public sealed class TestWebApi(DatabasePool databasePool) : WebApplicationFactory<Program>
 {
-    private readonly PooledDatabase _pooledDatabase;
-    private readonly ILoggerProvider _loggerProvider;
-
-    public TestWebApi(DatabasePool databasePool, ILoggerProvider loggerProvider)
-    {
-        _loggerProvider = loggerProvider;
-        _pooledDatabase = databasePool.Get();
-    }
+    private readonly PooledDatabase _pooledDatabase = databasePool.Get();
 
     protected override IHost CreateHost(IHostBuilder builder)
     {
@@ -33,6 +26,8 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
             {
                 { "ConnectionStrings:Default", _pooledDatabase.ConnectionString },
                 { "Logging:LogLevel:Microsoft.AspNetCore.Routing", "Information" },
+                { "Logging:LogLevel:Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager", "Warning" },
+                { "Logging:LogLevel:Microsoft.EntityFrameworkCore.Model.Validation", "Error" },
                 { "DisableTelemetry", "true" },
                 { "DisableOpenApi", "true" },
                 { "DisableMigrations", "true" }
@@ -51,7 +46,7 @@ public sealed class TestWebApi : WebApplicationFactory<Program>
         builder.ConfigureLogging(loggingBuilder =>
         {
             loggingBuilder.ClearProviders();
-            loggingBuilder.AddProvider(_loggerProvider);
+            loggingBuilder.AddConsole();
         });
 
         var app = base.CreateHost(builder);

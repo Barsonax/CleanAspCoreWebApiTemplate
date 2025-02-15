@@ -18,6 +18,6 @@ internal sealed class GetDepartmentByIdTests(TestWebApi sut)
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new { Id = department.Id });
+        await Assert.That(response).HasJsonBodyEquivalentTo(new { Id = department.Id });
     }
 }

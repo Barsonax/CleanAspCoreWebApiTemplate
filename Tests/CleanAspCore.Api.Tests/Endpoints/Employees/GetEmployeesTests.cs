@@ -10,7 +10,7 @@ internal sealed class GetEmployees(TestWebApi sut)
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new
+        await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 0,
             TotalRecords = 0,
@@ -39,7 +39,7 @@ internal sealed class GetEmployees(TestWebApi sut)
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new
+        await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 2,
             TotalRecords = 15,
@@ -72,7 +72,7 @@ internal sealed class GetEmployees(TestWebApi sut)
 
         //Assert
         await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new
+        await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 2,
             TotalRecords = 15,

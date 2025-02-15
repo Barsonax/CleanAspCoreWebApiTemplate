@@ -18,7 +18,7 @@ internal sealed class CreateJobTests(TestWebApi sut)
         var createdId = response.GetGuidFromLocationHeader();
         sut.AssertDatabase(context =>
         {
-            context.Jobs.Should().BeEquivalentTo(new[] { new { Id = createdId } });
+            context.Jobs.Should().BeEquivalentTo([new { Id = createdId }]);
         });
     }
 }

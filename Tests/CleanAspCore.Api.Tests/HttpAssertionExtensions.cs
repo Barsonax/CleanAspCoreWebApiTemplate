@@ -1,5 +1,7 @@
-﻿using FluentAssertions.Execution;
+﻿using System.Runtime.CompilerServices;
+using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Http;
+using TUnit.Assertions.AssertionBuilders;
 
 namespace CleanAspCore.Api.Tests;
 
@@ -37,15 +39,14 @@ internal static class HttpAssertionExtensions
         propertiesWithErrors.Should().BeEquivalentTo(expectedErrors);
     }
 
-    public static async Task AssertJsonBodyIsEquivalentTo<T>(this HttpResponseMessage response, T expected)
+    public static InvokableValueAssertionBuilder<HttpResponseMessage> HasJsonBodyEquivalentTo<T>(this ValueAssertionBuilder<HttpResponseMessage> response, T expected,
+        [CallerArgumentExpression(nameof(expected))]
+        string doNotPopulateThisValue1 = "")
     {
-        using var scope = new AssertionScope();
-        response.Content.Headers.ContentType.Should().NotBeNull();
-        response.Content.Headers.ContentType!.MediaType.Should().Be("application/json");
-        response.Content.Headers.ContentType!.CharSet.Should().Be("utf-8");
-
-        var body = await response.Content.ReadFromJsonAsync<T>();
-        body.Should().BeEquivalentTo(expected);
+        return response.IsNotNull().And
+            .HasMember(x => x.Content.Headers.ContentType!.MediaType).EqualTo("application/json").And
+            .HasMember(x => x.Content.Headers.ContentType!.CharSet).EqualTo("utf-8").And
+            .RegisterAssertion(new JsonBodyAssertCondition<T>(expected), [doNotPopulateThisValue1]);
     }
 
     public static Guid GetGuidFromLocationHeader(this HttpResponseMessage response)

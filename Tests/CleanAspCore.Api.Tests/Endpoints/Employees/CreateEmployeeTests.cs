@@ -24,7 +24,7 @@ internal sealed class CreateEmployeeTests(TestWebApi sut)
         var createdId = response.GetGuidFromLocationHeader();
         sut.AssertDatabase(context =>
         {
-            context.Employees.Should().BeEquivalentTo(new[] { new { Id = createdId } });
+            context.Employees.Should().BeEquivalentTo([new { Id = createdId }]);
         });
     }
 

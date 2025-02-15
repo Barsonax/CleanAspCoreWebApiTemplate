@@ -18,7 +18,7 @@ internal sealed class AddDepartmentsTests(TestWebApi sut)
         var createdId = response.GetGuidFromLocationHeader();
         sut.AssertDatabase(context =>
         {
-            context.Departments.Should().BeEquivalentTo(new[] { new { Id = createdId } });
+            context.Departments.Should().BeEquivalentTo([new { Id = createdId }]);
         });
     }
 }
