@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<DatabasePool>();
     }
 
-    public static void RegisterSqlContainer(this IServiceCollection services)
+    public static IServiceCollection RegisterSqlContainer(this IServiceCollection services)
     {
         services.RegisterSharedDatabaseServices();
         services.AddTransient<RespawnerOptions>(c => new RespawnerOptions { DbAdapter = DbAdapter.SqlServer });
@@ -26,11 +26,14 @@ public static class ServiceCollectionExtensions
         container.StartAsync().RunSynchronouslyWithoutSynchronizationContext();
 
         services.AddSingleton(container);
+
+        return services;
     }
 
-    public static void RegisterMigrationInitializer<TContext>(this IServiceCollection services)
+    public static IServiceCollection RegisterMigrationInitializer<TContext>(this IServiceCollection services)
         where TContext : DbContext, new()
     {
         services.AddSingleton<IDatabaseInitializer, DbContextMigrationInitializer<TContext>>();
+        return services;
     }
 }

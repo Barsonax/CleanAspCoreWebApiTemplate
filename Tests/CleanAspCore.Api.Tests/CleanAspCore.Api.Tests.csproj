@@ -5,24 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Bogus"/>
-    <PackageReference Include="FluentAssertions"/>
-    <PackageReference Include="GitHubActionsTestLogger">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
-    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
-    <PackageReference Include="NUnit"/>
-    <PackageReference Include="NUnit3TestAdapter"/>
-    <PackageReference Include="NUnit.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="coverlet.collector">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport"/>
+    <PackageReference Include="TUnit"/>
     <PackageReference Include="Refit"/>
   </ItemGroup>
   <ItemGroup>

@@ -36,14 +36,12 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release
       - name: Test
+        working-directory: Tests/CleanAspCore.Api.Tests
         run: >
-          dotnet test
+          dotnet run
           --no-build
           --configuration Release
-          --verbosity normal
-          --logger GitHubActions
-          --
-          RunConfiguration.CollectSourceInformation=true
+          --report-trx
       - name: dotnet publish
         working-directory: CleanAspCore.Api
         run: dotnet publish --no-build -c Release -o ${{env.DOTNET_ROOT}}/myapp

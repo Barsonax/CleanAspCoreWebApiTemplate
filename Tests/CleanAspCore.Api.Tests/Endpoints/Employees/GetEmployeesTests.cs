@@ -1,16 +1,16 @@
 ﻿namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-internal sealed class GetEmployees : TestBase
+internal sealed class GetEmployees(TestWebApi sut)
 {
     [Test]
     public async Task? GetEmployees_NoEmployees_ReturnsEmptyPage()
     {
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 0,
             TotalRecords = 0,
@@ -29,17 +29,17 @@ internal sealed class GetEmployees : TestBase
             .RuleFor(x => x.Department, department)
             .RuleFor(x => x.Job, job)
             .Generate(15);
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Employees.AddRange(employees);
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(1, 10);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 2,
             TotalRecords = 15,
@@ -62,17 +62,17 @@ internal sealed class GetEmployees : TestBase
             .RuleFor(x => x.Department, department)
             .RuleFor(x => x.Job, job)
             .Generate(15);
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Employees.AddRange(employees);
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(2, 10);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.ReadRole).GetEmployees(2, 10);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.OK);
-        await response.AssertJsonBodyIsEquivalentTo(new
+        await Assert.That(response).HasStatusCode(HttpStatusCode.OK);
+        await Assert.That(response).HasJsonBodyEquivalentTo(new
         {
             TotalPages = 2,
             TotalRecords = 15,

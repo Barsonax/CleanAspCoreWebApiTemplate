@@ -1,23 +1,26 @@
 ﻿namespace CleanAspCore.Api.Tests.Endpoints.Employees;
 
-internal sealed class DeleteEmployeeByIdTests : TestBase
+internal sealed class DeleteEmployeeByIdTests(TestWebApi sut)
 {
     [Test]
     public async Task DeleteEmployeeById_IsDeleted()
     {
         //Arrange
         var employee = new EmployeeFaker().Generate();
-        Sut.SeedData(context =>
+        sut.SeedData(context =>
         {
             context.Employees.Add(employee);
         });
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(employee.Id);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(employee.Id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.NoContent);
-        Sut.AssertDatabase(context => { context.Employees.Should().BeEmpty(); });
+        await Assert.That(response).HasStatusCode(HttpStatusCode.NoContent);
+        await sut.AssertDatabase(async context =>
+        {
+            await Assert.That(context.Employees).IsEmpty();
+        });
     }
 
     [Test]
@@ -27,9 +30,9 @@ internal sealed class DeleteEmployeeByIdTests : TestBase
         var id = Guid.NewGuid();
 
         //Act
-        var response = await Sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(id);
+        var response = await sut.CreateClientFor<IEmployeeApiClient>(ClaimConstants.WriteRole).DeleteEmployeeById(id);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.NotFound);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.NotFound);
     }
 }

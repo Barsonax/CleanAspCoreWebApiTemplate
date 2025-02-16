@@ -2,7 +2,7 @@ using CleanAspCore.Api.Tests.Fakers;
 
 namespace CleanAspCore.Api.Tests.Endpoints.Jobs;
 
-internal sealed class CreateJobTests : TestBase
+internal sealed class CreateJobTests(TestWebApi sut)
 {
     [Test]
     public async Task CreateJob_IsAdded()
@@ -11,14 +11,16 @@ internal sealed class CreateJobTests : TestBase
         var createJobRequest = new CreateJobRequestFaker().Generate();
 
         //Act
-        var response = await Sut.CreateClientFor<IJobApiClient>().CreateJob(createJobRequest);
+        var response = await sut.CreateClientFor<IJobApiClient>().CreateJob(createJobRequest);
 
         //Assert
-        await response.AssertStatusCode(HttpStatusCode.Created);
+        await Assert.That(response).HasStatusCode(HttpStatusCode.Created);
         var createdId = response.GetGuidFromLocationHeader();
-        Sut.AssertDatabase(context =>
+        await sut.AssertDatabase(async context =>
         {
-            context.Jobs.Should().BeEquivalentTo(new[] { new { Id = createdId } });
+            await Assert.That(context.Jobs)
+                .HasCount().EqualTo(1).And
+                .Contains(x => x.Id == createdId);
         });
     }
 }
