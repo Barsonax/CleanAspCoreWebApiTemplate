@@ -2,8 +2,11 @@ using System.Reflection;
 using CleanAspCore.Api;
 using CleanAspCore.Core.Common.Telemetry;
 using CleanAspCore.Data;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 var builder = WebApplication.CreateSlimBuilder(args);
+builder.Services.Configure<RouteOptions>(
+    options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex"));
 
 builder.AddOpenApiServices();
 builder.AddAuthServices();
