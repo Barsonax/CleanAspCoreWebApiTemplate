@@ -51,18 +51,18 @@ jobs:
           --coverage
           --coverage-output-format cobertura
           --report-trx
-      - uses: actions/upload-artifact@v4  # upload test results
-        if: success() || failure()        # run this step even if previous step failed
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
         with:
           name: test-results
           path: '**/*.trx'
       - uses: dorny/test-reporter@v1
         if: always()
         with:
-          artifact: test-results            # artifact name
-          name: Tests                  # Name of the check run which will be created
-          path: '**/*.trx'                     # Path to test results (inside artifact .zip)
-          reporter: dotnet-trx              # Format of test results
+          artifact: test-results
+          name: Tests
+          path: '**/*.trx'
+          reporter: dotnet-trx
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
