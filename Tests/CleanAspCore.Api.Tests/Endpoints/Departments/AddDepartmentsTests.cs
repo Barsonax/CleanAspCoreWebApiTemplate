@@ -5,6 +5,13 @@ namespace CleanAspCore.Api.Tests.Endpoints.Departments;
 internal sealed class AddDepartmentsTests(TestWebApi sut)
 {
     [Test]
+    public Task Fail()
+    {
+        Assert.Fail("Should throw exception");
+        return Task.CompletedTask;
+    }
+
+    [Test]
     public async Task CreateDepartment_IsAdded()
     {
         //Arrange
