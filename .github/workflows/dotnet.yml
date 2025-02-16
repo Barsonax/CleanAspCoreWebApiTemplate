@@ -43,11 +43,11 @@ jobs:
           --no-restore
           --configuration Release
       - name: Test
-        working-directory: Tests/CleanAspCore.Api.Tests
         run: >
-          dotnet run
+          dotnet test
           --no-build
           --configuration Release
+          --
           --coverage
           --coverage-output-format cobertura
           --report-trx
