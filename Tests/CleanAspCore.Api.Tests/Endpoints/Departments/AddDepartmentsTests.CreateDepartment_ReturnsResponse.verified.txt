@@ -1,0 +1,17 @@
+﻿{
+  Version: 1.1,
+  Content: {
+    Headers: []
+  },
+  StatusCode: Created,
+  ReasonPhrase: Created,
+  Headers: [
+    {
+      Location: [
+        https://localhost/departments/DepartmentId
+      ]
+    }
+  ],
+  TrailingHeaders: [],
+  IsSuccessStatusCode: true
+}
