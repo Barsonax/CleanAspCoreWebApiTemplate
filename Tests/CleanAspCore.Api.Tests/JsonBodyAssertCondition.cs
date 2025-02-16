@@ -7,7 +7,7 @@ public class JsonBodyAssertCondition<T>(T expected) : ExpectedValueAssertConditi
 {
     protected override string GetExpectation() => $"json body to be equivalent to {ExpectedValue}";
 
-    protected override async Task<AssertionResult> GetResult(HttpResponseMessage? actualValue, T? expectedValue)
+    protected override async ValueTask<AssertionResult> GetResult(HttpResponseMessage? actualValue, T? expectedValue)
     {
         if (actualValue is null)
         {

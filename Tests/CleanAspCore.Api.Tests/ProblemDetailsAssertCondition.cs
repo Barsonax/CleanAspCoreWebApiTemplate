@@ -8,7 +8,7 @@ public class ProblemDetailsAssertCondition(IEnumerable<string>? expected) : Expe
     protected override string GetExpectation() =>
         ExpectedValue is null ? "No errors in problem details" : $"problem details errors to contain errors for these properties: {string.Join(", ", ExpectedValue)}";
 
-    protected override async Task<AssertionResult> GetResult(HttpResponseMessage? actualValue, IEnumerable<string>? expectedValue)
+    protected override async ValueTask<AssertionResult> GetResult(HttpResponseMessage? actualValue, IEnumerable<string>? expectedValue)
     {
         if (actualValue is null)
         {
