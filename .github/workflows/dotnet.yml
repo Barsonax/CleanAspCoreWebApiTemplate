@@ -32,7 +32,7 @@ jobs:
           path: |
             ~/.nuget/packages
             **/obj/*
-          key: ${{ runner.os }}-nuget_obj-${{ hashFiles('**/*.csproj', 'global.json', 'Directory.Build.props') }}
+          key: ${{ runner.os }}-nuget_obj-${{ hashFiles('**/*.csproj', 'global.json', 'Directory.Build.props', 'Directory.Packages.props') }}
       - name: Restore dependencies
         if: steps.cache-nuget.outputs.cache-hit != 'true'
         run: dotnet restore
