@@ -4,15 +4,17 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Bogus"/>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing"/>
-    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage"/>
-    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport"/>
-    <PackageReference Include="TUnit"/>
-    <PackageReference Include="Refit"/>
+    <PackageReference Include="Bogus" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
+    <PackageReference Include="TUnit" />
+    <PackageReference Include="Refit" />
+    <PackageReference Include="Aspire.Hosting.Testing" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CleanAspCore.Api\CleanAspCore.Api.csproj"/>
-    <ProjectReference Include="..\CleanAspCore.TestUtils\CleanAspCore.TestUtils.csproj"/>
+    <ProjectReference Include="..\..\CleanAspCore.Api\CleanAspCore.Api.csproj" />
+    <ProjectReference Include="..\..\CleanAspCore.AppHost\CleanAspCore.AppHost.csproj" />
+    <ProjectReference Include="..\CleanAspCore.TestUtils\CleanAspCore.TestUtils.csproj" />
   </ItemGroup>
 </Project>
