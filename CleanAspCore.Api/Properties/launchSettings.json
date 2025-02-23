@@ -5,7 +5,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "scalar",
       "applicationUrl": "http://localhost:7162",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -19,6 +19,7 @@
       "hotReloadProfile": "aspnetcore",
       "commandLineArgs": "watch run --property WarningLevel=0",
       "launchBrowser": true,
+      "launchUrl": "scalar",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH": "1"
