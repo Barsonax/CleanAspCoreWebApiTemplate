@@ -15,7 +15,7 @@ public static class AppConfigurationExtensions
 {
     public static void AddOpenTelemetryServices(this WebApplicationBuilder builder)
     {
-        if (builder.Configuration.GetValue<bool?>("DisableTelemetry") == true)
+        if (!builder.Configuration.GetValue<bool>("EnableTelemetry"))
             return;
 
         builder.Logging.AddOpenTelemetry(options =>

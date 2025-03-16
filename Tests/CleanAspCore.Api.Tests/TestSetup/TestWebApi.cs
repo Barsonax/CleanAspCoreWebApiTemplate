@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Web;
 using Refit;
 
 namespace CleanAspCore.Api.Tests.TestSetup;
@@ -40,7 +41,7 @@ public sealed class TestWebApi(DatabasePool databasePool) : WebApplicationFactor
             services.AddDbContext<HrContext>(c => c
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
-            services.ConfigureTestJwt();
+            services.ConfigureTestJwt(Constants.AzureAd);
         });
 
         builder.ConfigureLogging(loggingBuilder =>

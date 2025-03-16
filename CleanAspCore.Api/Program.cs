@@ -1,5 +1,7 @@
 using System.Reflection;
+using System.Text.Json;
 using CleanAspCore.Api;
+using CleanAspCore.Core.Common.OpenApi;
 using CleanAspCore.Core.Common.Telemetry;
 using CleanAspCore.Data;
 using Microsoft.AspNetCore.Routing.Constraints;
@@ -8,14 +10,18 @@ var builder = WebApplication.CreateSlimBuilder(args);
 builder.Services.Configure<RouteOptions>(
     options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex"));
 
-builder.AddOpenApiServices();
+builder.AddOpenApiServices<CleanAspCore.Api.Program>(AppJsonSerializerContext.Default);
 builder.AddAuthServices();
 builder.AddAppServices();
 builder.AddOpenTelemetryServices();
 builder.Services.AddHttpClient();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 builder.Services.AddDbContext<HrContext>();
-
+builder.Configuration.AddJsonFile("appsettings.Local.json", true);
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
+});
 var app = builder.Build();
 
 app.RunMigrations();
