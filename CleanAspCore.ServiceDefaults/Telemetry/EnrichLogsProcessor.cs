@@ -2,7 +2,7 @@
 using OpenTelemetry;
 using OpenTelemetry.Logs;
 
-namespace CleanAspCore.Core.Common.Telemetry;
+namespace CleanAspCore.ServiceDefaults.Telemetry;
 
 internal sealed class EnrichLogsProcessor : BaseProcessor<LogRecord>
 {
