@@ -1,14 +1,19 @@
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using Azure.Monitor.OpenTelemetry.AspNetCore;
+using CleanAspCore.ServiceDefaults.Telemetry;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 
-namespace Microsoft.Extensions.Hosting;
+namespace CleanAspCore.ServiceDefaults;
 
 // Adds common .NET Aspire services: service discovery, resilience, health checks, and OpenTelemetry.
 // This project should be referenced by each service project in your solution.
@@ -41,28 +46,39 @@ public static class Extensions
         return builder;
     }
 
-    public static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+    private static TBuilder ConfigureOpenTelemetry<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
+#pragma warning disable CA2000
+        builder.Services.AddSingleton(new ActivitySource(builder.Environment.ApplicationName));
+        builder.Services.AddSingleton(new Meter(builder.Environment.ApplicationName));
+#pragma warning restore CA2000
+
+        if (!builder.Configuration.GetValue<bool>("EnableTelemetry"))
+            return builder;
+
         builder.Logging.AddOpenTelemetry(logging =>
         {
             logging.IncludeFormattedMessage = true;
             logging.IncludeScopes = true;
+            logging.AddProcessor(new EnrichLogsProcessor());
         });
 
         builder.Services.AddOpenTelemetry()
             .WithMetrics(metrics =>
             {
-                metrics.AddAspNetCoreInstrumentation()
+                metrics
+                    .AddMeter(builder.Environment.ApplicationName)
+                    .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddRuntimeInstrumentation();
             })
             .WithTracing(tracing =>
             {
                 tracing.AddSource(builder.Environment.ApplicationName)
+                    .AddProcessor(new EnrichSpanProcessor())
                     .AddAspNetCoreInstrumentation()
-                    // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
-                    //.AddGrpcClientInstrumentation()
-                    .AddHttpClientInstrumentation();
+                    .AddHttpClientInstrumentation()
+                    .AddEntityFrameworkCoreInstrumentation();
             });
 
         builder.AddOpenTelemetryExporters();
@@ -72,24 +88,19 @@ public static class Extensions
 
     private static TBuilder AddOpenTelemetryExporters<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
-        var useOtlpExporter = !string.IsNullOrWhiteSpace(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"]);
-
-        if (useOtlpExporter)
+        if (builder.Environment.IsDevelopment())
         {
             builder.Services.AddOpenTelemetry().UseOtlpExporter();
         }
-
-        // Uncomment the following lines to enable the Azure Monitor exporter (requires the Azure.Monitor.OpenTelemetry.AspNetCore package)
-        //if (!string.IsNullOrEmpty(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]))
-        //{
-        //    builder.Services.AddOpenTelemetry()
-        //       .UseAzureMonitor();
-        //}
+        else
+        {
+            builder.Services.AddOpenTelemetry().UseAzureMonitor();
+        }
 
         return builder;
     }
 
-    public static TBuilder AddDefaultHealthChecks<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+    private static TBuilder AddDefaultHealthChecks<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
     {
         builder.Services.AddHealthChecks()
             // Add a default liveness check to ensure app is responsive
