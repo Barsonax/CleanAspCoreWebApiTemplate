@@ -23,10 +23,10 @@ internal static class TestJwtGenerator
         return _sTokenHandler.WriteToken(new JwtSecurityToken(_issuer, Audience, claims, null, DateTime.UtcNow.AddMinutes(20), _signingCredentials));
     }
 
-    public static IServiceCollection ConfigureTestJwt(this IServiceCollection services)
+    public static IServiceCollection ConfigureTestJwt(this IServiceCollection services, string scheme)
     {
         services.RemoveAll<IConfigureOptions<JwtBearerOptions>>(); // Remove any already configured jwt bearer options configurators as we want to be in control of this in the tests.
-        services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
+        services.Configure<JwtBearerOptions>(scheme, options =>
         {
             options.Configuration = new OpenIdConnectConfiguration
             {

@@ -26,11 +26,11 @@ internal static class AppConfiguration
     {
         var defaultPolicy = new AuthorizationPolicyBuilder()
             .RequireAuthenticatedUser()
-            .AddAuthenticationSchemes("AzureAd");
+            .AddAuthenticationSchemes(Constants.AzureAd);
 
-        var auth = builder.Services.AddAuthentication("AzureAd");
+        var auth = builder.Services.AddAuthentication(Constants.AzureAd);
 
-        auth.AddMicrosoftIdentityWebApi(builder.Configuration, jwtBearerScheme: "AzureAd");
+        auth.AddMicrosoftIdentityWebApi(builder.Configuration, jwtBearerScheme: Constants.AzureAd);
 
         if (builder.Environment.IsDevelopment())
         {
