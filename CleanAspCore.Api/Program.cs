@@ -17,7 +17,7 @@ builder.AddOpenTelemetryServices();
 builder.Services.AddHttpClient();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 builder.Services.AddDbContext<HrContext>();
-builder.Configuration.AddJsonFile("appsettings.Local.json");
+builder.Configuration.AddJsonFile("appsettings.Local.json", true);
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
