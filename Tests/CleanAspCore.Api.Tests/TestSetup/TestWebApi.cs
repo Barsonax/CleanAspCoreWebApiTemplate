@@ -78,7 +78,7 @@ public sealed class TestWebApi(DatabasePool databasePool) : WebApplicationFactor
         return seedAction(context);
     }
 
-    public T CreateClientFor<T>(params Claim[] claims)
+    public HttpClient CreateUntypedClientFor(params Claim[] claims)
     {
         var jwt = TestJwtGenerator.GenerateJwtToken(claims);
         var client = CreateClient(new WebApplicationFactoryClientOptions
@@ -86,6 +86,12 @@ public sealed class TestWebApi(DatabasePool databasePool) : WebApplicationFactor
             BaseAddress = new Uri("https://localhost") // Prevents https redirection warnings.
         });
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+        return client;
+    }
+
+    public T CreateClientFor<T>(params Claim[] claims)
+    {
+        var client = CreateUntypedClientFor(claims);
         return RestService.For<T>(client);
     }
 }

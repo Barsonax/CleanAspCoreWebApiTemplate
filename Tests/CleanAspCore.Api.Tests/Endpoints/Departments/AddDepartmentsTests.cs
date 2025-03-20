@@ -24,4 +24,26 @@ internal sealed class AddDepartmentsTests(TestWebApi sut)
                 .Contains(x => x.Id == createdId);
         });
     }
+
+    [Test]
+    public async Task CreateDepartment_MissingProperties_ReturnsBadRequestWithDetails()
+    {
+        //Act
+        var response = await sut.CreateUntypedClientFor().PostAsJsonAsync("departments", new { });
+
+        //Assert
+        await Assert.That(response).HasBadRequest("name", "city");
+    }
+
+    [Test]
+    public async Task CreateDepartment_InvalidJson_ReturnsBadRequestWithDetails()
+    {
+        //Act
+        var response = await sut.CreateUntypedClientFor().PostAsJsonAsync("departments", "{/}");
+
+        //Assert
+        await Assert.That(response).HasBadRequest();
+        var responseText = await response.Content.ReadAsStringAsync();
+        await Assert.That(responseText).Contains("The JSON value could not be converted to");
+    }
 }

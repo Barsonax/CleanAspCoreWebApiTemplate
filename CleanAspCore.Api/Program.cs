@@ -1,6 +1,6 @@
 using System.Reflection;
-using System.Text.Json;
 using CleanAspCore.Api;
+using CleanAspCore.Api.Common.ErrorHandling;
 using CleanAspCore.Core.Common.OpenApi;
 using CleanAspCore.Core.Common.Telemetry;
 using CleanAspCore.Data;
@@ -14,6 +14,7 @@ builder.AddOpenApiServices<CleanAspCore.Api.Program>(AppJsonSerializerContext.De
 builder.AddAuthServices();
 builder.AddAppServices();
 builder.AddOpenTelemetryServices();
+builder.AddExceptionHandlers();
 builder.Services.AddHttpClient();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 builder.Services.AddDbContext<HrContext>();
@@ -28,6 +29,7 @@ app.RunMigrations();
 
 app.UseOpenApi();
 
+app.UseErrorHandling();
 app.UseAuthentication();
 app.UseAuthorization();
 
