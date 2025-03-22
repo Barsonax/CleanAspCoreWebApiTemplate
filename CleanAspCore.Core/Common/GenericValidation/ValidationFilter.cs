@@ -4,14 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanAspCore.Core.Common.GenericValidation;
 
-public sealed class ValidationFilter<TRequest>(IServiceProvider serviceProvider) : IEndpointFilter
+public sealed class ValidationFilter<TRequest> : IEndpointFilter
 {
     public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
         var request = (TRequest)context.Arguments
             .First(x => x != null && x.GetType().IsAssignableTo(typeof(TRequest)))!;
 
-        var validator = (IValidator)serviceProvider.GetRequiredService(typeof(IValidator<>).MakeGenericType(request.GetType()));
+        var validator = (IValidator)context.HttpContext.RequestServices.GetRequiredService(typeof(IValidator<>).MakeGenericType(request.GetType()));
 
         var result = await validator.ValidateAsync(new ValidationContext<TRequest>(request), context.HttpContext.RequestAborted);
 
