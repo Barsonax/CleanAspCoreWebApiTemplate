@@ -6,7 +6,7 @@ namespace CleanAspCore.Api.Tests.Endpoints.Weapons;
 internal sealed class GetWeaponByIdTests(TestWebApi sut)
 {
     [Test]
-    public async Task GetWeaponById_ReturnsExpectedWeapon()
+    public async Task GetWeaponById_Sword_ReturnsExpectedWeapon()
     {
         //Arrange
         var weapon = new SwordFaker().Generate();
@@ -19,6 +19,27 @@ internal sealed class GetWeaponByIdTests(TestWebApi sut)
         var response = await sut.CreateUntypedClientFor().GetFromJsonAsync<IWeaponResponse>($"weapons/{weapon.Id}");
 
         //Assert
-        await Assert.That(response).HasMember(x => x!.Id).EqualTo(weapon.Id);
+        await Assert.That(response)
+            .IsTypeOf<GetSwordResponse>()
+            .HasMember(x => x!.Id).EqualTo(weapon.Id);
+    }
+
+    [Test]
+    public async Task GetWeaponById_Bow_ReturnsExpectedWeapon()
+    {
+        //Arrange
+        var weapon = new BowFaker().Generate();
+        sut.SeedData(context =>
+        {
+            context.Weapons.Add(weapon);
+        });
+
+        //Act
+        var response = await sut.CreateUntypedClientFor().GetFromJsonAsync<IWeaponResponse>($"weapons/{weapon.Id}");
+
+        //Assert
+        await Assert.That(response)
+            .IsTypeOf<GetBowResponse>()
+            .HasMember(x => x!.Id).EqualTo(weapon.Id);
     }
 }
