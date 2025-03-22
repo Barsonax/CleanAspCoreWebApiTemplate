@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace CleanAspCore.Api.Common.ErrorHandling;
 
-internal partial class GlobalExceptionHandler : IExceptionHandler
+internal sealed partial class GlobalExceptionHandler : IExceptionHandler
 {
     private static readonly string[] _missingRequiredPropertyMessage = ["Is required but missing"];
 

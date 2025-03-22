@@ -32,7 +32,7 @@ internal sealed class CreateDepartmentRequestValidator : AbstractValidator<Creat
 
 internal static class AddDepartments
 {
-    public static async Task<CreatedAtRoute> Handle(HrContext context, CreateDepartmentRequest createDepartmentRequest, CancellationToken cancellationToken)
+    public static async Task<CreatedAtRoute> Handle(HrContext context, [FromBody] CreateDepartmentRequest createDepartmentRequest, CancellationToken cancellationToken)
     {
         var department = createDepartmentRequest.ToDepartment();
 

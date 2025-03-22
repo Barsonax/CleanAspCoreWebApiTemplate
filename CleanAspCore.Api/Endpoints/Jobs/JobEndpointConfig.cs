@@ -11,7 +11,7 @@ internal static class JobEndpointConfig
             .WithTags("Jobs");
 
         jobGroup.MapPost("/", AddJobs.Handle)
-            .WithRequestValidation<CreateJobRequest>();
+            .WithRequestBodyValidation();
 
         jobGroup.MapGet("/{id:guid}", GetJobById.Handle)
             .WithName(nameof(GetJobById));

@@ -1,6 +1,7 @@
 ﻿using CleanAspCore.Core.Data.Models.Departments;
 using CleanAspCore.Core.Data.Models.Employees;
 using CleanAspCore.Core.Data.Models.Jobs;
+using CleanAspCore.Core.Data.Models.Weapons;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -11,6 +12,8 @@ public sealed class HrContext : DbContext
     public DbSet<Employee> Employees => Set<Employee>();
     public DbSet<Department> Departments => Set<Department>();
     public DbSet<Job> Jobs => Set<Job>();
+
+    public DbSet<Weapon> Weapons => Set<Weapon>();
 
     private readonly string? _connectionString;
 

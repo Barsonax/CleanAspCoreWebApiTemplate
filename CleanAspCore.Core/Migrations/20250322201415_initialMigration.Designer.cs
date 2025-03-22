@@ -4,25 +4,28 @@ using CleanAspCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CleanAspCore.Migrations
+namespace CleanAspCore.Core.Migrations
 {
     [DbContext(typeof(HrContext))]
-    partial class HrContextModelSnapshot : ModelSnapshot
+    [Migration("20250322201415_initialMigration")]
+    partial class initialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CleanAspCore.Data.Models.Departments.Department", b =>
+            modelBuilder.Entity("CleanAspCore.Core.Data.Models.Departments.Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +46,7 @@ namespace CleanAspCore.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("CleanAspCore.Data.Models.Employees.Employee", b =>
+            modelBuilder.Entity("CleanAspCore.Core.Data.Models.Employees.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,7 +86,7 @@ namespace CleanAspCore.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("CleanAspCore.Data.Models.Jobs.Job", b =>
+            modelBuilder.Entity("CleanAspCore.Core.Data.Models.Jobs.Job", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,15 +102,73 @@ namespace CleanAspCore.Migrations
                     b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("CleanAspCore.Data.Models.Employees.Employee", b =>
+            modelBuilder.Entity("CleanAspCore.Core.Data.Models.Weapons.Weapon", b =>
                 {
-                    b.HasOne("CleanAspCore.Data.Models.Departments.Department", "Department")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Weapons");
+
+                    b.HasDiscriminator<string>("Type").HasValue("Weapon");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("CleanAspCore.Core.Data.Models.Weapons.Bow", b =>
+                {
+                    b.HasBaseType("CleanAspCore.Core.Data.Models.Weapons.Weapon");
+
+                    b.Property<float>("Damage")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Range")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RateOfFire")
+                        .HasColumnType("real");
+
+                    b.ToTable("Weapons", t =>
+                        {
+                            t.Property("Damage")
+                                .HasColumnName("Bow_Damage");
+
+                            t.Property("RateOfFire")
+                                .HasColumnName("Bow_RateOfFire");
+                        });
+
+                    b.HasDiscriminator().HasValue("bow");
+                });
+
+            modelBuilder.Entity("CleanAspCore.Core.Data.Models.Weapons.Sword", b =>
+                {
+                    b.HasBaseType("CleanAspCore.Core.Data.Models.Weapons.Weapon");
+
+                    b.Property<float>("Damage")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RateOfFire")
+                        .HasColumnType("real");
+
+                    b.HasDiscriminator().HasValue("sword");
+                });
+
+            modelBuilder.Entity("CleanAspCore.Core.Data.Models.Employees.Employee", b =>
+                {
+                    b.HasOne("CleanAspCore.Core.Data.Models.Departments.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CleanAspCore.Data.Models.Jobs.Job", "Job")
+                    b.HasOne("CleanAspCore.Core.Data.Models.Jobs.Job", "Job")
                         .WithMany()
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)

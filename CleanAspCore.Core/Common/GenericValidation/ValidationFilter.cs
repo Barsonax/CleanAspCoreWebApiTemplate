@@ -1,15 +1,19 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanAspCore.Core.Common.GenericValidation;
 
-public sealed class ValidationFilter<TRequest>(IValidator<TRequest> validator) : IEndpointFilter
+public sealed class ValidationFilter<TRequest>(IServiceProvider serviceProvider) : IEndpointFilter
 {
     public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
-        var request = context.Arguments.OfType<TRequest>().First();
+        var request = (TRequest)context.Arguments
+            .First(x => x != null && x.GetType().IsAssignableTo(typeof(TRequest)))!;
 
-        var result = await validator.ValidateAsync(request, context.HttpContext.RequestAborted);
+        var validator = (IValidator)serviceProvider.GetRequiredService(typeof(IValidator<>).MakeGenericType(request.GetType()));
+
+        var result = await validator.ValidateAsync(new ValidationContext<TRequest>(request), context.HttpContext.RequestAborted);
 
         if (!result.IsValid)
         {

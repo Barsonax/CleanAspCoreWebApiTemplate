@@ -11,7 +11,7 @@ internal static class DepartmentEndpointConfig
             .WithTags("Departments");
 
         departmentGroup.MapPost("/", AddDepartments.Handle)
-            .WithRequestValidation<CreateDepartmentRequest>();
+            .WithRequestBodyValidation();
 
         departmentGroup.MapGet("/{id:guid}", GetDepartmentById.Handle)
             .WithName(nameof(GetDepartmentById));

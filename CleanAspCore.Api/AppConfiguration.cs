@@ -1,6 +1,7 @@
 ﻿using CleanAspCore.Api.Endpoints.Departments;
 using CleanAspCore.Api.Endpoints.Employees;
 using CleanAspCore.Api.Endpoints.Jobs;
+using CleanAspCore.Api.Endpoints.Weapons;
 using CleanAspCore.Data.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,7 @@ internal static class AppConfiguration
         host.AddDepartmentsRoutes();
         host.AddEmployeesRoutes();
         host.AddJobsRoutes();
+        host.AddWeaponsRoutes();
     }
 
     internal static void AddAuthServices(this WebApplicationBuilder builder)

@@ -22,7 +22,7 @@ internal static class EmployeeEndpointConfig
 
         employeeGroup.MapPost("/", AddEmployee.Handle)
             .RequireAuthorization(WriteEmployeesPolicy)
-            .WithRequestValidation<CreateEmployeeRequest>();
+            .WithRequestBodyValidation();
 
         employeeGroup.MapGet("/{id:guid}", GetEmployeeById.Handle)
             .RequireAuthorization(ReadEmployeesPolicy)
@@ -37,6 +37,6 @@ internal static class EmployeeEndpointConfig
 
         employeeGroup.MapPatch("/{id:guid}", UpdateEmployeeById.Handle)
             .RequireAuthorization(WriteEmployeesPolicy)
-            .WithRequestValidation<UpdateEmployeeRequest>();
+            .WithRequestBodyValidation();
     }
 }
