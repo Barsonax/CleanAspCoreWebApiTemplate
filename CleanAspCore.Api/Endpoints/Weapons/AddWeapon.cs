@@ -10,12 +10,12 @@ namespace CleanAspCore.Api.Endpoints.Weapons;
 /// </summary>
 [JsonDerivedType(typeof(CreateBowRequest), typeDiscriminator: "bow")]
 [JsonDerivedType(typeof(CreateSwordRequest), typeDiscriminator: "sword")]
-public abstract class CreateWeaponRequest;
+public interface ICreateWeaponRequest;
 
 /// <summary>
 /// Creates a new bow.
 /// </summary>
-public sealed class CreateBowRequest : CreateWeaponRequest
+public sealed class CreateBowRequest : ICreateWeaponRequest
 {
     /// <summary>
     /// The range of this bow.
@@ -36,7 +36,7 @@ public sealed class CreateBowRequest : CreateWeaponRequest
 /// <summary>
 /// Creates a new sword.
 /// </summary>
-public sealed class CreateSwordRequest : CreateWeaponRequest
+public sealed class CreateSwordRequest : ICreateWeaponRequest
 {
     /// <summary>
     /// The damage the sword does per attack.
@@ -54,6 +54,7 @@ internal sealed class CreateSwordResponseValidator : AbstractValidator<CreateSwo
     public CreateSwordResponseValidator()
     {
         this.ValidateNullableReferences();
+        RuleFor(x => x.RateOfFire > 0);
     }
 }
 
@@ -62,12 +63,14 @@ internal sealed class CreateBowRequestValidator : AbstractValidator<CreateBowReq
     public CreateBowRequestValidator()
     {
         this.ValidateNullableReferences();
+        RuleFor(x => x.RateOfFire > 0);
+        RuleFor(x => x.Range > 0);
     }
 }
 
 internal static class AddWeapon
 {
-    internal static async Task<CreatedAtRoute> Handle([FromBody] CreateWeaponRequest createWeaponRequest, HrContext context, CancellationToken cancellationToken)
+    internal static async Task<CreatedAtRoute> Handle([FromBody] ICreateWeaponRequest createWeaponRequest, HrContext context, CancellationToken cancellationToken)
     {
         var weapon = createWeaponRequest.ToDataModel();
 
@@ -77,7 +80,7 @@ internal static class AddWeapon
         return TypedResults.CreatedAtRoute(nameof(GetWeaponById), new { weapon.Id });
     }
 
-    private static Weapon ToDataModel(this CreateWeaponRequest request) => request switch
+    private static Weapon ToDataModel(this ICreateWeaponRequest request) => request switch
     {
         CreateBowRequest bow => new Bow
         {

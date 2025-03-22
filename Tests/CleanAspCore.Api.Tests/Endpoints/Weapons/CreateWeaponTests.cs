@@ -13,7 +13,7 @@ internal sealed class CreateWeaponTests(TestWebApi sut)
         var request = new CreateSwordRequestFaker().Generate();
 
         //Act
-        var response = await sut.CreateUntypedClientFor().PostAsJsonAsync<CreateWeaponRequest>("/weapons", request);
+        var response = await sut.CreateUntypedClientFor().PostAsJsonAsync<ICreateWeaponRequest>("/weapons", request);
 
         //Assert
         await Assert.That(response).HasStatusCode(HttpStatusCode.Created);

@@ -16,7 +16,7 @@ internal sealed class GetWeaponByIdTests(TestWebApi sut)
         });
 
         //Act
-        var response = await sut.CreateUntypedClientFor().GetFromJsonAsync<WeaponResponse>($"weapons/{weapon.Id}");
+        var response = await sut.CreateUntypedClientFor().GetFromJsonAsync<IWeaponResponse>($"weapons/{weapon.Id}");
 
         //Assert
         await Assert.That(response).HasMember(x => x!.Id).EqualTo(weapon.Id);

@@ -9,5 +9,5 @@ internal interface IWeaponApiClient
     Task<HttpResponseMessage> GetWeaponById(Guid id);
 
     [Post("/weapons")]
-    Task<HttpResponseMessage> CreateWeapon(CreateWeaponRequest createJobRequest);
+    Task<HttpResponseMessage> CreateWeapon(ICreateWeaponRequest createJobRequest);
 }

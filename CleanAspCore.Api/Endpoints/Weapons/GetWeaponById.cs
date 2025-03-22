@@ -9,7 +9,23 @@ namespace CleanAspCore.Api.Endpoints.Weapons;
 /// </summary>
 [JsonDerivedType(typeof(GetBowResponse), typeDiscriminator: "bow")]
 [JsonDerivedType(typeof(GetSwordResponse), typeDiscriminator: "sword")]
-public abstract class WeaponResponse
+public interface IWeaponResponse
+{
+    /// <summary>
+    /// The id of this weapon.
+    /// </summary>
+    public Guid Id { get; init; }
+
+    /// <summary>
+    /// The type of the weapon
+    /// </summary>
+    public string Type { get; init; }
+}
+
+/// <summary>
+/// The get bow response.
+/// </summary>
+public sealed class GetBowResponse : IWeaponResponse
 {
     /// <summary>
     /// The id of this weapon.
@@ -20,13 +36,7 @@ public abstract class WeaponResponse
     /// The type of the weapon
     /// </summary>
     public required string Type { get; init; }
-}
 
-/// <summary>
-/// The get bow response.
-/// </summary>
-public sealed class GetBowResponse : WeaponResponse
-{
     /// <summary>
     /// The range of this bow.
     /// </summary>
@@ -46,8 +56,18 @@ public sealed class GetBowResponse : WeaponResponse
 /// <summary>
 /// The get sword response.
 /// </summary>
-public sealed class GetSwordResponse : WeaponResponse
+public sealed class GetSwordResponse : IWeaponResponse
 {
+    /// <summary>
+    /// The id of this weapon.
+    /// </summary>
+    public required Guid Id { get; init; }
+
+    /// <summary>
+    /// The type of the weapon
+    /// </summary>
+    public required string Type { get; init; }
+
     /// <summary>
     /// The damage the sword does per attack.
     /// </summary>
@@ -61,7 +81,7 @@ public sealed class GetSwordResponse : WeaponResponse
 
 internal static class GetWeaponById
 {
-    internal static async Task<Results<Ok<WeaponResponse>, NotFound>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
+    internal static async Task<Results<Ok<IWeaponResponse>, NotFound>> Handle(Guid id, HrContext context, CancellationToken cancellationToken)
     {
         var weapon = await context.Weapons
             .Where(x => x.Id == id)
@@ -76,7 +96,7 @@ internal static class GetWeaponById
         return TypedResults.Ok(weapon);
     }
 
-    private static WeaponResponse ToDto(this Weapon weapon) => weapon switch
+    private static IWeaponResponse ToDto(this Weapon weapon) => weapon switch
     {
         Bow bow => new GetBowResponse
         {
