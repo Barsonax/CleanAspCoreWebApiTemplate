@@ -8,6 +8,11 @@ namespace CleanAspCore.Core.Common.GenericValidation;
 
 public static class RouteHandlerBuilderExtensions
 {
+    /// <summary>
+    /// Performs validation on the parameter marked with <see cref="FromBodyAttribute"/>
+    /// </summary>
+    /// <param name="host"></param>
+    /// <returns></returns>
     public static RouteHandlerBuilder WithRequestBodyValidation(this RouteHandlerBuilder host) =>
         host.AddEndpointFilterFactory((routeHandlerContext, next) =>
             {
