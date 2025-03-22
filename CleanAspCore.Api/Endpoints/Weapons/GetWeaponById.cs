@@ -14,12 +14,12 @@ public interface IWeaponResponse
     /// <summary>
     /// The id of this weapon.
     /// </summary>
-    public Guid Id { get; init; }
+    Guid Id { get; init; }
 
     /// <summary>
     /// The type of the weapon
     /// </summary>
-    public string Type { get; init; }
+    string Type { get; init; }
 }
 
 /// <summary>
@@ -27,14 +27,10 @@ public interface IWeaponResponse
 /// </summary>
 public sealed class GetBowResponse : IWeaponResponse
 {
-    /// <summary>
-    /// The id of this weapon.
-    /// </summary>
+    /// <inheritdoc />
     public required Guid Id { get; init; }
 
-    /// <summary>
-    /// The type of the weapon
-    /// </summary>
+    /// <inheritdoc />
     public required string Type { get; init; }
 
     /// <summary>
