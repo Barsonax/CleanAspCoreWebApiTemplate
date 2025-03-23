@@ -9,6 +9,7 @@ namespace CleanAspCore.Data;
 
 public sealed class HrContext : DbContext
 {
+    public const string ConnectionStringName = "Database";
     public DbSet<Employee> Employees => Set<Employee>();
     public DbSet<Department> Departments => Set<Department>();
     public DbSet<Job> Jobs => Set<Job>();
@@ -21,7 +22,7 @@ public sealed class HrContext : DbContext
 
     public HrContext(DbContextOptions<HrContext> context, IConfiguration configuration) : base(context)
     {
-        _connectionString = configuration.GetConnectionString("Default");
+        _connectionString = configuration.GetConnectionString(ConnectionStringName);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

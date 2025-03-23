@@ -168,3 +168,5 @@ dotnet_diagnostic.CS1591.severity = warning
 [**.Tests/**.cs]
 # Remove the underscores from member name
 dotnet_diagnostic.CA1707.severity = none
+# Use uri
+dotnet_diagnostic.CA2234.severity = none

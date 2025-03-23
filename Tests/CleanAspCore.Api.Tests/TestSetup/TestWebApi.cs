@@ -25,7 +25,7 @@ public sealed class TestWebApi(DatabasePool databasePool) : WebApplicationFactor
         {
             config.AddInMemoryCollection(new Dictionary<string, string?>
             {
-                { "ConnectionStrings:Default", _pooledDatabase.ConnectionString },
+                { $"ConnectionStrings:{HrContext.ConnectionStringName}", _pooledDatabase.ConnectionString },
                 { "Logging:LogLevel:Microsoft.AspNetCore.Routing", "Information" },
                 { "Logging:LogLevel:Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager", "Warning" },
                 { "Logging:LogLevel:Microsoft.EntityFrameworkCore.Model.Validation", "Error" },

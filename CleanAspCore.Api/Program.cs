@@ -2,8 +2,8 @@ using System.Reflection;
 using CleanAspCore.Api;
 using CleanAspCore.Api.Common.ErrorHandling;
 using CleanAspCore.Core.Common.OpenApi;
-using CleanAspCore.Core.Common.Telemetry;
 using CleanAspCore.Data;
+using CleanAspCore.ServiceDefaults;
 using Microsoft.AspNetCore.Routing.Constraints;
 
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -13,11 +13,12 @@ builder.Services.Configure<RouteOptions>(
 builder.AddOpenApiServices<CleanAspCore.Api.Program>(AppJsonSerializerContext.Default);
 builder.AddAuthServices();
 builder.AddAppServices();
-builder.AddOpenTelemetryServices();
+builder.AddServiceDefaults();
 builder.AddExceptionHandlers();
 builder.Services.AddHttpClient();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
-builder.Services.AddDbContext<HrContext>();
+builder.AddSqlServerDbContext<HrContext>(HrContext.ConnectionStringName);
+
 builder.Configuration.AddJsonFile("appsettings.Local.json", true);
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
@@ -28,6 +29,7 @@ var app = builder.Build();
 app.RunMigrations();
 
 app.UseOpenApi();
+app.MapDefaultEndpoints();
 
 app.UseErrorHandling();
 app.UseAuthentication();
