@@ -17,7 +17,8 @@ builder.AddServiceDefaults();
 builder.AddExceptionHandlers();
 builder.Services.AddHttpClient();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
-builder.Services.AddDbContext<HrContext>();
+builder.AddSqlServerDbContext<HrContext>(HrContext.ConnectionStringName);
+
 builder.Configuration.AddJsonFile("appsettings.Local.json", true);
 builder.Services.ConfigureHttpJsonOptions(options =>
 {

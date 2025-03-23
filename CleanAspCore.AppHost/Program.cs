@@ -7,7 +7,7 @@ var sql = builder.AddSqlServer("sql")
 var db = sql.AddDatabase("database");
 
 var api = builder.AddProject<Projects.CleanAspCore_Api>("api")
-    .WithReference(db, "Default")
+    .WithReference(db, "Database")
     .WaitFor(db);
 
 builder.Build().Run();
