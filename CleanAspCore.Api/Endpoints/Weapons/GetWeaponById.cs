@@ -7,8 +7,8 @@ namespace CleanAspCore.Api.Endpoints.Weapons;
 /// <summary>
 /// Just here to support the derived types serialization.
 /// </summary>
-[JsonDerivedType(typeof(GetBowResponse), typeDiscriminator: "bow")]
-[JsonDerivedType(typeof(GetSwordResponse), typeDiscriminator: "sword")]
+[JsonDerivedType(typeof(GetBowResponse), Weapon.Types.Bow)]
+[JsonDerivedType(typeof(GetSwordResponse), Weapon.Types.Sword)]
 public interface IWeaponResponse
 {
     /// <summary>

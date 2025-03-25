@@ -9,7 +9,7 @@ internal sealed class WeaponConfiguration : IEntityTypeConfiguration<Weapon>
     {
         builder
             .HasDiscriminator(c => c.Type)
-            .HasValue<Bow>("bow")
-            .HasValue<Sword>("sword");
+            .HasValue<Bow>(Weapon.Types.Bow)
+            .HasValue<Sword>(Weapon.Types.Sword);
     }
 }

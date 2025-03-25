@@ -8,8 +8,8 @@ namespace CleanAspCore.Api.Endpoints.Weapons;
 /// <summary>
 /// Just here to support the derived types serialization.
 /// </summary>
-[JsonDerivedType(typeof(CreateBowRequest), typeDiscriminator: "bow")]
-[JsonDerivedType(typeof(CreateSwordRequest), typeDiscriminator: "sword")]
+[JsonDerivedType(typeof(CreateBowRequest), typeDiscriminator: Weapon.Types.Bow)]
+[JsonDerivedType(typeof(CreateSwordRequest), typeDiscriminator: Weapon.Types.Sword)]
 public interface ICreateWeaponRequest;
 
 /// <summary>
@@ -87,13 +87,13 @@ internal static class AddWeapon
             Damage = bow.Damage,
             Range = bow.Range,
             RateOfFire = bow.RateOfFire,
-            Type = "bow"
+            Type = Weapon.Types.Bow
         },
         CreateSwordRequest sword => new Sword
         {
             Damage = sword.Damage,
             RateOfFire = sword.RateOfFire,
-            Type = "sword"
+            Type = Weapon.Types.Sword
         },
         _ => throw new ArgumentOutOfRangeException(nameof(request), request, null)
     };
