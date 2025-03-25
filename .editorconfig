@@ -160,6 +160,8 @@ dotnet_diagnostic.CS1591.severity = none
 dotnet_diagnostic.CA1515.severity = none
 # Avoid empty interfaces
 dotnet_diagnostic.CA1040.severity = none
+# Do not nest types
+dotnet_diagnostic.CA1034.severity = none
 
 [**/Endpoints/**.cs]
 # Missing XML comment
