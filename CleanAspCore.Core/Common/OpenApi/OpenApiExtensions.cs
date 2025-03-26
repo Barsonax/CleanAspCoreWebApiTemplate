@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using MartinCostello.OpenApi;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.OpenApi;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Web;
@@ -15,13 +16,13 @@ public static class OpenApiExtensions
     {
         builder.Services.AddOpenApi(options =>
         {
-            options.AddDocumentTransformer<SecuritySchemeTransformer>();
-            options.AddDocumentTransformer((document, context, ct) =>
-            {
-                document.Info.Description = "This is a template repository showing how one can implement a clean api with ASP.NET using minimal apis";
-                document.Info.License = new OpenApiLicense { Name = "MIT" };
-                return Task.CompletedTask;
-            });
+            options.ConfigureDefaultDocumentOptions();
+        });
+
+        builder.Services.AddOpenApi("External", options =>
+        {
+            options.ConfigureDefaultDocumentOptions();
+            options.ShouldInclude = description => description.ActionDescriptor.EndpointMetadata.OfType<ExternalOpenApiMarker>().Any();
         });
         builder.Services.AddOpenApiExtensions((options) =>
         {
@@ -29,6 +30,17 @@ public static class OpenApiExtensions
             options.AddExamples = true;
             options.AddServerUrls = true;
             options.SerializationContexts.Add(jsonSerializerContext);
+        });
+    }
+
+    private static void ConfigureDefaultDocumentOptions(this OpenApiOptions options)
+    {
+        options.AddDocumentTransformer<SecuritySchemeTransformer>();
+        options.AddDocumentTransformer((document, context, ct) =>
+        {
+            document.Info.Description = "This is a template repository showing how one can implement a clean api with ASP.NET using minimal apis";
+            document.Info.License = new OpenApiLicense { Name = "MIT" };
+            return Task.CompletedTask;
         });
     }
 
@@ -59,4 +71,9 @@ public static class OpenApiExtensions
             }
         }).AllowAnonymous();
     }
+
+    /// <summary>
+    /// Marks an api to be included in the external openapi document.
+    /// </summary>
+    public static RouteHandlerBuilder IsExternalApi(this RouteHandlerBuilder builder) => builder.WithMetadata(ExternalOpenApiMarker.Instance);
 }

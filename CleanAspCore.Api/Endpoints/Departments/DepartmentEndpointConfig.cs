@@ -1,4 +1,5 @@
 ﻿using CleanAspCore.Core.Common.GenericValidation;
+using CleanAspCore.Core.Common.OpenApi;
 
 namespace CleanAspCore.Api.Endpoints.Departments;
 
@@ -14,6 +15,7 @@ internal static class DepartmentEndpointConfig
             .WithRequestBodyValidation();
 
         departmentGroup.MapGet("/{id:guid}", GetDepartmentById.Handle)
+            .IsExternalApi()
             .WithName(nameof(GetDepartmentById));
     }
 }
